@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+
+# cli.py
+import click
+from gql import gql, Client
+from gql.transport.requests import RequestsHTTPTransport
+
+
+the_graph_url = 'https://api.thegraph.com/subgraphs/name/gnosis/dfusion'
+expected_retries = 3
+
+# client = Client(
+#   retries=expected_retries,
+#   transport=RequestsHTTPTransport(url=the_graph_url)
+# )
+
+_transport = RequestsHTTPTransport(
+    url=the_graph_url,
+    use_json=True
+)
+
+client = Client(
+    retries=expected_retries,
+    transport=_transport
+    #fetch_schema_from_transport=True,
+)
+
+@click.group()
+def main():
+    """
+    dFusion CLI ✨
+    """
+    pass
+
+@main.command()
+@click.option('--first', default=10, help='Number of trades to return, used for pagination')
+@click.option('--skip', default=0, help='Number of trades to skip, used for pagination')
+@click.option('--sort', default="tradeBatchId", help='Sort result by a field, used for pagination')
+@click.option('--trader', help='Ethereum address of the trader')
+def trades(first, skip, sort, trader):
+    """Get trades"""
+    if trader:
+      filters = ', where: { owner:"%s"}' % (trader)
+    else:
+      filters = ''
+
+    query = '''
+    {
+      trades (first: %s , skip: %s, orderBy: %s%s) {
+        owner { id}
+        order { orderId }
+        tradeBatchId
+      }
+    }
+    ''' %(first, skip, sort, filters)
+    
+    #click.echo(query)
+
+    result = client.execute(gql(query))
+    for trade in result['trades']:
+      owner_address = trade['owner']['id']
+      order_id = trade['order']['orderId']
+      tradeBatchId = trade['tradeBatchId']
+      click.echo('''
+      --------------
+      Trader: %s
+      Order Id: %s
+      Batch Id: %s''' % (owner_address, order_id, tradeBatchId))
+
+
+if __name__ == "__main__":
+    main()
