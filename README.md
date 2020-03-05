@@ -1,4 +1,4 @@
-# dex-cli
+# dFusion CLI
 
 ## Setup
 
@@ -17,4 +17,16 @@ pip install -r requirements.txt
 # help command
 python dfusion.py --help
 python dfusion.py
+
+# Get trades
+./dfusion trades
+
+# Get first 5 trades
+./dfusion trades --first 5 --skip 0
+
+# Filter by trader
+./dfusion trades --trader 0x7b2e78d4dfaaba045a167a70da285e30e8fca196
+
+# Verbose mode
+./dfusion trades -v
 ```
