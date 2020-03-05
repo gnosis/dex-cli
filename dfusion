@@ -63,8 +63,8 @@ def trades(first, skip, sort, format, verbose, trader):
 def _print_trade(trade, format):
   if format == 'pretty':    
     _print_trade_pretty(trade)
-  elif format == 'pretty':
-    _print_trade_pretty(trade)
+  elif format == 'csv':
+    _print_trade_csv(trade)
   else:
     raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
 
