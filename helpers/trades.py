@@ -7,10 +7,10 @@ from constants import SEPARATOR
 TRADE_FIELDS = '''\
   owner { id}
   order { orderId }
+  tradeBatchId
   sellVolume
   buyVolume
-  txHash
-  tradeBatchId\
+  txHash\
 '''
 
 def toTradeDto(trade):
@@ -40,14 +40,19 @@ def print_trades_pretty(trades):
       click.style('  Batch Id', fg='green') + ': ' + 
       str(trade['tradeBatchId']) + '\n' + 
 
+      # TODO: Once sellToken and buyToken are added as filter (there's a PR), we fetch also decimals to better format this
       click.style('  Sell volume', fg='green') + ': ' + 
       str(trade['sellVolume']) + '\n' + 
 
       click.style('  Buy volume', fg='green') + ': ' + 
       str(trade['sellVolume']) + '\n' + 
 
+      click.style('  Transaction', fg='green') + ': https://etherscan.io/tx/' + 
+      str(trade['txHash']) + '\n' + 
+
       click.style(SEPARATOR, fg='red')
     )
 
 def print_trades_csv(trade):
+  # TODO: Implement here the CSV formatting
   click.echo("Not implemented yet")
