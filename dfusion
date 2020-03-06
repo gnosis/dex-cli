@@ -8,17 +8,6 @@ from gql.transport.requests import RequestsHTTPTransport
 from constants import SEPARATOR, RETRIES, URL_THE_GRAPH
 from helpers.trades import TRADE_FIELDS, toTradeDto, print_trades_pretty, print_trades_csv
 
-
-_transport = RequestsHTTPTransport(
-    url=URL_THE_GRAPH,
-    use_json=True
-)
-
-client = Client(
-    retries=RETRIES,
-    transport=_transport
-)
-
 @click.group()
 def main():
     """
@@ -55,6 +44,7 @@ def trades(count, skip, sort, format, verbose, trader):
         click.style(SEPARATOR, fg='red'))
       )
 
+    client = _getClient()
     result = client.execute(gql(query))
     tradesDto = map(toTradeDto, result['trades'])
     _print_trades(tradesDto, format)
@@ -67,6 +57,14 @@ def _print_trades(trades, format):
   else:
     raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
 
+def _getClient():
+  return Client(
+    retries = RETRIES,
+    transport = RequestsHTTPTransport(
+      url = URL_THE_GRAPH,
+      use_json = True
+    )
+  )
 
 if __name__ == "__main__":
     click.echo('\n' + click.style('''\
