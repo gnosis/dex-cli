@@ -1,3 +1,4 @@
 .history
 ENV
 .vscode
+__pycache__
