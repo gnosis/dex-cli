@@ -7,7 +7,7 @@ def format_token(token):
   label = symbol or name
 
   if label:
-    return label + ' (' + address + ')'
+    return f'{label} ({address})'
   else:
     return address
 
