@@ -5,7 +5,7 @@ import click
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 
-from constants import SEPARATOR, RETRIES, URL_THE_GRAPH
+from helpers.constants import SEPARATOR, RETRIES, URL_THE_GRAPH
 from helpers.trades import TRADE_FIELDS, toTradeDto, print_trades_pretty, print_trades_csv
 
 @click.group()
@@ -30,11 +30,9 @@ def trades(count, skip, sort, format, verbose, trader):
       filters = ''
 
     query = '''
-    {
-      trades (first: %s , skip: %s, orderBy: %s%s) {
-        %s
-      }
-    }
+{
+  trades (first: %s , skip: %s, orderBy: %s%s) {%s}
+}
     ''' %(count, skip, sort, filters, TRADE_FIELDS)
 
     if verbose > 0:
