@@ -22,7 +22,7 @@ python dfusion.py
 ./dfusion trades
 
 # Get first 5 trades
-./dfusion trades --first 5 --skip 0
+./dfusion trades --count 5 --skip 0
 
 # Filter by trader
 ./dfusion trades --trader 0x7b2e78d4dfaaba045a167a70da285e30e8fca196
