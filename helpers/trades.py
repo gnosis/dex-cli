@@ -1,8 +1,9 @@
 import click
+from datetime import datetime
 
-from .constants import SEPARATOR
+from .constants import SEPARATOR, COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR
 from .tokens import TOKEN_FIELDS_BASIC, toToken
-from .utils import toEtherescanLink, format_integer, format_amount_in_weis, format_token
+from .utils import toEtherescanLink, format_integer, format_amount_in_weis, format_token_long, format_token_short, format_date_time
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
@@ -14,13 +15,24 @@ TRADE_FIELDS = '''
     buyToken { %s }
     sellVolume
     buyVolume
+    tradeEpoch
+    revertEpoch
     txHash
 ''' %(TOKEN_FIELDS_BASIC, TOKEN_FIELDS_BASIC)
 
 def toTradeDto(trade):
+  revertEpoch = trade['revertEpoch']
+  if revertEpoch:
+    revertDate = datetime.utcfromtimestamp(int(revertEpoch))
+  else:
+    # revertDate = None
+    revertDate = datetime.utcfromtimestamp(0)
+
   return {
     "owner_address": trade['owner']['id'],
     "order_id": int(trade['order']['orderId']),
+    "tradeDate": datetime.utcfromtimestamp(int(trade['tradeEpoch'])),
+    "revertDate": revertDate,
     "sellToken": toToken(trade['sellToken']),
     "buyToken": toToken(trade['buyToken']),
     "tradeBatchId": int(trade['tradeBatchId']),
@@ -30,38 +42,52 @@ def toTradeDto(trade):
   }
 
 def print_trades_pretty(trades):
-  click.echo(click.style(SEPARATOR, fg='red'))
+  click.echo(click.style(SEPARATOR, fg=COLOR_SEPARATOR))
 
   for trade in trades:
     sellToken = trade['sellToken']
     buyToken = trade['buyToken']
+    revertDate = trade['revertDate']
 
+    if revertDate is None:
+      labelColor = COLOR_LABEL
+      revertDateText = ''
+    else:
+      labelColor = COLOR_LABEL_DELETED
+      revertDateText = click.style('  Reverted date', fg=labelColor) + ': ' + click.style(format_date_time(revertDate), bg=COLOR_LABEL_DELETED) + '\n'
+      
     click.echo(
-      click.style('  Batch Id', fg='green') + ': ' + 
+      click.style('  Trade date', fg=labelColor) + ': ' + 
+      format_date_time(trade['tradeDate']) + '\n' +       
+      revertDateText + 
+      '\n' + 
+
+      click.style('  Batch Id', fg=labelColor) + ': ' + 
       format_integer(trade['tradeBatchId']) + '\n' + 
 
-      click.style('  Trader', fg='green') + ':' + 
+      click.style('  Trader', fg=labelColor) + ': ' + 
       trade['owner_address'] + '\n' + 
 
-      click.style('  Order Id', fg='green') + ': ' + 
-      format_integer(trade['order_id']) + '\n' + 
+      click.style('  Order Id', fg=labelColor) + ': ' + 
+      format_integer(trade['order_id']) + '\n\n' + 
+      
+      click.style('  Sell Token', fg=labelColor) + ': ' + 
+      format_token_long(sellToken) + '\n' + 
 
-      click.style('  Sell Token', fg='green') + ': ' + 
-      format_token(sellToken) + '\n' + 
+      click.style('  Buy Token', fg=labelColor) + ': ' + 
+      format_token_long(buyToken) + '\n' +       
 
-      click.style('  Buy Token', fg='green') + ': ' + 
-      format_token(buyToken) + '\n' +       
+      click.style('  Sell volume', fg=labelColor) + ': ' + 
+      format_amount_in_weis(trade['sellVolume'], sellToken['decimals']) + ' ' + format_token_short(sellToken) + '\n' + 
 
-      click.style('  Sell volume', fg='green') + ': ' + 
-      format_amount_in_weis(trade['sellVolume'], sellToken['decimals']) + '\n' + 
+      click.style('  Buy volume', fg=labelColor) + ': ' + 
+      format_amount_in_weis(trade['buyVolume'], buyToken['decimals']) + ' ' + format_token_short(buyToken) + '\n\n' + 
 
-      click.style('  Buy volume', fg='green') + ': ' + 
-      format_amount_in_weis(trade['buyVolume'], buyToken['decimals']) + '\n' + 
 
-      click.style('  Transaction', fg='green') + ': ' + 
+      click.style('  Transaction', fg=labelColor) + ': ' + 
       toEtherescanLink(trade['txHash']) + '\n' + 
 
-      click.style(SEPARATOR, fg='red')
+      click.style(SEPARATOR, fg=COLOR_SEPARATOR)
     )
 
 def print_trades_csv(trade):
