@@ -1,4 +1,11 @@
-from .constants import BATCH_TIME_SECONDS
+import click
+from gql import gql, Client
+from gql.transport.requests import RequestsHTTPTransport
+from helpers.constants import RETRIES, URL_THE_GRAPH
+
+from .constants import BATCH_TIME_SECONDS, SEPARATOR
+
+graphql_client = None
 
 def format_token_long(token):
   symbol = token['symbol']
@@ -43,3 +50,23 @@ def toDateFromBatchId(batchId):
 
 def calculate_price(numerator, denominator, decimals_numerator, decimals_denominator):
   return numerator/denominator # TODO: Take decimals into account
+
+def debug_query(query, verbose):
+  if verbose > 0:
+    click.echo(f'''\
+{click.style(SEPARATOR, fg='red')}
+{click.style('GraphQl query: ', fg='green')}
+{query}''')
+
+def get_graphql_client():
+  global graphql_client
+  if graphql_client is None:
+    graphql_client = Client(
+      retries = RETRIES,
+      transport = RequestsHTTPTransport(
+        url = URL_THE_GRAPH,
+        use_json = True
+      )
+    )
+
+  return graphql_client
