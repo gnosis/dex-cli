@@ -7,18 +7,18 @@ from .utils import toEtherescanLink, format_integer, format_amount_in_weis, form
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
-TRADE_FIELDS = '''
-    owner { id}
-    order { orderId }
+TRADE_FIELDS = f'''
+    owner {{ id}}
+    order {{ orderId }}
     tradeBatchId
-    sellToken { %s }
-    buyToken { %s }
+    sellToken {{ {TOKEN_FIELDS_BASIC} }}
+    buyToken {{ {TOKEN_FIELDS_BASIC} }}
     sellVolume
     buyVolume
     tradeEpoch
     revertEpoch
     txHash
-''' %(TOKEN_FIELDS_BASIC, TOKEN_FIELDS_BASIC)
+'''
 
 def toTradeDto(trade):
   revertEpoch = trade['revertEpoch']
