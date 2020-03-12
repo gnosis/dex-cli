@@ -3,7 +3,7 @@ from datetime import datetime
 from gql import gql
 
 from .constants import SEPARATOR, COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR
-from .tokens import TOKEN_FIELDS_BASIC, toToken
+from .tokens import TOKEN_FIELDS_BASIC, to_token
 from .utils import get_graphql_client, toEtherescanLink, format_integer, format_amount_in_weis, format_token_long, format_token_short, debug_query, format_date_time
 
 # Trade entity fields
@@ -33,8 +33,8 @@ def to_trade_dto(trade):
     "order_id": int(trade['order']['orderId']),
     "tradeDate": datetime.utcfromtimestamp(int(trade['tradeEpoch'])),
     "revertDate": revertDate,
-    "sellToken": toToken(trade['sellToken']),
-    "buyToken": toToken(trade['buyToken']),
+    "sellToken": to_token(trade['sellToken']),
+    "buyToken": to_token(trade['buyToken']),
     "tradeBatchId": int(trade['tradeBatchId']),
     "sellVolume": int(trade['sellVolume']),
     "buyVolume": int(trade['buyVolume']),
@@ -57,10 +57,10 @@ def get_trades(count, skip, sort, format, verbose, trader):
     client = get_graphql_client()
     result = client.execute(gql(query))
     tradesDto = map(to_trade_dto, result['trades'])
-    _print_trades(tradesDto, format)
+    print_trades(tradesDto, format)
 
 
-def _print_trades(trades, format):
+def print_trades(trades, format):
   if format == 'pretty':    
     print_trades_pretty(trades)
   elif format == 'csv':

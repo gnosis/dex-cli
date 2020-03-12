@@ -37,10 +37,10 @@ def format_date(date):
 def format_date_time(date):
   return '' if date is None else date.strftime("%d/%m/%y %H:%M:%S")
 
-def toDateFromEpoch(epoch):
+def to_date_from_epoch(epoch):
   return epoch # TODO: Date from epoch
 
-def toEtherescanLink(hash):
+def to_etherescan_link(hash):
   return 'https://etherscan.io/tx/' + hash
 
 def toDateFromBatchId(batchId):

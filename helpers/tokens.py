@@ -59,8 +59,8 @@ def to_token_dto(token):
     "id": int(token['id']),
     "address": token['address'],
     "decimals": int(token['decimals'] or '18'),
-    "name": token['name'] or '',
-    "symbol": token['symbol'] or '',
+    "name": token['name'],
+    "symbol": token['symbol'],
     "createEpoch": datetime.utcfromtimestamp(int(token['createEpoch'])),
     "txHash": token['txHash']
   }
@@ -70,26 +70,27 @@ def print_tokens_pretty(tokens):
   click.echo(click.style(SEPARATOR, fg='red'))
 
   for token in tokens:
+    symbol = token['symbol'] or ''
+    name = token['name'] or ''
     click.echo( 
       click.style('  Id', fg='green') + ': ' + 
       str(token['id']) + '\n' +
 
       click.style('  Address', fg='green') + ': ' + 
-      str(token['address']) + '\n\n' +
+      token['address'] + '\n\n' +
 
       click.style('  Symbol', fg='green') + ': ' + 
-      str(token['symbol']) + '\n' +
+      symbol + '\n' +
 
       click.style('  Name', fg='green') + ': ' + 
-      str(token['name']) + '\n' +
+      name + '\n' +
 
       click.style('  Decimals', fg='green') + ': ' + 
       str(token['decimals']) + '\n\n' +
 
       click.style('  Created', fg='green') + ': ' + 
-      str(token['createEpoch']) + '\n' + # TODO: Handle date when this PR is merged --> https://github.com/gnosis/dex-cli/pull/11 
+      format_date(token['createEpoch']) + '\n' +
 
-      
       click.style('  Transaction', fg='green') + ': ' + 
       to_etherescan_link(token['txHash']) + '\n' + 
 
