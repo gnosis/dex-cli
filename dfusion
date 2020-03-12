@@ -29,12 +29,12 @@ def trades(count, skip, sort, format, verbose, trader):
     else:
       filters = ''
 
-    query = '''
-{
-  trades (first: %s , skip: %s, orderBy: %s%s) {%s}
-}
-    ''' %(count, skip, sort, filters, TRADE_FIELDS)
-
+    query = f'''
+{{
+  trades (first: {count} , skip: {skip}, orderBy: {sort}{filters}) {{{TRADE_FIELDS}  }}
+}}
+    '''
+    
     if verbose > 0:
       click.echo('%s\n%s\n%s' % (
         click.style(SEPARATOR, fg='red'),
