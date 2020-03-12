@@ -25,8 +25,7 @@ def toTradeDto(trade):
   if revertEpoch:
     revertDate = datetime.utcfromtimestamp(int(revertEpoch))
   else:
-    # revertDate = None
-    revertDate = datetime.utcfromtimestamp(0)
+    revertDate = None
 
   return {
     "owner_address": trade['owner']['id'],
