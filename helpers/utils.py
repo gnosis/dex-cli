@@ -1,6 +1,7 @@
 import click
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
+
 from constants import RETRIES, URL_THE_GRAPH, BATCH_TIME_SECONDS, SEPARATOR, COLOR_LABEL, COLOR_SEPARATOR
 
 graphql_client = None

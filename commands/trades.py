@@ -1,9 +1,10 @@
-import click
 from datetime import datetime
+
+import click
 from gql import gql
 
 from constants import SEPARATOR, COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR
-from .tokens import TOKEN_FIELDS_BASIC, to_token
+from commands.tokens import TOKEN_FIELDS_BASIC, to_token
 from helpers.utils import get_graphql_client, to_etherscan_link, format_integer, format_amount_in_weis, format_token_long, format_token_short, debug_query, format_date_time
 
 # Trade entity fields
