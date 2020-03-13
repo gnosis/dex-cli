@@ -88,7 +88,7 @@ def print_tokens_pretty(tokens):
       click.style('  Decimals', fg=COLOR_LABEL) + ': ' + 
       str(token['decimals']) + '\n\n' +
 
-      click.style('  Created', fg=COLOR_LABEL) + ': ' + 
+      click.style('  Registered', fg=COLOR_LABEL) + ': ' + 
       format_date(token['createEpoch']) + '\n' +
 
       click.style('  Transaction', fg=COLOR_LABEL) + ': ' + 
