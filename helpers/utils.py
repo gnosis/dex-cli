@@ -17,10 +17,7 @@ def format_token_short(token):
   name = token['name']
   label = symbol or name
 
-  if label:
-    return label
-  else:
-    return address
+  return label if label else address
 
 
 def format_integer(number):
