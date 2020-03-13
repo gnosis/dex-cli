@@ -1,6 +1,6 @@
 from .constants import BATCH_TIME_SECONDS
 
-def format_token(token):
+def format_token_long(token):
   symbol = token['symbol']
   address = token['address']
   name = token['name']
@@ -11,6 +11,15 @@ def format_token(token):
   else:
     return address
 
+def format_token_short(token):
+  symbol = token['symbol']
+  address = token['address']
+  name = token['name']
+  label = symbol or name
+
+  return label if label else address
+
+
 def format_integer(number):
   return str(number) # TODO: Format better the numbers
 
@@ -18,7 +27,10 @@ def format_amount_in_weis(amount, decimals):
   return str(amount / (10 ** decimals)) # TODO: Format better the weis
 
 def format_date(date):
-  return str(date) # TODO: Improve date formatting
+  return '' if date is None else date.strftime("%d/%m/%y")
+
+def format_date_time(date):
+  return '' if date is None else date.strftime("%d/%m/%y %H:%M:%S")
 
 def toDateFromEpoch(epoch):
   return epoch # TODO: Date from epoch
