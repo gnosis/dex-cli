@@ -3,8 +3,8 @@
 import click
 
 from constants import SEPARATOR
-from helpers.trades import get_trades
-from helpers.tokens import get_tokens
+from commands.trades import get_trades
+from commands.tokens import get_tokens
 
 @click.group()
 def main():
