@@ -3,8 +3,11 @@ from datetime import datetime
 import click
 from gql import gql
 
-from constants import SEPARATOR, OWL_DECIMALS, COLOR_LABEL, COLOR_SEPARATOR
-from utils import debug_query, get_graphql_client, format_amount_in_weis, format_integer, format_date_time, to_date_from_epoch, to_etherscan_link
+from constants import COLOR_LABEL, COLOR_SEPARATOR, OWL_DECIMALS, SEPARATOR
+from utils import (debug_query, format_amount_in_weis,
+                           format_date_time, format_integer,
+                           get_graphql_client, to_date_from_epoch,
+                           to_etherscan_link)
 
 TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
 
