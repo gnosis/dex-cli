@@ -1,5 +1,7 @@
 # dFusion CLI
 
+![](docs/CLI-demo.gif)
+
 ## Setup
 
 ```bash
