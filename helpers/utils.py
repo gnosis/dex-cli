@@ -1,7 +1,7 @@
 import click
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
-from helpers.constants import RETRIES, URL_THE_GRAPH, BATCH_TIME_SECONDS, SEPARATOR
+from helpers.constants import RETRIES, URL_THE_GRAPH, BATCH_TIME_SECONDS, SEPARATOR, COLOR_LABEL, COLOR_SEPARATOR
 
 graphql_client = None
 
@@ -37,10 +37,10 @@ def format_date(date):
 def format_date_time(date):
   return '' if date is None else date.strftime("%d/%m/%y %H:%M:%S")
 
-def toDateFromEpoch(epoch):
+def to_date_from_epoch(epoch):
   return epoch # TODO: Date from epoch
 
-def toEtherescanLink(hash):
+def to_etherscan_link(hash):
   return 'https://etherscan.io/tx/' + hash
 
 def toDateFromBatchId(batchId):
@@ -52,8 +52,8 @@ def calculate_price(numerator, denominator, decimals_numerator, decimals_denomin
 def debug_query(query, verbose):
   if verbose > 0:
     click.echo(f'''\
-{click.style(SEPARATOR, fg='red')}
-{click.style('GraphQl query: ', fg='green')}
+{click.style(SEPARATOR, fg=COLOR_SEPARATOR)}
+{click.style('GraphQl query: ', fg=COLOR_LABEL)}
 {query}''')
 
 def get_graphql_client():

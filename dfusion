@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-# cli.py
 import click
 
 from helpers.constants import SEPARATOR
-from helpers.trades import TRADE_FIELDS, get_trades
+from helpers.trades import get_trades
+from helpers.tokens import get_tokens
 
 @click.group()
 def main():
@@ -12,6 +12,18 @@ def main():
     dFusion CLI ✨
     """
     pass
+
+
+@main.command()
+@click.option('--count', default=100, help='Number of tokens to return, used for pagination')
+@click.option('--skip', default=0, help='Number of tokens to skip, used for pagination')
+@click.option('--sort', default="symbol", help='Sort result by a field, used for pagination')
+@click.option('--format', default="pretty", help='Format type i.e. pretty, csv')
+@click.option('-v', '--verbose', count=True)
+def tokens(count, skip, sort, format, verbose):
+    """Get tokens listed in dFusion. For more details, see https://docs.gnosis.io/dfusion/docs/addtoken1"""
+    get_tokens(count=count, skip=skip, sort=sort, format=format, verbose=verbose)
+
 
 @main.command()
 @click.option('--count', default=10, help='Number of trades to return, used for pagination')
