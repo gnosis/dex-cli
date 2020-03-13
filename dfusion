@@ -2,7 +2,7 @@
 
 import click
 
-from helpers.constants import SEPARATOR
+from constants import SEPARATOR
 from helpers.trades import get_trades
 from helpers.tokens import get_tokens
 

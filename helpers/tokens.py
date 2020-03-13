@@ -2,7 +2,7 @@ import click
 from gql import gql
 from datetime import datetime
 
-from .constants import SEPARATOR, OWL_DECIMALS, COLOR_LABEL, COLOR_SEPARATOR
+from constants import SEPARATOR, OWL_DECIMALS, COLOR_LABEL, COLOR_SEPARATOR
 from .utils import debug_query, get_graphql_client, format_amount_in_weis, format_integer, format_date_time, to_date_from_epoch, to_etherscan_link
 
 TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
