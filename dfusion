@@ -7,7 +7,6 @@ import click
 
 from constants import SEPARATOR
 
-
 @click.group()
 def main():
     """
