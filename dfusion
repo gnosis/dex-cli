@@ -2,11 +2,9 @@
 
 # cli.py
 import click
-from gql import gql, Client
-from gql.transport.requests import RequestsHTTPTransport
 
-from helpers.constants import SEPARATOR, RETRIES, URL_THE_GRAPH
-from helpers.trades import TRADE_FIELDS, toTradeDto, print_trades_pretty, print_trades_csv
+from helpers.constants import SEPARATOR
+from helpers.trades import TRADE_FIELDS, get_trades
 
 @click.group()
 def main():
@@ -24,45 +22,8 @@ def main():
 @click.option('--trader', help='Ethereum address of the trader')
 def trades(count, skip, sort, format, verbose, trader):
     """Get trades"""
-    if trader:
-      filters = ', where: { owner:"%s"}' % (trader)
-    else:
-      filters = ''
+    get_trades(count=count, skip=skip, sort=sort, format=format, verbose=verbose, trader=trader)
 
-    query = '''
-{
-  trades (first: %s , skip: %s, orderBy: %s%s) {%s}
-}
-    ''' %(count, skip, sort, filters, TRADE_FIELDS)
-
-    if verbose > 0:
-      click.echo('%s\n%s\n%s' % (
-        click.style(SEPARATOR, fg='red'),
-        query,
-        click.style(SEPARATOR, fg='red'))
-      )
-
-    client = _getClient()
-    result = client.execute(gql(query))
-    tradesDto = map(toTradeDto, result['trades'])
-    _print_trades(tradesDto, format)
-
-def _print_trades(trades, format):
-  if format == 'pretty':    
-    print_trades_pretty(trades)
-  elif format == 'csv':
-    print_trades_csv(trades)
-  else:
-    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
-
-def _getClient():
-  return Client(
-    retries = RETRIES,
-    transport = RequestsHTTPTransport(
-      url = URL_THE_GRAPH,
-      use_json = True
-    )
-  )
 
 if __name__ == "__main__":
     click.echo('\n' + click.style('''\

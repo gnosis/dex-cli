@@ -1,26 +1,27 @@
 import click
 from datetime import datetime
+from gql import gql
 
 from .constants import SEPARATOR, COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR
 from .tokens import TOKEN_FIELDS_BASIC, toToken
-from .utils import toEtherescanLink, format_integer, format_amount_in_weis, format_token_long, format_token_short, format_date_time
+from .utils import get_graphql_client, toEtherescanLink, format_integer, format_amount_in_weis, format_token_long, format_token_short, debug_query, format_date_time
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
-TRADE_FIELDS = '''
-    owner { id}
-    order { orderId }
+TRADE_FIELDS = f'''
+    owner {{ id}}
+    order {{ orderId }}
     tradeBatchId
-    sellToken { %s }
-    buyToken { %s }
+    sellToken {{ {TOKEN_FIELDS_BASIC} }}
+    buyToken {{ {TOKEN_FIELDS_BASIC} }}
     sellVolume
     buyVolume
     tradeEpoch
     revertEpoch
     txHash
-''' %(TOKEN_FIELDS_BASIC, TOKEN_FIELDS_BASIC)
+'''
 
-def toTradeDto(trade):
+def to_trade_dto(trade):
   revertEpoch = trade['revertEpoch']
   if revertEpoch:
     revertDate = datetime.utcfromtimestamp(int(revertEpoch))
@@ -39,6 +40,34 @@ def toTradeDto(trade):
     "buyVolume": int(trade['buyVolume']),
     "txHash": trade['txHash']
   }
+
+def get_trades(count, skip, sort, format, verbose, trader):
+    if trader:
+      filters = ', where: { owner:"%s"}' % (trader)
+    else:
+      filters = ''
+
+    query = f'''
+{{
+  trades (first: {count} , skip: {skip}, orderBy: {sort}{filters}) {{{TRADE_FIELDS}  }}
+}}
+    '''
+    
+    debug_query(query, verbose)
+    client = get_graphql_client()
+    result = client.execute(gql(query))
+    tradesDto = map(to_trade_dto, result['trades'])
+    _print_trades(tradesDto, format)
+
+
+def _print_trades(trades, format):
+  if format == 'pretty':    
+    print_trades_pretty(trades)
+  elif format == 'csv':
+    print_trades_csv(trades)
+  else:
+    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
+
 
 def print_trades_pretty(trades):
   click.echo(click.style(SEPARATOR, fg=COLOR_SEPARATOR))
