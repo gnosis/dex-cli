@@ -3,7 +3,7 @@ from gql import gql
 from datetime import datetime
 
 from .constants import SEPARATOR, OWL_DECIMALS, COLOR_LABEL, COLOR_SEPARATOR
-from .utils import debug_query, get_graphql_client, format_amount_in_weis, format_integer, format_date, to_date_from_epoch, to_etherscan_link
+from .utils import debug_query, get_graphql_client, format_amount_in_weis, format_integer, format_date_time, to_date_from_epoch, to_etherscan_link
 
 TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
 
@@ -89,7 +89,7 @@ def print_tokens_pretty(tokens):
       str(token['decimals']) + '\n\n' +
 
       click.style('  Registered', fg=COLOR_LABEL) + ': ' + 
-      format_date(token['createEpoch']) + '\n' +
+      format_date_time(token['createEpoch']) + '\n' +
 
       click.style('  Transaction', fg=COLOR_LABEL) + ': ' + 
       to_etherscan_link(token['txHash']) + '\n' + 
