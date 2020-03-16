@@ -1,5 +1,6 @@
 # Datasource
-URL_THE_GRAPH = 'https://api.thegraph.com/subgraphs/name/gnosis/dfusion-staging'
+URL_API_THE_GRAPH = 'https://api.thegraph.com/subgraphs/name/gnosis/dfusion-staging'
+URL_UI_THE_GRAPH = 'https://thegraph.com/explorer/subgraph/gnosis/dfusion-staging'
 RETRIES = 3
 
 # Model
@@ -13,3 +14,4 @@ SEPARATOR = '----------------------------'
 COLOR_LABEL = 'green'
 COLOR_LABEL_DELETED = 'red'
 COLOR_SEPARATOR = 'blue'
+COLOR_SECONDARY = 'cyan'
