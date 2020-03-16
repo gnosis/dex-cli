@@ -1,0 +1,23 @@
+language: python
+cache: pip
+
+python:
+  - "3.7"
+
+install:
+  - pip install -r requirements-test.txt
+  - pip install coveralls
+
+script:
+  - coverage run -m py.test -W ignore::DeprecationWarning -rxXs
+
+after_success:
+  - coveralls
+#
+# TODO: Do in different PR
+#deploy:
+#  provider: script
+#  script: bash scripts/deploy_pipy.sh "${PYPI_USER}" "${PYPI_PASS}"
+#  skip_cleanup: true
+#  on:
+#    tags: true
