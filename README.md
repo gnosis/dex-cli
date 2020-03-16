@@ -17,8 +17,8 @@ pip install -r requirements.txt
 
 ```bash
 # help command
-python dfusion.py --help
-python dfusion.py
+./dfusion --help
+./dfusion
 
 # Get trades
 ./dfusion trades
