@@ -43,7 +43,18 @@ Verbose mode prints information that is useful for debugging, including the Grap
 
 ## Development
 
+If you use Visual Studio code, make sure you install https://marketplace.visualstudio.com/items?itemName=ms-python.python plugin and organize imports on safe:
+
+```
+{
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
+}
+```
+
+To organize the imports manually run:
+
 ```bash
-# Organize imports
 isort -rc */**.py
 ```
