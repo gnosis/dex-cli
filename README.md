@@ -32,7 +32,7 @@ python dfusion.py
 
 # Debug - Verbose
 
-Verbose mode prints the query and the subgraph URL:
+Verbose mode prints information that is useful for debugging, including the GraphQL query and the url for the endpoint and subgraph:
 
 ```
 # Verbose mode (-v)
