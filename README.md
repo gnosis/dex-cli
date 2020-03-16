@@ -40,3 +40,10 @@ Verbose mode prints information that is useful for debugging, including the Grap
 ```
 
 ![](docs/CLI-verbose.png)
+
+## Development
+
+```bash
+# Organize imports
+isort -rc */**.py
+```

@@ -1,11 +1,14 @@
+from commands.tokens import TOKEN_FIELDS_BASIC, to_token
 from datetime import datetime
 
 import click
 from gql import gql
 
-from constants import SEPARATOR, COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR
-from commands.tokens import TOKEN_FIELDS_BASIC, to_token
-from utils import get_graphql_client, to_etherscan_link, format_integer, format_amount_in_weis, format_token_long, format_token_short, debug_query, format_date_time
+from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
+                       SEPARATOR)
+from utils import (debug_query, format_amount_in_weis, format_date_time,
+                   format_integer, format_token_long, format_token_short,
+                   get_graphql_client, to_etherscan_link)
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
