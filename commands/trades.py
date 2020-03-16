@@ -44,7 +44,7 @@ def to_trade_dto(trade):
 
 def get_trades(count, skip, sort, format, verbose, trader):
     if trader:
-      filters = ', where: { owner:"%s"}' % (trader)
+      filters = ', where: { owner:"%s"}' % (trader.lower())
     else:
       filters = ''
 
