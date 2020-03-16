@@ -32,3 +32,10 @@ python dfusion.py
 # Verbose mode
 ./dfusion trades -v
 ```
+
+## Development
+
+```bash
+# Organize imports
+isort -rc */**.py
+```

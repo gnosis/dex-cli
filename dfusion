@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
+from commands.tokens import get_tokens
+from commands.trades import get_trades
+
 import click
 
 from constants import SEPARATOR
-from commands.trades import get_trades
-from commands.tokens import get_tokens
 
 @click.group()
 def main():
