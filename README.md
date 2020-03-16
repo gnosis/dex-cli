@@ -28,7 +28,15 @@ python dfusion.py
 
 # Filter by trader
 ./dfusion trades --trader 0x7b2e78d4dfaaba045a167a70da285e30e8fca196
+```
 
-# Verbose mode
+# Debug - Verbose
+
+Verbose mode prints the query and the subgraph URL:
+
+```
+# Verbose mode (-v)
 ./dfusion trades -v
 ```
+
+![](docs/CLI-verbose.png)
