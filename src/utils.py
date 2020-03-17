@@ -1,3 +1,4 @@
+from datetime import datetime
 from decimal import ROUND_DOWN, Decimal
 
 import click
@@ -68,6 +69,9 @@ def calculate_price(numerator, denominator, decimals_numerator, decimals_denomin
     return Decimal(numerator) * precision_factor / Decimal(denominator)
   else:
     return Decimal(numerator) / Decimal(denominator) * precision_factor
+
+def parseEpoch(epoch):
+  return datetime.utcfromtimestamp(int(epoch)) if epoch else None
 
 def debug_query(query, verbose):
   if verbose > 0:
