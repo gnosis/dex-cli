@@ -6,14 +6,15 @@ from gql import gql
 
 from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
                        SEPARATOR)
-from utils import (debug_query, format_amount_in_weis, format_date_time,
-                   format_integer, format_token_long, format_token_short,
+from utils import (calculate_price, debug_query, format_amount,
+                   format_amount_in_weis, format_date_time, format_integer,
+                   format_price, format_token_long, format_token_short,
                    get_graphql_client, to_etherscan_link)
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
 TRADE_FIELDS = f'''
-    owner {{ id}}
+    owner {{ id }}
     order {{ orderId }}
     tradeBatchId
     sellToken {{ {TOKEN_FIELDS_BASIC} }}
@@ -77,9 +78,11 @@ def print_trades_pretty(trades):
   click.echo(click.style(SEPARATOR, fg=COLOR_SEPARATOR))
 
   for trade in trades:
-    sellToken = trade['sellToken']
-    buyToken = trade['buyToken']
     revertDate = trade['revertDate']
+    sellToken, sellVolume = trade['sellToken'], trade['sellVolume']
+    buyToken, buyVolume = trade['buyToken'], trade['buyVolume']
+    sellTokenDecimals, sellTokenLabel = sellToken['decimals'], format_token_short(sellToken)
+    buyTokenDecimals, buyTokenLabel = buyToken['decimals'], format_token_short(buyToken)
 
     if revertDate is None:
       labelColor = COLOR_LABEL
@@ -107,13 +110,29 @@ def print_trades_pretty(trades):
       format_token_long(sellToken) + '\n' + 
 
       click.style('  Buy Token', fg=labelColor) + ': ' + 
-      format_token_long(buyToken) + '\n' +       
+      format_token_long(buyToken) + '\n' +
+
+      click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg='green') + ': ' + 
+      format_price(calculate_price(
+        numerator=buyVolume,
+        denominator=sellVolume,
+        decimals_numerator=buyTokenDecimals,
+        decimals_denominator=sellTokenDecimals
+      ), currency=buyTokenLabel) + '\n' +      
+
+      click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg='green') + ': ' + 
+      format_price(calculate_price(
+        numerator=sellVolume,
+        denominator=buyVolume,
+        decimals_numerator=sellTokenDecimals,
+        decimals_denominator=buyTokenDecimals
+      ), currency=sellTokenLabel) + '\n' +
 
       click.style('  Sell volume', fg=labelColor) + ': ' + 
-      format_amount_in_weis(trade['sellVolume'], sellToken['decimals']) + ' ' + format_token_short(sellToken) + '\n' + 
+      format_amount_in_weis(sellVolume, sellTokenDecimals) + ' ' + sellTokenLabel + '\n' + 
 
       click.style('  Buy volume', fg=labelColor) + ': ' + 
-      format_amount_in_weis(trade['buyVolume'], buyToken['decimals']) + ' ' + format_token_short(buyToken) + '\n\n' + 
+      format_amount_in_weis(buyVolume, buyTokenDecimals) + ' ' + buyTokenLabel + '\n\n' + 
 
 
       click.style('  Transaction', fg=labelColor) + ': ' + 

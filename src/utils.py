@@ -1,3 +1,5 @@
+from decimal import ROUND_DOWN, Decimal
+
 import click
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
@@ -29,10 +31,21 @@ def format_token_short(token):
 
 
 def format_integer(number):
-  return str(number) # TODO: Format better the numbers
+  return '{:,d}'.format(number)
 
-def format_amount_in_weis(amount, decimals):
-  return str(amount / (10 ** decimals)) # TODO: Format better the weis
+def format_amount_in_weis(amount, decimals, rounding=ROUND_DOWN):
+  value = amount / Decimal(10 ** decimals)
+  return format_amount(value, decimals=decimals, rounding=rounding)
+
+def format_price(amount, decimals=10, rounding=ROUND_DOWN, currency=''):
+  price = format_amount(amount, decimals=decimals, rounding=rounding)
+  return price + ' ' + currency if currency else price
+
+def format_amount(amount, decimals=18, rounding=ROUND_DOWN):
+  quantize_value = Decimal(10) ** -Decimal(decimals)
+  rounded_value = Decimal(amount).quantize(quantize_value, rounding=rounding)
+
+  return f'{{:,.{decimals}f}}'.format(rounded_value).rstrip('0').rstrip('.')
 
 def format_date(date):
   return '' if date is None else date.strftime("%d/%m/%y")
@@ -50,7 +63,11 @@ def toDateFromBatchId(batchId):
   return batchId * BATCH_TIME_SECONDS # TODO: Dates in python
 
 def calculate_price(numerator, denominator, decimals_numerator, decimals_denominator):
-  return numerator/denominator # TODO: Take decimals into account
+  precision_factor = Decimal(10) ** Decimal(abs(decimals_numerator - decimals_denominator))
+  if decimals_numerator > decimals_denominator:
+    return Decimal(numerator) * precision_factor / Decimal(denominator)
+  else:
+    return Decimal(numerator) / Decimal(denominator) * precision_factor
 
 def debug_query(query, verbose):
   if verbose > 0:
