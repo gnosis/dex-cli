@@ -57,4 +57,7 @@ To organize the imports manually run:
 
 ```bash
 isort -rc */**.py
+
+# Check coverage
+coverage run -m pytest && coverage report
 ```
