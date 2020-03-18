@@ -20,7 +20,7 @@ PRICES_FIELDS = f'''
   txHash
 '''
 
-def get_prices(count, skip, sort, sort_direction, format, verbose):
+def get_prices(count, skip, sort, sort_direction, print_format, verbose):
     query = f'''
 {{
   prices (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{PRICES_FIELDS}  }}
@@ -31,16 +31,16 @@ def get_prices(count, skip, sort, sort_direction, format, verbose):
     client = get_graphql_client()
     result = client.execute(gql(query))    
     prices_dto = [to_price_dto(price) for price in result['prices']]
-    print_prices(prices_dto, format)
+    print_prices(prices_dto, print_format)
 
 
-def print_prices(prices, format):
-  if format == 'pretty':    
+def print_prices(prices, print_format):
+  if print_format == 'pretty':    
     print_prices_pretty(prices)
-  elif format == 'csv':
+  elif print_format == 'csv':
     print_prices_csv(prices)
   else:
-    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
+    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (print_format))  
 
 
 def to_price_dto(price):

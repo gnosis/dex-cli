@@ -41,7 +41,7 @@ def to_trade_dto(trade):
     "txHash": trade['txHash']
   }
 
-def get_trades(count, skip, sort, sort_direction, format, verbose, trader):
+def get_trades(count, skip, sort, sort_direction, print_format, verbose, trader):
     if trader:
       filters = f', where: {{ owner:"{trader.lower()}"}}'
     else:
@@ -57,16 +57,16 @@ def get_trades(count, skip, sort, sort_direction, format, verbose, trader):
     client = get_graphql_client()
     result = client.execute(gql(query))
     trades_dto = [to_trade_dto(trade) for trade in result['trades']] 
-    print_trades(trades_dto, format)
+    print_trades(trades_dto, print_format)
 
 
-def print_trades(trades, format):
-  if format == 'pretty':    
+def print_trades(trades, print_format):
+  if print_format == 'pretty':    
     print_trades_pretty(trades)
-  elif format == 'csv':
+  elif print_format == 'csv':
     print_trades_csv(trades)
   else:
-    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
+    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (print_format))  
 
 
 def print_trades_pretty(trades):
