@@ -63,7 +63,7 @@ def format_percentage(value, total):
 
 def format_amount(amount, decimals=18, rounding=ROUND_DOWN):
   quantize_value = Decimal(10) ** -Decimal(decimals)
-  rounded_value = Decimal(amount).quantize(quantize_value, context=Context(prec=36), rounding=rounding)
+  rounded_value = Decimal(amount).quantize(quantize_value, context=Context(prec=40), rounding=rounding)
 
   return f'{{:,.{decimals}f}}'.format(rounded_value).rstrip('0').rstrip('.')
 
