@@ -56,8 +56,8 @@ def get_trades(count, skip, sort, sort_direction, format, verbose, trader):
     debug_query(query, verbose)
     client = get_graphql_client()
     result = client.execute(gql(query))
-    tradesDto = map(to_trade_dto, result['trades'])
-    print_trades(tradesDto, format)
+    trades_dto = [to_trade_dto(trade) for trade in result['trades']] 
+    print_trades(trades_dto, format)
 
 
 def print_trades(trades, format):

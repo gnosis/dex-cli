@@ -44,7 +44,7 @@ def get_tokens(count, skip, sort, sort_direction, format, verbose):
     debug_query(query, verbose)
     client = get_graphql_client()
     result = client.execute(gql(query))
-    tokens_dto = map(to_token_dto, result['tokens'])
+    tokens_dto = [to_token_dto(token) for token in result['tokens']]
     print_tokens(tokens_dto, format)
 
 
