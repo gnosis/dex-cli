@@ -5,7 +5,7 @@ from gql import gql
 
 from constants import COLOR_LABEL, COLOR_SEPARATOR, OWL_DECIMALS, SEPARATOR
 from utils import (debug_query, format_amount_in_weis, format_date_time,
-                   format_integer, get_graphql_client, gql_sort_by,
+                   format_integer, get_graphql_client, gql_filter, gql_sort_by,
                    to_date_from_epoch, to_etherscan_link)
 
 TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
@@ -33,19 +33,21 @@ def to_token(token):
   }
 
 
-def get_tokens(count, skip, sort, sort_direction, print_format, verbose):
+def get_tokens(count, skip, sort, sort_direction, print_format, verbose, address):
+  filters = gql_filter({
+    "address": address.lower() if address else None,
+  })
 
-    query = f'''
+  query = f'''
 {{
-  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{TOKENS_FIELDS}  }}
+  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{{TOKENS_FIELDS}  }}
 }}
-    '''
-    
-    debug_query(query, verbose)
-    client = get_graphql_client()
-    result = client.execute(gql(query))
-    tokens_dto = [to_token_dto(token) for token in result['tokens']]
-    print_tokens(tokens_dto, print_format)
+    '''  
+  debug_query(query, verbose)
+  client = get_graphql_client()
+  result = client.execute(gql(query))
+  tokens_dto = [to_token_dto(token) for token in result['tokens']]
+  print_tokens(tokens_dto, print_format)
 
 
 def print_tokens(tokens, print_format):
