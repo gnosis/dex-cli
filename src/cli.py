@@ -21,35 +21,38 @@ def main():
 @click.option('--count', default=100, help='Number of tokens to return, used for pagination')
 @click.option('--skip', default=0, help='Number of tokens to skip, used for pagination')
 @click.option('--sort', default="symbol", help='Sort result by a field, used for pagination')
+@click.option('--sort-direction', default="asc", help='Sort direction. "asc" for ascending, "desc" for descending order')
 @click.option('--format', default="pretty", help='Format type i.e. pretty, csv')
 @click.option('-v', '--verbose', count=True)
-def tokens(count, skip, sort, format, verbose):
+def tokens(count, skip, sort, sort_direction, format, verbose):
     """Get tokens listed in dFusion. For more details, see https://docs.gnosis.io/dfusion/docs/addtoken1"""
-    get_tokens(count=count, skip=skip, sort=sort, format=format, verbose=verbose)
+    get_tokens(count=count, skip=skip, sort=sort, sort_direction=sort_direction, format=format, verbose=verbose)
 
 
 @main.command()
 @click.option('--count', default=10, help='Number of trades to return, used for pagination')
 @click.option('--skip', default=0, help='Number of trades to skip, used for pagination')
 @click.option('--sort', default="tradeBatchId", help='Sort result by a field, used for pagination')
+@click.option('--sort-direction', default="desc", help='Sort direction. "asc" for ascending, "desc" for descending order')
 @click.option('--format', default="pretty", help='Format type i.e. pretty, csv')
 @click.option('-v', '--verbose', count=True)
 @click.option('--trader', help='Ethereum address of the trader')
-def trades(count, skip, sort, format, verbose, trader):
+def trades(count, skip, sort, sort_direction, format, verbose, trader):
     """Get trades"""
-    get_trades(count=count, skip=skip, sort=sort, format=format, verbose=verbose, trader=trader)
+    get_trades(count=count, skip=skip, sort=sort, sort_direction=sort_direction, format=format, verbose=verbose, trader=trader)
 
 
 @main.command()
 @click.option('--count', default=10, help='Number of orders to return, used for pagination')
 @click.option('--skip', default=0, help='Number of orders to skip, used for pagination')
-@click.option('--sort', default="fromBatchId", help='Sort result by a field, used for pagination')
+@click.option('--sort', default="createEpoch", help='Sort result by a field, used for pagination')
+@click.option('--sort-direction', default="desc", help='Sort direction. "asc" for ascending, "desc" for descending order')
 @click.option('--format', default="pretty", help='Format type i.e. pretty, csv')
 @click.option('-v', '--verbose', count=True)
 @click.option('--trader', help='Ethereum address of the trader')
-def orders(count, skip, sort, format, verbose, trader):
+def orders(count, skip, sort, sort_direction, format, verbose, trader):
     """Get orders"""
-    get_orders(count=count, skip=skip, sort=sort, format=format, verbose=verbose, trader=trader)
+    get_orders(count=count, skip=skip, sort=sort, sort_direction=sort_direction, format=format, verbose=verbose, trader=trader)
 
 
 if __name__ == "__main__":
