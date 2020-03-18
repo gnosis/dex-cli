@@ -116,10 +116,7 @@ def gql_sort_by(sort, sort_direction):
   return f'orderBy: {sort}, orderDirection: {sort_direction}'
 
 def gql_filter(filters):
-  # to_filter = lambda key: 'key' if filters[key] is not None else None
-
   filter_conditions = [f'{key}: "{filters[key]}"' for key in filters.keys() if filters[key] is not None]
-  print(filter_conditions, len(filter_conditions))
 
   if filter_conditions:
       return f', where: {{ {", ".join(filter_conditions)} }}'
