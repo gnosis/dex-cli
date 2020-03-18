@@ -42,10 +42,9 @@ def to_trade_dto(trade):
   }
 
 def get_trades(count, skip, sort, sort_direction, print_format, verbose, trader):
-    if trader:
-      filters = f', where: {{ owner:"{trader.lower()}"}}'
-    else:
-      filters = ''
+    filters = gql_filter({
+      "owner": trader.lower() if trader else None,
+    })
 
     query = f'''
 {{
