@@ -107,7 +107,7 @@ def print_orders_pretty(orders):
     tradePriceText = ''
     if soldVolume > 0:
       tradePriceText = (
-        click.style(f'  Avg. Traded Price {sellTokenLabel}/{buyTokenLabel}', fg='green') + ': ' + 
+        click.style(f'  Avg. Traded Price {sellTokenLabel}/{buyTokenLabel}', fg=labelColor) + ': ' + 
         format_price(
           calculate_price(
             numerator=boughtVolume,
@@ -118,7 +118,7 @@ def print_orders_pretty(orders):
           currency=buyTokenLabel
         ) +
         '\n' +
-        click.style(f'  Avg. Traded Price {buyTokenLabel}/{sellTokenLabel}', fg='green') + ': ' + 
+        click.style(f'  Avg. Traded Price {buyTokenLabel}/{sellTokenLabel}', fg=labelColor) + ': ' + 
         format_price(
           calculate_price(
             numerator=soldVolume,
@@ -165,8 +165,9 @@ def print_orders_pretty(orders):
         format_amount_in_weis(boughtVolume, buyTokenDecimals) + ' ' + buyTokenLabel + '\n'
         if soldVolume else ''
       ) + # TODO: Add percentage https://github.com/gnosis/dex-cli/issues/31
+      '\n' +
 
-      click.style(f'  Limit Price {sellTokenLabel}/{buyTokenLabel}', fg='green') + ': ' + 
+      click.style(f'  Limit Price {sellTokenLabel}/{buyTokenLabel}', fg=labelColor) + ': ' + 
       format_price(calculate_price(
         numerator=priceNumerator,
         denominator=priceDenominator,
@@ -174,7 +175,7 @@ def print_orders_pretty(orders):
         decimals_denominator=sellTokenDecimals
       ), currency=buyTokenLabel) + '\n' +      
 
-      click.style(f'  Limit Price {buyTokenLabel}/{sellTokenLabel}', fg='green') + ': ' + 
+      click.style(f'  Limit Price {buyTokenLabel}/{sellTokenLabel}', fg=labelColor) + ': ' + 
       format_price(calculate_price(
         numerator=priceDenominator,
         denominator=priceNumerator,

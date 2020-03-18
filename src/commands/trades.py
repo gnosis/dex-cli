@@ -107,7 +107,7 @@ def print_trades_pretty(trades):
       click.style('  Buy Token', fg=labelColor) + ': ' + 
       format_token_long(buyToken) + '\n' +
 
-      click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg='green') + ': ' + 
+      click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg=labelColor) + ': ' + 
       format_price(calculate_price(
         numerator=buyVolume,
         denominator=sellVolume,
@@ -115,7 +115,7 @@ def print_trades_pretty(trades):
         decimals_denominator=sellTokenDecimals
       ), currency=buyTokenLabel) + '\n' +      
 
-      click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg='green') + ': ' + 
+      click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg=labelColor) + ': ' + 
       format_price(calculate_price(
         numerator=sellVolume,
         denominator=buyVolume,
