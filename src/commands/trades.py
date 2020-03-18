@@ -9,7 +9,7 @@ from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
 from utils import (calculate_price, debug_query, format_amount,
                    format_amount_in_weis, format_date_time, format_integer,
                    format_price, format_token_long, format_token_short,
-                   get_graphql_client, parse_date_from_epoch,
+                   get_graphql_client, gql_sort_by, parse_date_from_epoch,
                    to_etherscan_link)
 
 # Trade entity fields
@@ -41,7 +41,7 @@ def to_trade_dto(trade):
     "txHash": trade['txHash']
   }
 
-def get_trades(count, skip, sort, format, verbose, trader):
+def get_trades(count, skip, sort, sort_direction, format, verbose, trader):
     if trader:
       filters = f', where: {{ owner:"{trader.lower()}"}}'
     else:
@@ -49,7 +49,7 @@ def get_trades(count, skip, sort, format, verbose, trader):
 
     query = f'''
 {{
-  trades (first: {count} , skip: {skip}, orderBy: {sort}{filters}) {{{TRADE_FIELDS}  }}
+  trades (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{{TRADE_FIELDS}  }}
 }}
     '''
     
