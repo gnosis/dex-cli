@@ -1,4 +1,5 @@
 from commands.tokens import TOKEN_FIELDS_BASIC, to_token
+from decimal import Decimal
 
 import click
 from gql import gql
@@ -47,15 +48,15 @@ def get_orders(count, skip, sort, format, verbose, trader):
     debug_query(query, verbose)
     client = get_graphql_client()
     result = client.execute(gql(query))
-    tradesDto = map(to_order_dto, result['orders'])
-    print_orders(tradesDto, format)
+    ordersDto = map(to_order_dto, result['orders'])
+    print_orders(ordersDto, format)
 
 
-def print_orders(trades, format):
+def print_orders(orders, format):
   if format == 'pretty':    
-    print_orders_pretty(trades)
+    print_orders_pretty(orders)
   elif format == 'csv':
-    print_orders_csv(trades)
+    print_orders_csv(orders)
   else:
     raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
 
@@ -66,13 +67,13 @@ def to_order_dto(order):
     "order_id": int(order['orderId']),
     "fromBatchId": int(order['fromBatchId']),
     "untilBatchId": int(order['untilBatchId']),
-    "buyToken": order['buyToken'],
-    "sellToken": order['sellToken'],
-    "priceNumerator": order['priceNumerator'],
-    "priceDenominator": order['priceDenominator'],
-    "maxSellAmount": order['maxSellAmount'],
-    "soldVolume": order['soldVolume'],
-    "boughtVolume": order['boughtVolume'],
+    "sellToken": to_token(order['sellToken']),
+    "buyToken": to_token(order['buyToken']),
+    "priceNumerator": Decimal(order['priceNumerator']),
+    "priceDenominator": Decimal(order['priceDenominator']),
+    "maxSellAmount": Decimal(order['maxSellAmount']),
+    "soldVolume": Decimal(order['soldVolume']),
+    "boughtVolume": Decimal(order['boughtVolume']),
     "createDate": parse_date_from_epoch(order['createEpoch']),
     "cancelDate": parse_date_from_epoch(order['cancelEpoch']),
     "deleteDate": parse_date_from_epoch(order['deleteEpoch']),
@@ -84,6 +85,12 @@ def print_orders_pretty(orders):
 
   for order in orders:
     cancelDate, deleteDate = order['cancelDate'], order['deleteDate']
+    priceNumerator, priceDenominator = order['priceNumerator'], order['priceDenominator']
+    sellToken, soldVolume = order['sellToken'], order['soldVolume']
+    buyToken, boughtVolume = order['buyToken'], order['boughtVolume']
+    sellTokenDecimals, sellTokenLabel = sellToken['decimals'], format_token_short(sellToken)
+    buyTokenDecimals, buyTokenLabel = buyToken['decimals'], format_token_short(buyToken)
+
     labelColor = COLOR_LABEL
     if cancelDate is None:
       cancelDateText = ''
@@ -96,6 +103,33 @@ def print_orders_pretty(orders):
     else:
       labelColor = COLOR_LABEL_DELETED
       deleteDateText = click.style('  Deleted date', fg=labelColor) + ': ' + click.style(format_date_time(deleteDate), bg=COLOR_LABEL_DELETED) + '\n'
+
+    tradePriceText = ''
+    if soldVolume > 0:
+      tradePriceText = (
+        click.style(f'  Avg. Traded Price {sellTokenLabel}/{buyTokenLabel}', fg='green') + ': ' + 
+        format_price(
+          calculate_price(
+            numerator=boughtVolume,
+            denominator=soldVolume,
+            decimals_numerator=buyTokenDecimals,
+            decimals_denominator=sellTokenDecimals
+          ), 
+          currency=buyTokenLabel
+        ) +
+        '\n' +
+        click.style(f'  Avg. Traded Price {buyTokenLabel}/{sellTokenLabel}', fg='green') + ': ' + 
+        format_price(
+          calculate_price(
+            numerator=soldVolume,
+            denominator=boughtVolume,
+            decimals_numerator=sellTokenDecimals,
+            decimals_denominator=buyTokenDecimals
+          ),
+          currency=sellTokenLabel
+        ) +
+        '\n'
+      )
 
     click.echo(
       click.style('  Order date', fg=labelColor) + ': ' + 
@@ -117,45 +151,39 @@ def print_orders_pretty(orders):
       format_batch_id_with_date(order['untilBatchId']) + 
       '\n\n' + 
 
+      click.style('  Sell Token', fg=labelColor) + ': ' + 
+      format_token_long(sellToken) + '\n' + 
 
-      # click.style('  Buy token', fg=labelColor) + ': ' + 
-      # format_token_long(order['buyToken']) + '\n' + 
+      click.style('  Buy Token', fg=labelColor) + ': ' + 
+      format_token_long(buyToken) + '\n' +
 
-      # click.style('  Until Batch Id', fg=labelColor) + ': ' + 
-      # format_token_long(order['sellToken']) + '\n' + 
+      click.style('  Sold volume', fg=labelColor) + ': ' + 
+      format_amount_in_weis(soldVolume, sellTokenDecimals) + ' ' + sellTokenLabel + '\n' + 
 
-      # click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg=labelColor) + ': ' + 
-      # format_price(calculate_price(
-      #   numerator=buyVolume,
-      #   denominator=sellVolume,
-      #   decimals_numerator=buyTokenDecimals,
-      #   decimals_denominator=sellTokenDecimals
-      # ), currency=buyTokenLabel) + '\n' +      
+      (
+        click.style('  Bought volume', fg=labelColor) + ': ' + 
+        format_amount_in_weis(boughtVolume, buyTokenDecimals) + ' ' + buyTokenLabel + '\n'
+        if soldVolume else ''
+      ) + # TODO: Add percentage https://github.com/gnosis/dex-cli/issues/31
 
-      # click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg=labelColor) + ': ' + 
-      # format_price(calculate_price(
-      #   numerator=sellVolume,
-      #   denominator=buyVolume,
-      #   decimals_numerator=sellTokenDecimals,
-      #   decimals_denominator=buyTokenDecimals
-      # ), currency=sellTokenLabel) + '\n' +
+      click.style(f'  Limit Price {sellTokenLabel}/{buyTokenLabel}', fg='green') + ': ' + 
+      format_price(calculate_price(
+        numerator=priceNumerator,
+        denominator=priceDenominator,
+        decimals_numerator=buyTokenDecimals,
+        decimals_denominator=sellTokenDecimals
+      ), currency=buyTokenLabel) + '\n' +      
 
-      # click.style('  Buy volume', fg=labelColor) + ': ' + 
-      # str(order['buyVolume']) + '\n' +  # TODO: Units
+      click.style(f'  Limit Price {buyTokenLabel}/{sellTokenLabel}', fg='green') + ': ' + 
+      format_price(calculate_price(
+        numerator=priceDenominator,
+        denominator=priceNumerator,
+        decimals_numerator=sellTokenDecimals,
+        decimals_denominator=buyTokenDecimals
+      ), currency=sellTokenLabel) + '\n' +
 
-      # click.style('  Max Sell Amount', fg=labelColor) + ': ' + 
-      # str(order['maxSellAmount']) + '\n' +  # TODO: Units
-
-      # click.style('  Sold Volume', fg=labelColor) + ': ' + 
-      # str(order['soldVolume']) + '\n' + # TODO: Units
-
-      # click.style('  Bought Volume', fg=labelColor) + ': ' + 
-      # str(order['boughtVolume']) + '\n' + # TODO: Units
-
-      # TODO: Show number of trades
-      # TODO: Show optionally the trades of one order?
-      # TODO: Show creation date?
-
+      tradePriceText +
+      '\n' +
 
       click.style('  Transaction', fg=labelColor) + ': ' + 
       to_etherscan_link(order['txHash']) + '\n' + 

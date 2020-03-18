@@ -1,5 +1,5 @@
 from datetime import datetime
-from decimal import ROUND_DOWN, Decimal
+from decimal import ROUND_DOWN, Decimal, getcontext
 
 import click
 from gql import Client, gql
@@ -8,6 +8,8 @@ from gql.transport.requests import RequestsHTTPTransport
 from constants import (BATCH_TIME_SECONDS, COLOR_LABEL, COLOR_SECONDARY,
                        COLOR_SEPARATOR, RETRIES, SEPARATOR, URL_API_THE_GRAPH,
                        URL_UI_THE_GRAPH)
+
+getcontext().prec = 36
 
 graphql_client = None
 
@@ -57,7 +59,7 @@ def format_date(date):
 def format_date_time(date, tooBigLabel='Never'):  
     return tooBigLabel if date == datetime.max else date.strftime("%d/%m/%y %H:%M:%S")
 
-def format_batch_id_with_date(batchId, tooBigLabel='Never expire'):
+def format_batch_id_with_date(batchId, tooBigLabel='Never expires'):
   if batchId:
     return tooBigLabel if batchId >= MAX_BATCH_ID else (
       format_integer(batchId) + 
@@ -81,7 +83,18 @@ def to_date_from_batch_id(batchId):
   return to_date_from_epoch(batchId * BATCH_TIME_SECONDS)
 
 def calculate_price(numerator, denominator, decimals_numerator, decimals_denominator):
-  precision_factor = Decimal(10) ** Decimal(abs(decimals_numerator - decimals_denominator))
+  numerator_dec = Decimal(numerator)
+  denominator_dec = Decimal(denominator)
+
+  if denominator_dec.is_zero():
+    return Decimal(1) if numerator_dec.is_zero() else Infinity
+  else:
+    precision_factor = Decimal(10) ** Decimal(abs(decimals_numerator - decimals_denominator))
+    if decimals_numerator > decimals_denominator:
+      return numerator_dec / denominator_dec / precision_factor
+    else:
+      return numerator_dec / (denominator_dec / precision_factor)
+
   if decimals_numerator > decimals_denominator:
     return Decimal(numerator) * precision_factor / Decimal(denominator)
   else:
