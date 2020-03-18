@@ -112,6 +112,9 @@ def debug_query(query, verbose):
 
 {query}''')
 
+def gql_sort_by(sort, sort_direction):
+  return f'orderBy: {sort}, orderDirection: {sort_direction}'
+
 def get_graphql_client():
   global graphql_client
   if graphql_client is None:
