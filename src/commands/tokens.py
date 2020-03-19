@@ -35,7 +35,7 @@ def to_token(token):
   }
 
 
-def get_tokens(count, skip, sort, sort_direction, print_format, verbose, token_id, symbol, address):
+def get_tokens(count, skip, sort, sort_direction_ascending, print_format, verbose, token_id, symbol, address):
   filters = gql_filter({
     "id": token_id,
     "address": address.lower() if address else None,
@@ -44,7 +44,7 @@ def get_tokens(count, skip, sort, sort_direction, print_format, verbose, token_i
 
   query = f'''
 {{
-  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{{TOKENS_FIELDS}  }}
+  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction_ascending)}{filters}) {{{TOKENS_FIELDS}  }}
 }}
     '''  
   debug_query(query, verbose)

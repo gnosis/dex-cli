@@ -21,10 +21,10 @@ PRICES_FIELDS = f'''
   txHash
 '''
 
-def get_prices(count, skip, sort, sort_direction, print_format, verbose):
+def get_prices(count, skip, sort, sort_direction_ascending, print_format, verbose):
     query = f'''
 {{
-  prices (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{PRICES_FIELDS}  }}
+  prices (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction_ascending)}) {{{PRICES_FIELDS}  }}
 }}
     '''
     

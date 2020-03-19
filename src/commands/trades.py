@@ -46,14 +46,14 @@ def to_trade_dto(trade):
     "txHash": trade['txHash']
   }
 
-def get_trades(count, skip, sort, sort_direction, print_format, verbose, trader):
+def get_trades(count, skip, sort, sort_direction_ascending, print_format, verbose, trader):
     filters = gql_filter({
       "owner": trader.lower() if trader else None,
     })
 
     query = f'''
 {{
-  trades (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{{TRADE_FIELDS}  }}
+  trades (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction_ascending)}{filters}) {{{TRADE_FIELDS}  }}
 }}
     '''
     

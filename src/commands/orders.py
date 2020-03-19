@@ -38,14 +38,14 @@ ORDERS_FIELDS = f'''
     txHash
 '''
 
-def get_orders(count, skip, sort, sort_direction, print_format, verbose, trader):
+def get_orders(count, skip, sort, sort_direction_ascending, print_format, verbose, trader):
     filters = gql_filter({
       "owner": trader.lower() if trader else None,
     })
 
     query = f'''
 {{
-  orders (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{ {ORDERS_FIELDS} }}
+  orders (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction_ascending)}{filters}) {{ {ORDERS_FIELDS} }}
 }}
     '''
     
