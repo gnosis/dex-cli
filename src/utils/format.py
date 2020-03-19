@@ -60,8 +60,7 @@ def format_date_time(date, tooBigLabel='Never'):
 def format_batch_id_with_date(batchId, tooBigLabel='Never expires'):
   if batchId:
     return tooBigLabel if batchId >= MAX_BATCH_ID else (
-      format_integer(batchId) + 
-      f" ({ format_date_time(to_date_from_batch_id(batchId))})"
+      f"{format_integer(batchId)} ({ format_date_time(to_date_from_batch_id(batchId))})"
     )
   else:
     return ''
