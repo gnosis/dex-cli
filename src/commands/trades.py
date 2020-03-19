@@ -83,12 +83,35 @@ def print_trades_pretty(trades):
     sellTokenDecimals, sellTokenLabel = sell_token['decimals'], format_token_short(sell_token)
     buyTokenDecimals, buyTokenLabel = buy_token['decimals'], format_token_short(buy_token)
 
+    # Revert date
     if revert_date is None:
       label_color = COLOR_LABEL
       revert_date_text = ''
     else:
       label_color = COLOR_LABEL_DELETED
       revert_date_text = click.style('  Reverted date', fg=label_color) + ': ' + click.style(format_date_time(revert_date), bg=COLOR_LABEL_DELETED) + '\n'
+
+    # Prices
+    order_price_text_1 = _get_price_text(
+      label='Price',
+      sell_label=sellTokenLabel,
+      buy_label=buyTokenLabel,
+      numerator=buy_volume,
+      denominator=sell_volume,
+      decimals_numerator=buyTokenDecimals,
+      decimals_denominator=sellTokenDecimals,
+      label_color=label_color
+    )
+    order_price_text_2 = _get_price_text(
+      label='Price',
+      sell_label=buyTokenLabel,
+      buy_label=sellTokenLabel,
+      numerator=sell_volume,
+      denominator=buy_volume,
+      decimals_numerator=sellTokenDecimals,
+      decimals_denominator=buyTokenDecimals,
+      label_color=label_color
+    )
       
     click.echo(
       click.style('  Trade date', fg=label_color) + ': ' + 
@@ -111,21 +134,8 @@ def print_trades_pretty(trades):
       click.style('  Buy Token', fg=label_color) + ': ' + 
       format_token_long(buy_token) + '\n' +
 
-      click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg=label_color) + ': ' + 
-      format_price(calculate_price(
-        numerator=buy_volume,
-        denominator=sell_volume,
-        decimals_numerator=buyTokenDecimals,
-        decimals_denominator=sellTokenDecimals
-      ), currency=buyTokenLabel) + '\n' +      
-
-      click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg=label_color) + ': ' + 
-      format_price(calculate_price(
-        numerator=sell_volume,
-        denominator=buy_volume,
-        decimals_numerator=sellTokenDecimals,
-        decimals_denominator=buyTokenDecimals
-      ), currency=sellTokenLabel) + '\n' +
+      # Prices
+      f'{order_price_text_1}\n{order_price_text_2}\n' +
 
       click.style('  Sell volume', fg=label_color) + ': ' + 
       format_amount_in_weis(sell_volume, sellTokenDecimals) + ' ' + sellTokenLabel + '\n' + 
@@ -143,3 +153,18 @@ def print_trades_pretty(trades):
 def print_trades_csv(trade):
   # TODO: Implement here the CSV formatting
   click.echo("Not implemented yet")
+
+
+def _get_price_text (label, sell_label, buy_label, numerator, denominator, decimals_numerator, decimals_denominator, label_color):
+  return (
+    click.style(f'  {label} {sell_label}/{buy_label}', fg=label_color) + ': ' +
+    format_price(
+      calculate_price(
+        numerator=numerator,
+        denominator=denominator,
+        decimals_numerator=decimals_numerator,
+        decimals_denominator=decimals_denominator
+      ), 
+      currency=buy_label
+    )
+  )

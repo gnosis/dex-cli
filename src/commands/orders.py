@@ -85,21 +85,6 @@ def to_order_dto(order):
   }
 
 
-def _get_price_text (label, sell_label, buy_label, numerator, denominator, decimals_numerator, decimals_denominator, label_color):
-  return (
-    click.style(f'  {label} {sell_label}/{buy_label}', fg=label_color) + ': ' +
-    format_price(
-      calculate_price(
-        numerator=numerator,
-        denominator=denominator,
-        decimals_numerator=decimals_numerator,
-        decimals_denominator=decimals_denominator
-      ), 
-      currency=buy_label
-    )
-  )
-
-
 def print_orders_pretty(orders):
   click.echo(click.style(SEPARATOR, fg=COLOR_SEPARATOR))
 
@@ -237,3 +222,18 @@ def print_orders_pretty(orders):
 def print_orders_csv(orders):
   # TODO: Implement here the CSV formatting
   click.echo("Not implemented yet")
+
+
+def _get_price_text (label, sell_label, buy_label, numerator, denominator, decimals_numerator, decimals_denominator, label_color):
+  return (
+    click.style(f'  {label} {sell_label}/{buy_label}', fg=label_color) + ': ' +
+    format_price(
+      calculate_price(
+        numerator=numerator,
+        denominator=denominator,
+        decimals_numerator=decimals_numerator,
+        decimals_denominator=decimals_denominator
+      ), 
+      currency=buy_label
+    )
+  )
