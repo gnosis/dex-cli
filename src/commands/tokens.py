@@ -5,21 +5,21 @@ from gql import gql
 
 from constants import COLOR_LABEL, COLOR_SEPARATOR, OWL_DECIMALS, SEPARATOR
 from utils import (debug_query, format_amount_in_weis, format_date_time,
-                   format_integer, get_graphql_client, to_date_from_epoch,
-                   to_etherscan_link)
+                   format_integer, get_graphql_client, gql_sort_by,
+                   to_date_from_epoch, to_etherscan_link)
 
 TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
 
 # Batch entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
 TOKENS_FIELDS = '''
-  id
-  address
-  decimals
-  name
-  symbol
-  createEpoch
-  txHash  
+    id
+    address
+    decimals
+    name
+    symbol
+    createEpoch
+    txHash  
 '''
 
 
@@ -33,11 +33,11 @@ def to_token(token):
   }
 
 
-def get_tokens(count, skip, sort, format, verbose):
+def get_tokens(count, skip, sort, sort_direction, format, verbose):
 
     query = f'''
 {{
-  tokens (first: {count} , skip: {skip}, orderBy: {sort}) {{{TOKENS_FIELDS}  }}
+  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{TOKENS_FIELDS}  }}
 }}
     '''
     

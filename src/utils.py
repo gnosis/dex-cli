@@ -9,6 +9,8 @@ from constants import (BATCH_TIME_SECONDS, COLOR_LABEL, COLOR_SECONDARY,
                        COLOR_SEPARATOR, RETRIES, SEPARATOR, URL_API_THE_GRAPH,
                        URL_UI_THE_GRAPH)
 
+getcontext().prec = 36
+
 graphql_client = None
 
 MAX_EPOCH = 253402300799
@@ -125,6 +127,9 @@ def debug_query(query, verbose):
   Subgraph: {click.style(URL_UI_THE_GRAPH, fg=COLOR_SECONDARY)}
 
 {query}''')
+
+def gql_sort_by(sort, sort_direction):
+  return f'orderBy: {sort}, orderDirection: {sort_direction}'
 
 def get_graphql_client():
   global graphql_client
