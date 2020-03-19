@@ -5,10 +5,11 @@ import click
 from gql import gql
 
 from constants import COLOR_LABEL, COLOR_SEPARATOR, OWL_DECIMALS, SEPARATOR
-from utils import (debug_query, format_amount_in_weis,
-                   format_batch_id_with_date, format_integer,
-                   format_token_long, get_graphql_client, gql_sort_by,
-                   to_etherscan_link)
+from utils.format import (format_amount_in_weis, format_batch_id_with_date,
+                          format_date_time, format_integer, format_token_long)
+from utils.graphql import (debug_query, get_graphql_client, gql_filter,
+                           gql_sort_by)
+from utils.misc import to_date_from_epoch, to_etherscan_link
 
 # Price entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion

@@ -6,11 +6,16 @@ from gql import gql
 
 from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
                        SEPARATOR)
-from utils import (calculate_price, debug_query, format_amount,
-                   format_amount_in_weis, format_date_time, format_integer,
-                   format_price, format_token_long, format_token_short,
-                   get_graphql_client, gql_filter, gql_sort_by,
-                   parse_date_from_epoch, to_etherscan_link)
+from utils.format import (format_amount, format_amount_in_weis,
+                          format_batch_id_with_date, format_date_time,
+                          format_integer, format_percentage, format_price,
+                          format_token_long, format_token_short,
+                          parse_date_from_epoch)
+from utils.graphql import (debug_query, get_graphql_client, gql_filter,
+                           gql_sort_by)
+from utils.misc import (calculate_price, is_unlimited_amount,
+                        to_date_from_batch_id, to_date_from_epoch,
+                        to_etherscan_link)
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
@@ -79,34 +84,34 @@ def print_trades_pretty(trades):
     buyTokenDecimals, buyTokenLabel = buyToken['decimals'], format_token_short(buyToken)
 
     if revertDate is None:
-      labelColor = COLOR_LABEL
+      label_color = COLOR_LABEL
       revertDateText = ''
     else:
-      labelColor = COLOR_LABEL_DELETED
-      revertDateText = click.style('  Reverted date', fg=labelColor) + ': ' + click.style(format_date_time(revertDate), bg=COLOR_LABEL_DELETED) + '\n'
+      label_color = COLOR_LABEL_DELETED
+      revertDateText = click.style('  Reverted date', fg=label_color) + ': ' + click.style(format_date_time(revertDate), bg=COLOR_LABEL_DELETED) + '\n'
       
     click.echo(
-      click.style('  Trade date', fg=labelColor) + ': ' + 
+      click.style('  Trade date', fg=label_color) + ': ' + 
       format_date_time(trade['tradeDate']) + '\n' +       
       revertDateText + 
       '\n' + 
 
-      click.style('  Batch Id', fg=labelColor) + ': ' + 
+      click.style('  Batch Id', fg=label_color) + ': ' + 
       format_integer(trade['tradeBatchId']) + '\n' + 
 
-      click.style('  Trader', fg=labelColor) + ': ' + 
+      click.style('  Trader', fg=label_color) + ': ' + 
       trade['owner_address'] + '\n' + 
 
-      click.style('  Order Id', fg=labelColor) + ': ' + 
+      click.style('  Order Id', fg=label_color) + ': ' + 
       format_integer(trade['order_id']) + '\n\n' + 
       
-      click.style('  Sell Token', fg=labelColor) + ': ' + 
+      click.style('  Sell Token', fg=label_color) + ': ' + 
       format_token_long(sellToken) + '\n' + 
 
-      click.style('  Buy Token', fg=labelColor) + ': ' + 
+      click.style('  Buy Token', fg=label_color) + ': ' + 
       format_token_long(buyToken) + '\n' +
 
-      click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg=labelColor) + ': ' + 
+      click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg=label_color) + ': ' + 
       format_price(calculate_price(
         numerator=buyVolume,
         denominator=sellVolume,
@@ -114,7 +119,7 @@ def print_trades_pretty(trades):
         decimals_denominator=sellTokenDecimals
       ), currency=buyTokenLabel) + '\n' +      
 
-      click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg=labelColor) + ': ' + 
+      click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg=label_color) + ': ' + 
       format_price(calculate_price(
         numerator=sellVolume,
         denominator=buyVolume,
@@ -122,14 +127,14 @@ def print_trades_pretty(trades):
         decimals_denominator=buyTokenDecimals
       ), currency=sellTokenLabel) + '\n' +
 
-      click.style('  Sell volume', fg=labelColor) + ': ' + 
+      click.style('  Sell volume', fg=label_color) + ': ' + 
       format_amount_in_weis(sellVolume, sellTokenDecimals) + ' ' + sellTokenLabel + '\n' + 
 
-      click.style('  Buy volume', fg=labelColor) + ': ' + 
+      click.style('  Buy volume', fg=label_color) + ': ' + 
       format_amount_in_weis(buyVolume, buyTokenDecimals) + ' ' + buyTokenLabel + '\n\n' + 
 
 
-      click.style('  Transaction', fg=labelColor) + ': ' + 
+      click.style('  Transaction', fg=label_color) + ': ' + 
       to_etherscan_link(trade['txHash']) + '\n' + 
 
       click.style(SEPARATOR, fg=COLOR_SEPARATOR)
