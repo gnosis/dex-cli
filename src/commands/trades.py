@@ -36,13 +36,13 @@ def to_trade_dto(trade):
   return {
     "owner_address": trade['owner']['id'],
     "order_id": int(trade['order']['orderId']),
-    "tradeDate": parse_date_from_epoch(trade['tradeEpoch']),
-    "revertDate": parse_date_from_epoch(trade['revertEpoch']),
-    "sellToken": to_token(trade['sellToken']),
-    "buyToken": to_token(trade['buyToken']),
-    "tradeBatchId": int(trade['tradeBatchId']),
-    "sellVolume": Decimal(trade['sellVolume']),
-    "buyVolume": Decimal(trade['buyVolume']),
+    "trade_date": parse_date_from_epoch(trade['tradeEpoch']),
+    "revert_date": parse_date_from_epoch(trade['revertEpoch']),
+    "sell_token": to_token(trade['sellToken']),
+    "buy_token": to_token(trade['buyToken']),
+    "trade_batch_id": int(trade['tradeBatchId']),
+    "sell_volume": Decimal(trade['sellVolume']),
+    "buy_volume": Decimal(trade['buyVolume']),
     "txHash": trade['txHash']
   }
 
@@ -77,27 +77,27 @@ def print_trades_pretty(trades):
   click.echo(click.style(SEPARATOR, fg=COLOR_SEPARATOR))
 
   for trade in trades:
-    revertDate = trade['revertDate']
-    sellToken, sellVolume = trade['sellToken'], trade['sellVolume']
-    buyToken, buyVolume = trade['buyToken'], trade['buyVolume']
-    sellTokenDecimals, sellTokenLabel = sellToken['decimals'], format_token_short(sellToken)
-    buyTokenDecimals, buyTokenLabel = buyToken['decimals'], format_token_short(buyToken)
+    revert_date = trade['revert_date']
+    sell_token, sell_volume = trade['sell_token'], trade['sell_volume']
+    buy_token, buy_volume = trade['buy_token'], trade['buy_volume']
+    sellTokenDecimals, sellTokenLabel = sell_token['decimals'], format_token_short(sell_token)
+    buyTokenDecimals, buyTokenLabel = buy_token['decimals'], format_token_short(buy_token)
 
-    if revertDate is None:
+    if revert_date is None:
       label_color = COLOR_LABEL
-      revertDateText = ''
+      revert_date_text = ''
     else:
       label_color = COLOR_LABEL_DELETED
-      revertDateText = click.style('  Reverted date', fg=label_color) + ': ' + click.style(format_date_time(revertDate), bg=COLOR_LABEL_DELETED) + '\n'
+      revert_date_text = click.style('  Reverted date', fg=label_color) + ': ' + click.style(format_date_time(revert_date), bg=COLOR_LABEL_DELETED) + '\n'
       
     click.echo(
       click.style('  Trade date', fg=label_color) + ': ' + 
-      format_date_time(trade['tradeDate']) + '\n' +       
-      revertDateText + 
+      format_date_time(trade['trade_date']) + '\n' +       
+      revert_date_text + 
       '\n' + 
 
       click.style('  Batch Id', fg=label_color) + ': ' + 
-      format_integer(trade['tradeBatchId']) + '\n' + 
+      format_integer(trade['trade_batch_id']) + '\n' + 
 
       click.style('  Trader', fg=label_color) + ': ' + 
       trade['owner_address'] + '\n' + 
@@ -106,32 +106,32 @@ def print_trades_pretty(trades):
       format_integer(trade['order_id']) + '\n\n' + 
       
       click.style('  Sell Token', fg=label_color) + ': ' + 
-      format_token_long(sellToken) + '\n' + 
+      format_token_long(sell_token) + '\n' + 
 
       click.style('  Buy Token', fg=label_color) + ': ' + 
-      format_token_long(buyToken) + '\n' +
+      format_token_long(buy_token) + '\n' +
 
       click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg=label_color) + ': ' + 
       format_price(calculate_price(
-        numerator=buyVolume,
-        denominator=sellVolume,
+        numerator=buy_volume,
+        denominator=sell_volume,
         decimals_numerator=buyTokenDecimals,
         decimals_denominator=sellTokenDecimals
       ), currency=buyTokenLabel) + '\n' +      
 
       click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg=label_color) + ': ' + 
       format_price(calculate_price(
-        numerator=sellVolume,
-        denominator=buyVolume,
+        numerator=sell_volume,
+        denominator=buy_volume,
         decimals_numerator=sellTokenDecimals,
         decimals_denominator=buyTokenDecimals
       ), currency=sellTokenLabel) + '\n' +
 
       click.style('  Sell volume', fg=label_color) + ': ' + 
-      format_amount_in_weis(sellVolume, sellTokenDecimals) + ' ' + sellTokenLabel + '\n' + 
+      format_amount_in_weis(sell_volume, sellTokenDecimals) + ' ' + sellTokenLabel + '\n' + 
 
       click.style('  Buy volume', fg=label_color) + ': ' + 
-      format_amount_in_weis(buyVolume, buyTokenDecimals) + ' ' + buyTokenLabel + '\n\n' + 
+      format_amount_in_weis(buy_volume, buyTokenDecimals) + ' ' + buyTokenLabel + '\n\n' + 
 
 
       click.style('  Transaction', fg=label_color) + ': ' + 

@@ -69,18 +69,18 @@ def to_order_dto(order):
   return {
     "owner_address": order['owner']['id'],
     "order_id": int(order['orderId']),
-    "fromBatchId": int(order['fromBatchId']),
-    "untilBatchId": int(order['untilBatchId']),
-    "sellToken": to_token(order['sellToken']),
-    "buyToken": to_token(order['buyToken']),
-    "priceNumerator": Decimal(order['priceNumerator']),
-    "priceDenominator": Decimal(order['priceDenominator']),
-    "maxSellAmount": Decimal(order['maxSellAmount']),
-    "soldVolume": Decimal(order['soldVolume']),
-    "boughtVolume": Decimal(order['boughtVolume']),
-    "createDate": parse_date_from_epoch(order['createEpoch']),
-    "cancelDate": parse_date_from_epoch(order['cancelEpoch']),
-    "deleteDate": parse_date_from_epoch(order['deleteEpoch']),
+    "from_batch_id": int(order['fromBatchId']),
+    "until_batch_id": int(order['untilBatchId']),
+    "sell_token": to_token(order['sellToken']),
+    "buy_token": to_token(order['buyToken']),
+    "price_numerator": Decimal(order['priceNumerator']),
+    "price_denominator": Decimal(order['priceDenominator']),
+    "max_sell_amount": Decimal(order['maxSellAmount']),
+    "sold_volume": Decimal(order['soldVolume']),
+    "bought_volume": Decimal(order['boughtVolume']),
+    "create_date": parse_date_from_epoch(order['createEpoch']),
+    "cancel_date": parse_date_from_epoch(order['cancelEpoch']),
+    "delete_date": parse_date_from_epoch(order['deleteEpoch']),
     "txHash": order['txHash']
   }
 
@@ -104,27 +104,27 @@ def print_orders_pretty(orders):
   click.echo(click.style(SEPARATOR, fg=COLOR_SEPARATOR))
 
   for order in orders:
-    cancelDate, deleteDate = order['cancelDate'], order['deleteDate']
-    priceNumerator, priceDenominator = order['priceNumerator'], order['priceDenominator']
-    sellToken, soldVolume, maxSellAmount = order['sellToken'], order['soldVolume'], order['maxSellAmount']
-    buyToken, boughtVolume = order['buyToken'], order['boughtVolume']
-    sellTokenDecimals, sellTokenLabel = sellToken['decimals'], format_token_short(sellToken)
-    buyTokenDecimals, buyTokenLabel = buyToken['decimals'], format_token_short(buyToken)
+    cancel_date, delete_date = order['cancel_date'], order['delete_date']
+    price_numerator, price_denominator = order['price_numerator'], order['price_denominator']
+    sell_token, sold_volume, max_sell_amount = order['sell_token'], order['sold_volume'], order['max_sell_amount']
+    buy_token, bought_volume = order['buy_token'], order['bought_volume']
+    sellTokenDecimals, sellTokenLabel = sell_token['decimals'], format_token_short(sell_token)
+    buyTokenDecimals, buyTokenLabel = buy_token['decimals'], format_token_short(buy_token)
 
     # Canceled trade date
     label_color = COLOR_LABEL
-    if cancelDate is None:
-      cancelDateText = ''
+    if cancel_date is None:
+      cancel_date_text = ''
     else:
       label_color = COLOR_LABEL_DELETED
-      cancelDateText = click.style('  Cancel date', fg=label_color) + ': ' + click.style(format_date_time(cancelDate), bg=COLOR_LABEL_DELETED) + '\n'
+      cancel_date_text = click.style('  Cancel date', fg=label_color) + ': ' + click.style(format_date_time(cancel_date), bg=COLOR_LABEL_DELETED) + '\n'
 
     # Deleted trade date
-    if deleteDate is None:
-      deleteDateText = ''
+    if delete_date is None:
+      delete_date_text = ''
     else:
       label_color = COLOR_LABEL_DELETED
-      deleteDateText = click.style('  Deleted date', fg=label_color) + ': ' + click.style(format_date_time(deleteDate), bg=COLOR_LABEL_DELETED) + '\n'
+      delete_date_text = click.style('  Deleted date', fg=label_color) + ': ' + click.style(format_date_time(delete_date), bg=COLOR_LABEL_DELETED) + '\n'
 
 
     # Limit Price
@@ -132,8 +132,8 @@ def print_orders_pretty(orders):
       label='Limit Price',
       sell_label=sellTokenLabel,
       buy_label=buyTokenLabel,
-      numerator=priceNumerator,
-      denominator=priceDenominator,
+      numerator=price_numerator,
+      denominator=price_denominator,
       decimals_numerator=buyTokenDecimals,
       decimals_denominator=sellTokenDecimals,
       label_color=label_color
@@ -142,8 +142,8 @@ def print_orders_pretty(orders):
       label='Limit Price',
       sell_label=buyTokenLabel,
       buy_label=sellTokenLabel,
-      numerator=priceDenominator,
-      denominator=priceNumerator,
+      numerator=price_denominator,
+      denominator=price_numerator,
       decimals_numerator=buyTokenDecimals,
       decimals_denominator=sellTokenDecimals,
       label_color=label_color
@@ -152,13 +152,13 @@ def print_orders_pretty(orders):
 
     # Get the actual averaged trade price, if the order was partially/totally executed
     trade_price_text = ''
-    if soldVolume > 0:      
+    if sold_volume > 0:      
       trade_price_text_1 = _get_price_text(
         label='Avg. Traded Price',
         sell_label=sellTokenLabel,
         buy_label=buyTokenLabel,
-        numerator=boughtVolume,
-        denominator=soldVolume,
+        numerator=bought_volume,
+        denominator=sold_volume,
         decimals_numerator=buyTokenDecimals,
         decimals_denominator=sellTokenDecimals,
         label_color=label_color
@@ -168,8 +168,8 @@ def print_orders_pretty(orders):
         label='Avg. Traded Price',
         sell_label=buyTokenLabel,
         buy_label=sellTokenLabel,
-        numerator=soldVolume,
-        denominator=boughtVolume,
+        numerator=sold_volume,
+        denominator=bought_volume,
         decimals_numerator=sellTokenDecimals,
         decimals_denominator=buyTokenDecimals,
         label_color=label_color
@@ -179,14 +179,14 @@ def print_orders_pretty(orders):
 
     # Calculate percentage, if not unlimited amount
     percentageText = ''
-    if not is_unlimited_amount(maxSellAmount):
-      percentageText = click.style(f" ({format_percentage(value=soldVolume, total=maxSellAmount)})", fg=COLOR_SECONDARY)
+    if not is_unlimited_amount(max_sell_amount):
+      percentageText = click.style(f" ({format_percentage(value=sold_volume, total=max_sell_amount)})", fg=COLOR_SECONDARY)
 
     click.echo(
       click.style('  Order date', fg=label_color) + ': ' + 
-      format_date_time(order['createDate']) + '\n' +       
-      cancelDateText + 
-      deleteDateText + 
+      format_date_time(order['create_date']) + '\n' +       
+      cancel_date_text + 
+      delete_date_text + 
       '\n' + 
 
       click.style('  Trader', fg=label_color) + ': ' + 
@@ -196,30 +196,30 @@ def print_orders_pretty(orders):
       format_integer(order['order_id']) + '\n' + 
 
       click.style('  From batch', fg=label_color) + ': ' + 
-      format_batch_id_with_date(order['fromBatchId']) + '\n' +
+      format_batch_id_with_date(order['from_batch_id']) + '\n' +
 
       click.style('  To batch', fg=label_color) + ': ' +
-      format_batch_id_with_date(order['untilBatchId']) + 
+      format_batch_id_with_date(order['until_batch_id']) + 
       '\n\n' + 
 
       click.style('  Sell Token', fg=label_color) + ': ' + 
-      format_token_long(sellToken) + '\n' + 
+      format_token_long(sell_token) + '\n' + 
 
       click.style('  Buy Token', fg=label_color) + ': ' + 
-      format_token_long(buyToken) + '\n' +
+      format_token_long(buy_token) + '\n' +
 
       click.style('  Sold volume', fg=label_color) + ': ' + 
-      format_amount_in_weis(soldVolume, sellTokenDecimals) +
+      format_amount_in_weis(sold_volume, sellTokenDecimals) +
       ' of ' +
-      format_amount_in_weis(maxSellAmount, sellTokenDecimals) + ' ' + sellTokenLabel + 
+      format_amount_in_weis(max_sell_amount, sellTokenDecimals) + ' ' + sellTokenLabel + 
       percentageText +
       '\n' + 
 
       (
         click.style('  Bought volume', fg=label_color) + ': ' + 
-        format_amount_in_weis(boughtVolume, buyTokenDecimals) + ' ' + buyTokenLabel +      
+        format_amount_in_weis(bought_volume, buyTokenDecimals) + ' ' + buyTokenLabel +      
         '\n'
-        if soldVolume else ''
+        if sold_volume else ''
       ) +
       '\n' +
 

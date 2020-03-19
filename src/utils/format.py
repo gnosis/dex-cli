@@ -30,9 +30,9 @@ def format_integer(number):
   return '{:,d}'.format(number)
 
 
-def format_amount_in_weis(amount, decimals, rounding=ROUND_DOWN, unlimitedLabel='Unlimited'):
+def format_amount_in_weis(amount, decimals, rounding=ROUND_DOWN, unlimited_label='Unlimited'):
   if is_unlimited_amount(amount):
-    return unlimitedLabel
+    return unlimited_label
   else:
     value = amount / Decimal(10 ** decimals)
     return format_amount(value, decimals=decimals, rounding=rounding)

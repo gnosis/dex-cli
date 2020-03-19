@@ -49,7 +49,7 @@ def to_price_dto(price):
   return {
     "token": to_token(price['token']),
     "batchId": int(price['batchId']),
-    "priceInOwl": Decimal(price['priceInOwl']),
+    "price_in_owl": Decimal(price['priceInOwl']),
     "volume": Decimal(price['volume']),
     "txHash": price['txHash']
   }
@@ -67,7 +67,7 @@ def print_prices_pretty(prices):
       format_batch_id_with_date(price['batchId']) + '\n' + 
 
       click.style('  Price in OWL', fg=COLOR_LABEL) + ': ' + 
-      format_amount_in_weis(price['priceInOwl'], OWL_DECIMALS) + '\n' + 
+      format_amount_in_weis(price['price_in_owl'], OWL_DECIMALS) + '\n' + 
 
       click.style('  Transaction', fg=COLOR_LABEL) + ': ' + 
       to_etherscan_link(price['txHash']) + '\n' + 
