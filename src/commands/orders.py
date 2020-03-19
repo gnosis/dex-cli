@@ -10,30 +10,30 @@ from utils import (calculate_price, debug_query, format_amount,
                    format_amount_in_weis, format_batch_id_with_date,
                    format_date_time, format_integer, format_price,
                    format_token_long, format_token_short, get_graphql_client,
-                   parse_date_from_epoch, to_date_from_batch_id,
+                   gql_sort_by, parse_date_from_epoch, to_date_from_batch_id,
                    to_date_from_epoch, to_etherscan_link)
 
 # Orders entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
 ORDERS_FIELDS = f'''
-  owner {{ id }}
-  orderId
-  fromBatchId
-  untilBatchId
-  buyToken {{ {TOKEN_FIELDS_BASIC} }}
-  sellToken {{ {TOKEN_FIELDS_BASIC} }}
-  priceNumerator
-  priceDenominator
-  maxSellAmount
-  soldVolume
-  boughtVolume
-  createEpoch
-  cancelEpoch
-  deleteEpoch
-  txHash
+    owner {{ id }}
+    orderId
+    fromBatchId
+    untilBatchId
+    buyToken {{ {TOKEN_FIELDS_BASIC} }}
+    sellToken {{ {TOKEN_FIELDS_BASIC} }}
+    priceNumerator
+    priceDenominator
+    maxSellAmount
+    soldVolume
+    boughtVolume
+    createEpoch
+    cancelEpoch
+    deleteEpoch
+    txHash
 '''
 
-def get_orders(count, skip, sort, format, verbose, trader):
+def get_orders(count, skip, sort, sort_direction, format, verbose, trader):
     if trader:
       filters = f', where: {{ owner:"{trader.lower()}"}}'
     else:
@@ -41,7 +41,7 @@ def get_orders(count, skip, sort, format, verbose, trader):
 
     query = f'''
 {{
-  orders (first: {count} , skip: {skip}, orderBy: {sort}{filters}) {{{ORDERS_FIELDS}  }}
+  orders (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{ {ORDERS_FIELDS} }}
 }}
     '''
     
