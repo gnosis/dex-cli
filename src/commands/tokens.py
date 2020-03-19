@@ -13,13 +13,13 @@ TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
 # Batch entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
 TOKENS_FIELDS = '''
-  id
-  address
-  decimals
-  name
-  symbol
-  createEpoch
-  txHash  
+    id
+    address
+    decimals
+    name
+    symbol
+    createEpoch
+    txHash  
 '''
 
 
@@ -34,10 +34,9 @@ def to_token(token):
 
 
 def get_tokens(count, skip, sort, sort_direction, print_format, verbose):
-
     query = f'''
 {{
-  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{TOKENS_FIELDS}  }}
+  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{TOKENS_FIELDS} }}
 }}
     '''
     
@@ -49,7 +48,7 @@ def get_tokens(count, skip, sort, sort_direction, print_format, verbose):
 
 
 def print_tokens(tokens, print_format):
-  if print_format == 'pretty':    
+  if print_format == 'pretty': 
     print_tokens_pretty(tokens)
   elif print_format == 'csv':
     print_tokens_csv(tokens)

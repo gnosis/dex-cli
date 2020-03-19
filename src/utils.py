@@ -1,5 +1,5 @@
 from datetime import datetime
-from decimal import ROUND_DOWN, Decimal, getcontext
+from decimal import ROUND_DOWN, Context, Decimal, getcontext
 
 import click
 from gql import Client, gql
@@ -9,7 +9,9 @@ from constants import (BATCH_TIME_SECONDS, COLOR_LABEL, COLOR_SECONDARY,
                        COLOR_SEPARATOR, RETRIES, SEPARATOR, URL_API_THE_GRAPH,
                        URL_UI_THE_GRAPH)
 
-getcontext().prec = 36
+MAX_EPOCH = 253402300799
+MAX_BATCH_ID = 844674335
+MAX_AMOUNT = Decimal('340282366920938463463374607431768211455')
 
 graphql_client = None
 
@@ -39,17 +41,32 @@ def format_token_short(token):
 def format_integer(number):
   return '{:,d}'.format(number)
 
-def format_amount_in_weis(amount, decimals, rounding=ROUND_DOWN):
-  value = amount / Decimal(10 ** decimals)
-  return format_amount(value, decimals=decimals, rounding=rounding)
+def isUnlimitedAmount(amount):
+  global MAX_AMOUNT
+
+  return amount == MAX_AMOUNT
+
+def format_amount_in_weis(amount, decimals, rounding=ROUND_DOWN, unlimitedLabel='Unlimited'):
+  if isUnlimitedAmount(amount):
+    return unlimitedLabel
+  else:
+    value = amount / Decimal(10 ** decimals)
+    return format_amount(value, decimals=decimals, rounding=rounding)
 
 def format_price(amount, decimals=10, rounding=ROUND_DOWN, currency=''):
   price = format_amount(amount, decimals=decimals, rounding=rounding)
   return price + ' ' + currency if currency else price
 
+def format_percentage(value, total):
+  if isUnlimitedAmount(total):
+    return ''
+  else:
+    percentage = (Decimal(value) / Decimal(total)) * Decimal(100)
+    return format_amount(percentage, decimals=2) + '%'
+
 def format_amount(amount, decimals=18, rounding=ROUND_DOWN):
   quantize_value = Decimal(10) ** -Decimal(decimals)
-  rounded_value = Decimal(amount).quantize(quantize_value, rounding=rounding)
+  rounded_value = Decimal(amount).quantize(quantize_value, context=Context(prec=40), rounding=rounding)
 
   return f'{{:,.{decimals}f}}'.format(rounded_value).rstrip('0').rstrip('.')
 
