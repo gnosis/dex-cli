@@ -1,5 +1,5 @@
 from commands.tokens import TOKEN_FIELDS_BASIC, to_token
-from datetime import datetime
+from decimal import Decimal
 
 import click
 from gql import gql
@@ -9,7 +9,8 @@ from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
 from utils import (calculate_price, debug_query, format_amount,
                    format_amount_in_weis, format_date_time, format_integer,
                    format_price, format_token_long, format_token_short,
-                   get_graphql_client, to_etherscan_link)
+                   get_graphql_client, parse_date_from_epoch,
+                   to_etherscan_link)
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
@@ -27,22 +28,16 @@ TRADE_FIELDS = f'''
 '''
 
 def to_trade_dto(trade):
-  revertEpoch = trade['revertEpoch']
-  if revertEpoch:
-    revertDate = datetime.utcfromtimestamp(int(revertEpoch))
-  else:
-    revertDate = None
-
   return {
     "owner_address": trade['owner']['id'],
     "order_id": int(trade['order']['orderId']),
-    "tradeDate": datetime.utcfromtimestamp(int(trade['tradeEpoch'])),
-    "revertDate": revertDate,
+    "tradeDate": parse_date_from_epoch(trade['tradeEpoch']),
+    "revertDate": parse_date_from_epoch(trade['revertEpoch']),
     "sellToken": to_token(trade['sellToken']),
     "buyToken": to_token(trade['buyToken']),
     "tradeBatchId": int(trade['tradeBatchId']),
-    "sellVolume": int(trade['sellVolume']),
-    "buyVolume": int(trade['buyVolume']),
+    "sellVolume": Decimal(trade['sellVolume']),
+    "buyVolume": Decimal(trade['buyVolume']),
     "txHash": trade['txHash']
   }
 
@@ -112,7 +107,7 @@ def print_trades_pretty(trades):
       click.style('  Buy Token', fg=labelColor) + ': ' + 
       format_token_long(buyToken) + '\n' +
 
-      click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg='green') + ': ' + 
+      click.style(f'  Price {sellTokenLabel}/{buyTokenLabel}', fg=labelColor) + ': ' + 
       format_price(calculate_price(
         numerator=buyVolume,
         denominator=sellVolume,
@@ -120,7 +115,7 @@ def print_trades_pretty(trades):
         decimals_denominator=sellTokenDecimals
       ), currency=buyTokenLabel) + '\n' +      
 
-      click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg='green') + ': ' + 
+      click.style(f'  Price {buyTokenLabel}/{sellTokenLabel}', fg=labelColor) + ': ' + 
       format_price(calculate_price(
         numerator=sellVolume,
         denominator=buyVolume,

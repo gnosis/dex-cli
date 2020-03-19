@@ -1,4 +1,5 @@
-from decimal import ROUND_DOWN, Decimal
+from datetime import datetime
+from decimal import ROUND_DOWN, Decimal, getcontext
 
 import click
 from gql import Client, gql
@@ -8,7 +9,12 @@ from constants import (BATCH_TIME_SECONDS, COLOR_LABEL, COLOR_SECONDARY,
                        COLOR_SEPARATOR, RETRIES, SEPARATOR, URL_API_THE_GRAPH,
                        URL_UI_THE_GRAPH)
 
+getcontext().prec = 36
+
 graphql_client = None
+
+MAX_EPOCH = 253402300799
+MAX_BATCH_ID = 844674335
 
 def format_token_long(token):
   symbol = token['symbol']
@@ -50,24 +56,52 @@ def format_amount(amount, decimals=18, rounding=ROUND_DOWN):
 def format_date(date):
   return '' if date is None else date.strftime("%d/%m/%y")
 
-def format_date_time(date):
-  return '' if date is None else date.strftime("%d/%m/%y %H:%M:%S")
+def format_date_time(date, tooBigLabel='Never'):  
+    return tooBigLabel if date == datetime.max else date.strftime("%d/%m/%y %H:%M:%S")
+
+def format_batch_id_with_date(batchId, tooBigLabel='Never expires'):
+  if batchId:
+    return tooBigLabel if batchId >= MAX_BATCH_ID else (
+      format_integer(batchId) + 
+      f" ({ format_date_time(to_date_from_batch_id(batchId))})"
+    )
+  else:
+    return ''
 
 def to_date_from_epoch(epoch):
-  return epoch # TODO: Date from epoch
+  global MAX_EPOCH
+
+  if epoch < MAX_EPOCH:
+    return datetime.utcfromtimestamp(epoch) if epoch else None
+  else:
+    return datetime.max
 
 def to_etherscan_link(hash):
   return 'https://etherscan.io/tx/' + hash
 
-def toDateFromBatchId(batchId):
-  return batchId * BATCH_TIME_SECONDS # TODO: Dates in python
+def to_date_from_batch_id(batchId):
+  return to_date_from_epoch(batchId * BATCH_TIME_SECONDS)
 
 def calculate_price(numerator, denominator, decimals_numerator, decimals_denominator):
-  precision_factor = Decimal(10) ** Decimal(abs(decimals_numerator - decimals_denominator))
+  numerator_dec = Decimal(numerator)
+  denominator_dec = Decimal(denominator)
+
+  if denominator_dec.is_zero():
+    return Decimal(1) if numerator_dec.is_zero() else Infinity
+  else:
+    precision_factor = Decimal(10) ** Decimal(abs(decimals_numerator - decimals_denominator))
+    if decimals_numerator > decimals_denominator:
+      return numerator_dec / denominator_dec / precision_factor
+    else:
+      return numerator_dec / (denominator_dec / precision_factor)
+
   if decimals_numerator > decimals_denominator:
     return Decimal(numerator) * precision_factor / Decimal(denominator)
   else:
     return Decimal(numerator) / Decimal(denominator) * precision_factor
+
+def parse_date_from_epoch(epoch):
+  return to_date_from_epoch(int(epoch)) if epoch else None
 
 def debug_query(query, verbose):
   if verbose > 0:
