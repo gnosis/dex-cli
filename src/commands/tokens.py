@@ -13,13 +13,13 @@ TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
 # Batch entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
 TOKENS_FIELDS = '''
-  id
-  address
-  decimals
-  name
-  symbol
-  createEpoch
-  txHash  
+    id
+    address
+    decimals
+    name
+    symbol
+    createEpoch
+    txHash  
 '''
 
 

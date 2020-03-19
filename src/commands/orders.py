@@ -16,21 +16,21 @@ from utils import (calculate_price, debug_query, format_amount,
 # Orders entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
 ORDERS_FIELDS = f'''
-  owner {{ id }}
-  orderId
-  fromBatchId
-  untilBatchId
-  buyToken {{ {TOKEN_FIELDS_BASIC} }}
-  sellToken {{ {TOKEN_FIELDS_BASIC} }}
-  priceNumerator
-  priceDenominator
-  maxSellAmount
-  soldVolume
-  boughtVolume
-  createEpoch
-  cancelEpoch
-  deleteEpoch
-  txHash
+    owner {{ id }}
+    orderId
+    fromBatchId
+    untilBatchId
+    buyToken {{ {TOKEN_FIELDS_BASIC} }}
+    sellToken {{ {TOKEN_FIELDS_BASIC} }}
+    priceNumerator
+    priceDenominator
+    maxSellAmount
+    soldVolume
+    boughtVolume
+    createEpoch
+    cancelEpoch
+    deleteEpoch
+    txHash
 '''
 
 def get_orders(count, skip, sort, sort_direction, format, verbose, trader):
@@ -41,7 +41,7 @@ def get_orders(count, skip, sort, sort_direction, format, verbose, trader):
 
     query = f'''
 {{
-  orders (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{{ORDERS_FIELDS}  }}
+  orders (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{ {ORDERS_FIELDS} }}
 }}
     '''
     
