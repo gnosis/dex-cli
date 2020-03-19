@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from commands.orders import get_orders
+from commands.prices import get_prices
 from commands.tokens import get_tokens
 from commands.trades import get_trades
 
@@ -30,6 +31,18 @@ def tokens(count, skip, sort, sort_direction, format, verbose):
 
 
 @main.command()
+@click.option('--count', default=100, help='Number of prices to return, used for pagination')
+@click.option('--skip', default=0, help='Number of prices to skip, used for pagination')
+@click.option('--sort', default="batchId", help='Sort result by a field, used for pagination')
+@click.option('--sort-direction', default="asc", help='Sort direction. "asc" for ascending, "desc" for descending order')
+@click.option('--format', default="pretty", help='Format type i.e. pretty, csv')
+@click.option('-v', '--verbose', count=True)
+def prices(count, skip, sort, sort_direction, format, verbose):
+    """Get historic prices"""
+    get_prices(count=count, skip=skip, sort=sort, sort_direction=sort_direction, format=format, verbose=verbose)
+
+
+@main.command()
 @click.option('--count', default=10, help='Number of trades to return, used for pagination')
 @click.option('--skip', default=0, help='Number of trades to skip, used for pagination')
 @click.option('--sort', default="tradeBatchId", help='Sort result by a field, used for pagination')
@@ -53,7 +66,6 @@ def trades(count, skip, sort, sort_direction, format, verbose, trader):
 def orders(count, skip, sort, sort_direction, format, verbose, trader):
     """Get orders"""
     get_orders(count=count, skip=skip, sort=sort, sort_direction=sort_direction, format=format, verbose=verbose, trader=trader)
-
 
 
 if __name__ == "__main__":

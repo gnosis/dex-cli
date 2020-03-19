@@ -9,13 +9,11 @@ from constants import (BATCH_TIME_SECONDS, COLOR_LABEL, COLOR_SECONDARY,
                        COLOR_SEPARATOR, RETRIES, SEPARATOR, URL_API_THE_GRAPH,
                        URL_UI_THE_GRAPH)
 
-getcontext().prec = 36
-
-graphql_client = None
-
 MAX_EPOCH = 253402300799
 MAX_BATCH_ID = 844674335
 MAX_AMOUNT = Decimal('340282366920938463463374607431768211455')
+
+graphql_client = None
 
 def format_token_long(token):
   symbol = token['symbol']

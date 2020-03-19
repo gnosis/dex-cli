@@ -49,8 +49,8 @@ def get_orders(count, skip, sort, sort_direction, format, verbose, trader):
     debug_query(query, verbose)
     client = get_graphql_client()
     result = client.execute(gql(query))
-    ordersDto = map(to_order_dto, result['orders'])
-    print_orders(ordersDto, format)
+    orders_dto = [to_order_dto(order) for order in result['orders']] 
+    print_orders(orders_dto, format)
 
 
 def print_orders(orders, format):
