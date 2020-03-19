@@ -38,7 +38,7 @@ def gql_sort_by(sort, sort_direction):
 
 
 def gql_filter(filters):
-  filter_conditions = [f'{key}: "{filters[key]}"' for key in filters.keys() if filters[key] is not None]
+  filter_conditions = [f'{key}: "{value}"' for key, value in filters.items() if value is not None]
 
   if filter_conditions:
       return f', where: {{ {", ".join(filter_conditions)} }}'
