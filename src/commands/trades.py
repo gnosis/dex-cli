@@ -9,8 +9,8 @@ from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
 from utils import (calculate_price, debug_query, format_amount,
                    format_amount_in_weis, format_date_time, format_integer,
                    format_price, format_token_long, format_token_short,
-                   get_graphql_client, gql_sort_by, parse_date_from_epoch,
-                   to_etherscan_link)
+                   get_graphql_client, gql_filter, gql_sort_by,
+                   parse_date_from_epoch, to_etherscan_link)
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
@@ -42,10 +42,9 @@ def to_trade_dto(trade):
   }
 
 def get_trades(count, skip, sort, sort_direction, print_format, verbose, trader):
-    if trader:
-      filters = f', where: {{ owner:"{trader.lower()}"}}'
-    else:
-      filters = ''
+    filters = gql_filter({
+      "owner": trader.lower() if trader else None,
+    })
 
     query = f'''
 {{

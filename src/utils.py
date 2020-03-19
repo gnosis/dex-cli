@@ -132,6 +132,14 @@ def debug_query(query, verbose):
 def gql_sort_by(sort, sort_direction):
   return f'orderBy: {sort}, orderDirection: {sort_direction}'
 
+def gql_filter(filters):
+  filter_conditions = [f'{key}: "{filters[key]}"' for key in filters.keys() if filters[key] is not None]
+
+  if filter_conditions:
+      return f', where: {{ {", ".join(filter_conditions)} }}'
+  else:
+    return ''
+
 def get_graphql_client():
   global graphql_client
   if graphql_client is None:
