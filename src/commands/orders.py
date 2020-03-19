@@ -4,13 +4,14 @@ from decimal import Decimal
 import click
 from gql import gql
 
-from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
-                       SEPARATOR)
+from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SECONDARY,
+                       COLOR_SEPARATOR, SEPARATOR)
 from utils import (calculate_price, debug_query, format_amount,
                    format_amount_in_weis, format_batch_id_with_date,
-                   format_date_time, format_integer, format_price,
-                   format_token_long, format_token_short, get_graphql_client,
-                   gql_sort_by, parse_date_from_epoch, to_date_from_batch_id,
+                   format_date_time, format_integer, format_percentage,
+                   format_price, format_token_long, format_token_short,
+                   get_graphql_client, gql_sort_by, isUnlimitedAmount,
+                   parse_date_from_epoch, to_date_from_batch_id,
                    to_date_from_epoch, to_etherscan_link)
 
 # Orders entity fields
@@ -86,7 +87,7 @@ def print_orders_pretty(orders):
   for order in orders:
     cancelDate, deleteDate = order['cancelDate'], order['deleteDate']
     priceNumerator, priceDenominator = order['priceNumerator'], order['priceDenominator']
-    sellToken, soldVolume = order['sellToken'], order['soldVolume']
+    sellToken, soldVolume, maxSellAmount = order['sellToken'], order['soldVolume'], order['maxSellAmount']
     buyToken, boughtVolume = order['buyToken'], order['boughtVolume']
     sellTokenDecimals, sellTokenLabel = sellToken['decimals'], format_token_short(sellToken)
     buyTokenDecimals, buyTokenLabel = buyToken['decimals'], format_token_short(buyToken)
@@ -131,6 +132,10 @@ def print_orders_pretty(orders):
         '\n'
       )
 
+    percentageText = ''
+    if not isUnlimitedAmount(maxSellAmount):
+      percentageText = click.style(f" ({format_percentage(value=soldVolume, total=maxSellAmount)})", fg=COLOR_SECONDARY)
+
     click.echo(
       click.style('  Order date', fg=labelColor) + ': ' + 
       format_date_time(order['createDate']) + '\n' +       
@@ -158,11 +163,16 @@ def print_orders_pretty(orders):
       format_token_long(buyToken) + '\n' +
 
       click.style('  Sold volume', fg=labelColor) + ': ' + 
-      format_amount_in_weis(soldVolume, sellTokenDecimals) + ' ' + sellTokenLabel + '\n' + 
+      format_amount_in_weis(soldVolume, sellTokenDecimals) +
+      ' of ' +
+      format_amount_in_weis(maxSellAmount, sellTokenDecimals) + ' ' + sellTokenLabel + 
+      percentageText +
+      '\n' + 
 
       (
         click.style('  Bought volume', fg=labelColor) + ': ' + 
-        format_amount_in_weis(boughtVolume, buyTokenDecimals) + ' ' + buyTokenLabel + '\n'
+        format_amount_in_weis(boughtVolume, buyTokenDecimals) + ' ' + buyTokenLabel +      
+        '\n'
         if soldVolume else ''
       ) + # TODO: Add percentage https://github.com/gnosis/dex-cli/issues/31
       '\n' +
