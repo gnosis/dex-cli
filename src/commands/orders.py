@@ -34,7 +34,7 @@ ORDERS_FIELDS = f'''
     txHash
 '''
 
-def get_orders(count, skip, sort, sort_direction, format, verbose, trader):
+def get_orders(count, skip, sort, sort_direction, print_format, verbose, trader):
     if trader:
       filters = f', where: {{ owner:"{trader.lower()}"}}'
     else:
@@ -50,16 +50,16 @@ def get_orders(count, skip, sort, sort_direction, format, verbose, trader):
     client = get_graphql_client()
     result = client.execute(gql(query))
     orders_dto = [to_order_dto(order) for order in result['orders']] 
-    print_orders(orders_dto, format)
+    print_orders(orders_dto, print_format)
 
 
-def print_orders(orders, format):
-  if format == 'pretty':    
+def print_orders(orders, print_format):
+  if print_format == 'pretty':    
     print_orders_pretty(orders)
-  elif format == 'csv':
+  elif print_format == 'csv':
     print_orders_csv(orders)
   else:
-    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
+    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (print_format))  
 
 
 def to_order_dto(order):

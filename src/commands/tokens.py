@@ -33,11 +33,10 @@ def to_token(token):
   }
 
 
-def get_tokens(count, skip, sort, sort_direction, format, verbose):
-
+def get_tokens(count, skip, sort, sort_direction, print_format, verbose):
     query = f'''
 {{
-  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{TOKENS_FIELDS}  }}
+  tokens (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{TOKENS_FIELDS} }}
 }}
     '''
     
@@ -45,16 +44,16 @@ def get_tokens(count, skip, sort, sort_direction, format, verbose):
     client = get_graphql_client()
     result = client.execute(gql(query))
     tokens_dto = [to_token_dto(token) for token in result['tokens']]
-    print_tokens(tokens_dto, format)
+    print_tokens(tokens_dto, print_format)
 
 
-def print_tokens(tokens, format):
-  if format == 'pretty':    
+def print_tokens(tokens, print_format):
+  if print_format == 'pretty': 
     print_tokens_pretty(tokens)
-  elif format == 'csv':
+  elif print_format == 'csv':
     print_tokens_csv(tokens)
   else:
-    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (format))  
+    raise Exception('Format "%s" is not supported. Supported formats are: pretty, csv' % (print_format))  
 
 
 def to_token_dto(token):

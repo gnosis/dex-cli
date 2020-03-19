@@ -15,6 +15,9 @@ MAX_AMOUNT = Decimal('340282366920938463463374607431768211455')
 
 graphql_client = None
 
+MAX_EPOCH = 253402300799
+MAX_BATCH_ID = 844674335
+
 def format_token_long(token):
   symbol = token['symbol']
   address = token['address']
