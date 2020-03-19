@@ -25,9 +25,27 @@ def main():
 @click.option('--sort-direction', default="asc", help='Sort direction. "asc" for ascending, "desc" for descending order')
 @click.option('--format', 'print_format', default="pretty", help='Format type i.e. pretty, csv')
 @click.option('-v', '--verbose', count=True)
-def tokens(count, skip, sort, sort_direction, print_format, verbose):
+@click.option('--id', 'token_id', help='Token id')
+@click.option('--symbol', help='Token symbol')
+@click.option('--address', help='Token address')
+def tokens(count, skip, sort, sort_direction, print_format, verbose, token_id, symbol, address):
     """Get tokens listed in dFusion. For more details, see https://docs.gnosis.io/dfusion/docs/addtoken1"""
-    get_tokens(count=count, skip=skip, sort=sort, sort_direction=sort_direction, print_format=print_format, verbose=verbose)
+    get_tokens(
+      # Pagination
+      count=count,
+      skip=skip,
+      sort=sort,
+      sort_direction=sort_direction,
+      
+      # Format/debug
+      print_format=print_format,
+      verbose=verbose,
+
+      # Filters
+      token_id=token_id,
+      address=address,
+      symbol=symbol
+    )
 
 
 @main.command()
