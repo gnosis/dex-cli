@@ -37,11 +37,6 @@ def calculate_price(numerator, denominator, decimals_numerator, decimals_denomin
     else:
       return numerator_dec / (denominator_dec / precision_factor)
 
-  if decimals_numerator > decimals_denominator:
-    return Decimal(numerator) * precision_factor / Decimal(denominator)
-  else:
-    return Decimal(numerator) / Decimal(denominator) * precision_factor
-
 
 def to_etherscan_link(hash):
   return ETHERSCAN_BASE_URL + '/tx/' + hash
