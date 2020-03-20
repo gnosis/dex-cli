@@ -21,10 +21,10 @@ PRICES_FIELDS = f'''
   txHash
 '''
 
-def get_prices(count, skip, sort, sort_direction, print_format, verbose):
+def get_prices(count, skip, sort, sort_ascending, print_format, verbose):
     query = f'''
 {{
-  prices (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}) {{{PRICES_FIELDS}  }}
+  prices (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_ascending)}) {{{PRICES_FIELDS}  }}
 }}
     '''
     
@@ -48,10 +48,10 @@ def to_price_dto(price):
   # No transformation is needed
   return {
     "token": to_token(price['token']),
-    "batchId": int(price['batchId']),
+    "batch_id": int(price['batchId']),
     "price_in_owl": Decimal(price['priceInOwl']),
     "volume": Decimal(price['volume']),
-    "txHash": price['txHash']
+    "tx_hash": price['txHash']
   }
 
 def print_prices_pretty(prices):
@@ -64,13 +64,13 @@ def print_prices_pretty(prices):
       format_token_long(price['token']) + '\n' + 
 
       click.style('  Batch Id', fg=COLOR_LABEL) + ': ' + 
-      format_batch_id_with_date(price['batchId']) + '\n' + 
+      format_batch_id_with_date(price['batch_id']) + '\n' + 
 
       click.style('  Price in OWL', fg=COLOR_LABEL) + ': ' + 
       format_amount_in_weis(price['price_in_owl'], OWL_DECIMALS) + '\n' + 
 
       click.style('  Transaction', fg=COLOR_LABEL) + ': ' + 
-      to_etherscan_link(price['txHash']) + '\n' + 
+      to_etherscan_link(price['tx_hash']) + '\n' + 
 
       click.style(SEPARATOR, fg=COLOR_SEPARATOR)
     )

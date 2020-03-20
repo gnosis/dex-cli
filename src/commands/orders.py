@@ -38,14 +38,14 @@ ORDERS_FIELDS = f'''
     txHash
 '''
 
-def get_orders(count, skip, sort, sort_direction, print_format, verbose, trader):
+def get_orders(count, skip, sort, sort_ascending, print_format, verbose, trader):
     filters = gql_filter({
       "owner": trader.lower() if trader else None,
     })
 
     query = f'''
 {{
-  orders (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{ {ORDERS_FIELDS} }}
+  orders (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_ascending)}{filters}) {{ {ORDERS_FIELDS} }}
 }}
     '''
     
@@ -81,7 +81,7 @@ def to_order_dto(order):
     "create_date": parse_date_from_epoch(order['createEpoch']),
     "cancel_date": parse_date_from_epoch(order['cancelEpoch']),
     "delete_date": parse_date_from_epoch(order['deleteEpoch']),
-    "txHash": order['txHash']
+    "tx_hash": order['txHash']
   }
 
 
@@ -214,7 +214,7 @@ def print_orders_pretty(orders):
       '\n' +
 
       click.style('  Transaction', fg=label_color) + ': ' + 
-      to_etherscan_link(order['txHash']) + '\n' + 
+      to_etherscan_link(order['tx_hash']) + '\n' + 
 
       click.style(SEPARATOR, fg=COLOR_SEPARATOR)
     )

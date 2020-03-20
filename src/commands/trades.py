@@ -43,17 +43,17 @@ def to_trade_dto(trade):
     "trade_batch_id": int(trade['tradeBatchId']),
     "sell_volume": Decimal(trade['sellVolume']),
     "buy_volume": Decimal(trade['buyVolume']),
-    "txHash": trade['txHash']
+    "tx_hash": trade['txHash']
   }
 
-def get_trades(count, skip, sort, sort_direction, print_format, verbose, trader):
+def get_trades(count, skip, sort, sort_ascending, print_format, verbose, trader):
     filters = gql_filter({
       "owner": trader.lower() if trader else None,
     })
 
     query = f'''
 {{
-  trades (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_direction)}{filters}) {{{TRADE_FIELDS}  }}
+  trades (first: {count} , skip: {skip}, {gql_sort_by(sort, sort_ascending)}{filters}) {{{TRADE_FIELDS}  }}
 }}
     '''
     
@@ -145,7 +145,7 @@ def print_trades_pretty(trades):
 
 
       click.style('  Transaction', fg=label_color) + ': ' + 
-      to_etherscan_link(trade['txHash']) + '\n' + 
+      to_etherscan_link(trade['tx_hash']) + '\n' + 
 
       click.style(SEPARATOR, fg=COLOR_SEPARATOR)
     )

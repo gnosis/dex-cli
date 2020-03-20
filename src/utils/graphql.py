@@ -33,8 +33,9 @@ def debug_query(query, verbose):
 {query}''')
 
 
-def gql_sort_by(sort, sort_direction):
-  return f'orderBy: {sort}, orderDirection: {sort_direction}'
+def gql_sort_by(sort, sort_ascending):
+  order_direction = 'asc' if sort_ascending else 'desc'
+  return f'orderBy: {sort}, orderDirection: {order_direction}'
 
 
 def gql_filter(filters):
