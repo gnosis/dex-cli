@@ -20,8 +20,8 @@ def to_date_from_epoch(epoch):
     return datetime.max
 
 
-def to_date_from_batch_id(batchId):
-  return to_date_from_epoch(batchId * BATCH_TIME_SECONDS)
+def to_date_from_batch_id(batch_id):
+  return to_date_from_epoch(batch_id * BATCH_TIME_SECONDS)
 
 
 def calculate_price(numerator, denominator, decimals_numerator, decimals_denominator):

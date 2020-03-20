@@ -57,10 +57,10 @@ def format_date(date):
 def format_date_time(date, tooBigLabel='Never'):  
     return tooBigLabel if date == datetime.max else date.strftime("%d/%m/%y %H:%M:%S")
 
-def format_batch_id_with_date(batchId, tooBigLabel='Never expires'):
-  if batchId:
-    return tooBigLabel if batchId >= MAX_BATCH_ID else (
-      f"{format_integer(batchId)} ({ format_date_time(to_date_from_batch_id(batchId))})"
+def format_batch_id_with_date(batch_id, tooBigLabel='Never expires'):
+  if batch_id:
+    return tooBigLabel if batch_id >= MAX_BATCH_ID else (
+      f"{format_integer(batch_id)} ({ format_date_time(to_date_from_batch_id(batch_id))})"
     )
   else:
     return ''
