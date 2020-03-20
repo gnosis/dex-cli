@@ -4,9 +4,11 @@ import click
 from gql import gql
 
 from constants import COLOR_LABEL, COLOR_SEPARATOR, OWL_DECIMALS, SEPARATOR
-from utils import (debug_query, format_amount_in_weis, format_date_time,
-                   format_integer, get_graphql_client, gql_filter, gql_sort_by,
-                   to_date_from_epoch, to_etherscan_link)
+from utils.format import (format_amount_in_weis, format_date_time,
+                          format_integer, parse_date_from_epoch)
+from utils.graphql import (debug_query, get_graphql_client, gql_filter,
+                           gql_sort_by)
+from utils.misc import to_date_from_epoch, to_etherscan_link
 
 TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
 
@@ -68,7 +70,7 @@ def to_token_dto(token):
     "decimals": int(token['decimals'] or '18'),
     "name": token['name'],
     "symbol": token['symbol'],
-    "createEpoch": datetime.utcfromtimestamp(int(token['createEpoch'])),
+    "create_date": parse_date_from_epoch(token['createEpoch']),
     "txHash": token['txHash']
   }
 
@@ -96,7 +98,7 @@ def print_tokens_pretty(tokens):
       str(token['decimals']) + '\n\n' +
 
       click.style('  Registered', fg=COLOR_LABEL) + ': ' + 
-      format_date_time(token['createEpoch']) + '\n' +
+      format_date_time(token['create_date']) + '\n' +
 
       click.style('  Transaction', fg=COLOR_LABEL) + ': ' + 
       to_etherscan_link(token['txHash']) + '\n' + 
