@@ -12,10 +12,7 @@ def format_token_long(token):
   name = token['name']
   label = symbol or name
 
-  if label:
-    return f'{label} ({address})'
-  else:
-    return address
+  return f'{label} ({address})' if label else address
 
 def format_token_short(token):
   symbol = token['symbol']
