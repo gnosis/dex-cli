@@ -129,8 +129,8 @@ def print_orders_pretty(orders):
       buy_label=sellTokenLabel,
       numerator=price_denominator,
       denominator=price_numerator,
-      decimals_numerator=buyTokenDecimals,
-      decimals_denominator=sellTokenDecimals,
+      decimals_numerator=sellTokenDecimals,
+      decimals_denominator=buyTokenDecimals,
       label_color=label_color
     )
     
