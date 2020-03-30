@@ -46,9 +46,14 @@ def to_trade_dto(trade):
     "tx_hash": trade['txHash']
   }
 
-def get_trades(count, skip, sort, sort_ascending, print_format, verbose, trader):
+def get_trades(count, skip, sort, sort_ascending, print_format, verbose, trader, order_id, batch_id, buy_token_id, sell_token_id, tx_hash):
     filters = gql_filter({
       "owner": trader.lower() if trader else None,
+      "order_id": order_id if order_id else None,
+      "tradeBatchId": batch_id if batch_id else None,
+      "buyToken": buy_token_id if buy_token_id else None,
+      "sellToken": sell_token_id if sell_token_id else None,
+      "txHash": tx_hash.lower() if tx_hash else None
     })
 
     query = f'''
