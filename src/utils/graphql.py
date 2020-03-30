@@ -39,5 +39,9 @@ def gql_sort_by(sort, sort_ascending):
 
 
 def gql_filter(filters):
-  filter_conditions = [f'{key}: "{value}"' for key, value in filters.items() if value is not None]
+  filter_conditions = [_to_condition(key, value) for key, value in filters.items() if value is not None]
   return f', where: {{ {", ".join(filter_conditions)} }}' if filter_conditions else ''
+
+def _to_condition(key, value):
+    value_string = '"' + value + '"' if issubclass(type(value), str) else value
+    return f"{key}: {value_string}"

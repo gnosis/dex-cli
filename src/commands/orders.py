@@ -41,7 +41,7 @@ ORDERS_FIELDS = f'''
 def get_orders(count, skip, sort, sort_ascending, print_format, verbose, trader, order_id, buy_token_id, sell_token_id, has_traded, tx_hash):
     filters = gql_filter({
       "owner": trader.lower() if trader else None,
-      "order_id": order_id if order_id else None,
+      "orderId": int(order_id) if order_id else None,
       "buyToken": buy_token_id if buy_token_id else None,
       "sellToken": sell_token_id if sell_token_id else None,
       "soldVolume_gt": 0 if has_traded == True else None,
