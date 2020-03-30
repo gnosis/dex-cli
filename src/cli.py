@@ -86,9 +86,14 @@ def trades(count, skip, sort, sort_ascending, print_format, verbose, trader, ord
 @click.option('--format', 'print_format', default="pretty", help='Format type i.e. pretty, csv')
 @click.option('-v', '--verbose', count=True)
 @click.option('--trader', help='Ethereum address of the trader')
-def orders(count, skip, sort, sort_ascending, print_format, verbose, trader):
+@click.option('--id', 'order_id', help='Order id')
+@click.option('--buy', 'buy_token_id', help='Buy token id')
+@click.option('--sell', 'sell_token_id', help='Sell token id')
+@click.option('--traded/--not-traded', 'has_traded', default=None, help='The order has been executed, either totally or partially')
+@click.option('--tx', 'tx_hash', help='Transaction hash for the trade (same as solution submission)')
+def orders(count, skip, sort, sort_ascending, print_format, verbose, trader, order_id, buy_token_id, sell_token_id, has_traded, tx_hash):
     """Get orders"""
-    get_orders(count=count, skip=skip, sort=sort, sort_ascending=sort_ascending, print_format=print_format, verbose=verbose, trader=trader)
+    get_orders(count=count, skip=skip, sort=sort, sort_ascending=sort_ascending, print_format=print_format, verbose=verbose, trader=trader, order_id=order_id, buy_token_id=buy_token_id, sell_token_id=sell_token_id, has_traded=has_traded, tx_hash=tx_hash)
 
 
 if __name__ == "__main__":
