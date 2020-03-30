@@ -34,9 +34,8 @@ TRADE_FIELDS = f'''
 
 def to_trade_dto(trade):
   return {
-    "owner_address": trade['owner']['id'],
-    # TODO: https://github.com/gnosis/dex-cli/issues/50
-    #"orderId": int(trade['order']['orderId']),
+    "owner_address": trade['owner']['id'],    
+    "order_id": int(trade['order']['orderId']),
     "trade_date": parse_date_from_epoch(trade['tradeEpoch']),
     "revert_date": parse_date_from_epoch(trade['revertEpoch']),
     "sell_token": to_token(trade['sellToken']),
@@ -47,10 +46,11 @@ def to_trade_dto(trade):
     "tx_hash": trade['txHash']
   }
 
-def get_trades(count, skip, sort, sort_ascending, print_format, verbose, trader, order_id, batch_id, buy_token_id, sell_token_id, tx_hash):
+def get_trades(count, skip, sort, sort_ascending, print_format, verbose, trader, batch_id, buy_token_id, sell_token_id, tx_hash):
     filters = gql_filter({
       "owner": trader.lower() if trader else None,
-      "order": order_id if order_id else None,
+      # TODO: https://github.com/gnosis/dex-cli/issues/50
+      #"order": order_id if order_id else None,
       "tradeBatchId": batch_id if batch_id else None,
       "buyToken": buy_token_id if buy_token_id else None,
       "sellToken": sell_token_id if sell_token_id else None,
