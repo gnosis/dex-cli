@@ -54,10 +54,13 @@ def tokens(count, skip, sort, sort_ascending, print_format, verbose, token_id, s
 @click.option('--sort', default="batchId", help='Sort result by a field, used for pagination')
 @click.option('--asc/--desc', 'sort_ascending', default=False, help='Sort direction. "desc" (default) for ascending, "desc" for descending')
 @click.option('--format', 'print_format', default="pretty", help='Format type i.e. pretty, csv')
+@click.option('--batch', 'batch_id', help='Batch id')
+@click.option('--token', 'token_id', help='Token id')
+@click.option('--tx', 'tx_hash', help='Transaction hash for the price (same as solution submission)')
 @click.option('-v', '--verbose', count=True)
-def prices(count, skip, sort, sort_ascending, print_format, verbose):
+def prices(count, skip, sort, sort_ascending, print_format, verbose, batch_id, token_id, tx_hash):
     """Get historic prices"""
-    get_prices(count=count, skip=skip, sort=sort, sort_ascending=sort_ascending, print_format=print_format, verbose=verbose)
+    get_prices(count=count, skip=skip, sort=sort, sort_ascending=sort_ascending, print_format=print_format, verbose=verbose, batch_id=batch_id, token_id=token_id, tx_hash=tx_hash)
 
 
 @main.command()
