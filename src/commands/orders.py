@@ -19,7 +19,7 @@ from utils.misc import (calculate_price, is_unlimited_amount,
                         to_etherscan_link)
 
 # Orders entity fields
-#   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
+#   See https://thegraph.com/explorer/subgraph/gnosis/protocol
 ORDERS_FIELDS = f'''
     owner {{ id }}
     orderId

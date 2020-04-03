@@ -1,4 +1,4 @@
-# dFusion CLI
+# Gnosis Protocol CLI
 
 ![](docs/CLI-demo.gif)
 
@@ -17,17 +17,17 @@ pip install -r requirements.txt
 
 ```bash
 # help command
-./dfusion --help
-./dfusion
+./gnop --help
+./gnop
 
 # Get trades
-./dfusion trades
+./gnop trades
 
 # Get first 5 trades
-./dfusion trades --count 5 --skip 0
+./gnop trades --count 5 --skip 0
 
 # Filter by trader
-./dfusion trades --trader 0x7b2e78d4dfaaba045a167a70da285e30e8fca196
+./gnop trades --trader 0x7b2e78d4dfaaba045a167a70da285e30e8fca196
 ```
 
 # Debug - Verbose
@@ -36,7 +36,7 @@ Verbose mode prints information that is useful for debugging, including the Grap
 
 ```
 # Verbose mode (-v)
-./dfusion trades -v
+./gnop trades -v
 ```
 
 ![](docs/CLI-verbose.png)

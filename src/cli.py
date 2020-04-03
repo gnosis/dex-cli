@@ -13,7 +13,7 @@ from constants import SEPARATOR
 @click.group()
 def main():
     """
-    dFusion CLI ✨
+    Gnosis Protocol CLI ✨
     """
     pass
 
@@ -29,7 +29,7 @@ def main():
 @click.option('--symbol', help='Token symbol')
 @click.option('--address', help='Token address')
 def tokens(count, skip, sort, sort_ascending, print_format, verbose, token_id, symbol, address):
-    """Get tokens listed in dFusion. For more details, see https://docs.gnosis.io/dfusion/docs/addtoken1"""
+    """Get list of tokens. For more details, see https://docs.gnosis.io/protocol/docs/addtoken1"""
     get_tokens(
       # Pagination
       count=count,
