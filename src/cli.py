@@ -7,14 +7,24 @@ from commands.trades import get_trades
 
 import click
 
-from constants import SEPARATOR
+
+def show_header(ctx, param, value):
+    """Display header if requested format allows that"""
+    if value == 'pretty':
+
+        click.echo('\n' + click.style('''\
+     _______         _             
+    | |  ___|       (_)            
+  __| | |_ _   _ ___ _  ___  _ __  
+ / _` |  _| | | / __| |/ _ \| '_ \ 
+| (_| | | | |_| \__ \ | (_) | | | |
+ \__,_\_|  \__,_|___/_|\___/|_| |_|''', fg='yellow', bold=True) + '\n')
+
+    return value
 
 
 @click.group()
 def main():
-    """
-    dFusion CLI ✨
-    """
     pass
 
 
@@ -23,7 +33,7 @@ def main():
 @click.option('--skip', default=0, help='Number of tokens to skip, used for pagination')
 @click.option('--sort', default="symbol", help='Sort result by a field, used for pagination')
 @click.option('--asc/--desc', 'sort_ascending', default=True, help='Sort direction. "asc" (default) for ascending, "desc" for descending')
-@click.option('--format', 'print_format', default="pretty", help='Format type i.e. pretty, csv')
+@click.option('--format', 'print_format', default="pretty", expose_value=True, is_eager=False, callback=hide_header, help='Format type i.e. pretty, csv')
 @click.option('-v', '--verbose', count=True)
 @click.option('--id', 'token_id', help='Token id')
 @click.option('--symbol', help='Token symbol')
@@ -53,7 +63,7 @@ def tokens(count, skip, sort, sort_ascending, print_format, verbose, token_id, s
 @click.option('--skip', default=0, help='Number of prices to skip, used for pagination')
 @click.option('--sort', default="batchId", help='Sort result by a field, used for pagination')
 @click.option('--asc/--desc', 'sort_ascending', default=False, help='Sort direction. "desc" (default) for ascending, "desc" for descending')
-@click.option('--format', 'print_format', default="pretty", help='Format type i.e. pretty, csv')
+@click.option('--format', 'print_format', default="pretty", expose_value=True, is_eager=False, callback=hide_header, help='Format type i.e. pretty, csv')
 @click.option('--batch', 'batch_id', help='Batch id')
 @click.option('--token', 'token_id', help='Token id')
 @click.option('--tx', 'tx_hash', help='Transaction hash for the price (same as solution submission)')
@@ -68,7 +78,7 @@ def prices(count, skip, sort, sort_ascending, print_format, verbose, batch_id, t
 @click.option('--skip', default=0, help='Number of trades to skip, used for pagination')
 @click.option('--sort', default="tradeBatchId", help='Sort result by a field, used for pagination')
 @click.option('--asc/--desc', 'sort_ascending', default=False, help='Sort direction. "desc" (default) for ascending, "desc" for descending')
-@click.option('--format', 'print_format', default="pretty", help='Format type i.e. pretty, csv')
+@click.option('--format', 'print_format', default="pretty", expose_value=True, is_eager=False, callback=hide_header, help='Format type i.e. pretty, csv')
 @click.option('-v', '--verbose', count=True)
 @click.option('--trader', help='Ethereum address of the trader')
 @click.option('--batch', 'batch_id', help='Batch id')
@@ -85,7 +95,7 @@ def trades(count, skip, sort, sort_ascending, print_format, verbose, trader, bat
 @click.option('--skip', default=0, help='Number of orders to skip, used for pagination')
 @click.option('--sort', default="createEpoch", help='Sort result by a field, used for pagination')
 @click.option('--asc/--desc', 'sort_ascending', default=False, help='Sort direction. "desc" (default) for ascending, "desc" for descending')
-@click.option('--format', 'print_format', default="pretty", help='Format type i.e. pretty, csv')
+@click.option('--format', 'print_format', default="pretty", expose_value=True, is_eager=False, callback=hide_header, help='Format type i.e. pretty, csv')
 @click.option('-v', '--verbose', count=True)
 @click.option('--trader', help='Ethereum address of the trader')
 @click.option('--id', 'order_id', help='Order id')
@@ -99,11 +109,4 @@ def orders(count, skip, sort, sort_ascending, print_format, verbose, trader, ord
 
 
 if __name__ == "__main__":
-    click.echo('\n' + click.style('''\
-     _______         _             
-    | |  ___|       (_)            
-  __| | |_ _   _ ___ _  ___  _ __  
- / _` |  _| | | / __| |/ _ \| '_ \ 
-| (_| | | | |_| \__ \ | (_) | | | |
- \__,_\_|  \__,_|___/_|\___/|_| |_|''', fg='yellow', bold=True) + '\n')
     main()

@@ -7,7 +7,7 @@ from gql import gql
 from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
                        SEPARATOR)
 from utils.format import (format_amount, format_amount_in_weis,
-                          format_batch_id_with_date, format_date_time,
+                          format_batch_id_with_date, format_date_time, format_date_time_iso8601,
                           format_integer, format_percentage, format_price,
                           format_token_long, format_token_short,
                           parse_date_from_epoch)
@@ -15,7 +15,7 @@ from utils.graphql import (debug_query, get_graphql_client, gql_filter,
                            gql_sort_by)
 from utils.misc import (calculate_price, is_unlimited_amount,
                         to_date_from_batch_id, to_date_from_epoch,
-                        to_etherscan_link)
+                        to_etherscan_link, get_csv_writer)
 
 # Trade entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
@@ -156,9 +156,62 @@ def print_trades_pretty(trades):
       click.style(SEPARATOR, fg=COLOR_SEPARATOR)
     )
 
-def print_trades_csv(trade):
-  # TODO: Implement here the CSV formatting
-  click.echo("Not implemented yet")
+
+def print_trades_csv(trades):
+  writer = get_csv_writer()
+
+  writer.writerow(['Date',
+                   'Reverted',
+                   'Batch Id',
+                   'Trader Address',
+                   'Order Id',
+                   'Price SELL/BUY',
+                   'Price BUY/SELL',
+                   'Sell Volume', 'Sell Token',
+                   'Buy Volume', 'Buy Token',
+                   'Sell Token Address',
+                   'Buy Token Address',
+                   'Transaction'])
+
+  for trade in trades:
+
+    revert_date = trade.get('revert_date', None)
+    revert_date_text = format_date_time_iso8601(revert_date) if revert_date else ''
+
+    sell_token, sell_volume = trade['sell_token'], trade['sell_volume']
+    buy_token, buy_volume = trade['buy_token'], trade['buy_volume']
+
+    price_sell_buy = format_price(
+      calculate_price(
+          numerator=buy_volume,
+          denominator=sell_volume,
+          decimals_numerator=buy_token['decimals'],
+          decimals_denominator=sell_token['decimals'],
+      ))
+
+    price_buy_sell = format_price(
+      calculate_price(
+        numerator=sell_volume,
+        denominator=buy_volume,
+        decimals_numerator=sell_token['decimals'],
+        decimals_denominator=buy_token['decimals'],
+      ))
+
+    writer.writerow([format_date_time_iso8601(trade['trade_date']),
+        revert_date_text,
+        trade['trade_batch_id'],
+        trade['owner_address'],
+        trade['order_id'],
+        price_sell_buy,
+        price_buy_sell,
+        format_amount_in_weis(sell_volume, sell_token['decimals']),
+        format_token_short(sell_token),
+        format_amount_in_weis(buy_volume, buy_token['decimals']),
+        format_token_short(buy_token),
+        sell_token['address'],
+        buy_token['address'],
+        to_etherscan_link(trade['tx_hash'])
+    ])
 
 
 def _get_price_text (label, sell_label, buy_label, numerator, denominator, decimals_numerator, decimals_denominator, label_color):
