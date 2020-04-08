@@ -6,10 +6,11 @@ from gql import gql
 
 from constants import COLOR_LABEL, COLOR_SEPARATOR, OWL_DECIMALS, SEPARATOR
 from utils.format import (format_amount_in_weis, format_batch_id_with_date, format_price,
-                          format_date_time, format_integer, format_token_long)
+                          format_date_time, format_integer, format_date_time_iso8601, format_token_long,
+                          format_token_short)
 from utils.graphql import (debug_query, get_graphql_client, gql_filter,
                            gql_sort_by)
-from utils.misc import to_date_from_epoch, to_etherscan_link
+from utils.misc import to_date_from_epoch, to_etherscan_link, get_csv_writer, to_date_from_batch_id
 
 # Price entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
@@ -62,6 +63,7 @@ def to_price_dto(price):
     "tx_hash": price['txHash']
   }
 
+
 def print_prices_pretty(prices):
   click.echo(click.style(SEPARATOR, fg=COLOR_SEPARATOR))
 
@@ -75,7 +77,7 @@ def print_prices_pretty(prices):
       format_batch_id_with_date(price['batch_id']) + '\n' + 
 
       click.style('  Price in OWL', fg=COLOR_LABEL) + ': ' + 
-      format_price(price['price_in_owl_numerator'] / price['price_in_owl_denominator'], OWL_DECIMALS) + '\n' + 
+      format_price_in_owl(price) + '\n' +
 
       click.style('  Transaction', fg=COLOR_LABEL) + ': ' + 
       to_etherscan_link(price['tx_hash']) + '\n' + 
@@ -83,6 +85,26 @@ def print_prices_pretty(prices):
       click.style(SEPARATOR, fg=COLOR_SEPARATOR)
     )
 
+
 def print_prices_csv(prices):
-  # TODO: Implement here the CSV formatting
-  click.echo("Not implemented yet")
+  writer = get_csv_writer()
+
+  writer.writerow(['Token',
+                   'Registered',
+                   'Batch Id',
+                   'Batch Start',  # artificial
+                   'Price in OWL',
+                   'Transaction'])
+
+  for price in prices:
+    writer.writerow([
+      format_token_short(price['token']),
+      price['token']['address'],
+      price['batch_id'],
+      format_date_time_iso8601(to_date_from_batch_id(price['batch_id'])),
+      format_price_in_owl(price),
+      price['tx_hash']])
+
+
+def format_price_in_owl(price):
+  return format_price(price['price_in_owl_numerator'] / price['price_in_owl_denominator'], OWL_DECIMALS)
