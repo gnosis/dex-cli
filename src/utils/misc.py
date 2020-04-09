@@ -1,8 +1,12 @@
 from datetime import datetime
 from decimal import ROUND_DOWN, Decimal
 
+import csv
+import os
+import sys
+
 from constants import (BATCH_TIME_SECONDS, ETHERSCAN_BASE_URL, MAX_AMOUNT,
-                       MAX_EPOCH)
+                       MAX_EPOCH, CSV_DELIMITER, CSV_QUOTE)
 
 
 def is_unlimited_amount(amount):
@@ -40,3 +44,8 @@ def calculate_price(numerator, denominator, decimals_numerator, decimals_denomin
 
 def to_etherscan_link(hash):
   return ETHERSCAN_BASE_URL + '/tx/' + hash
+
+
+def get_csv_writer() -> csv.writer:
+  return csv.writer(sys.stdout, lineterminator=os.linesep, delimiter=CSV_DELIMITER,
+                      quotechar=CSV_QUOTE, quoting=csv.QUOTE_MINIMAL)

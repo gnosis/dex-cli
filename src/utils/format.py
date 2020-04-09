@@ -1,7 +1,7 @@
 from datetime import datetime
 from decimal import ROUND_DOWN, Context, Decimal
 
-from constants import BATCH_TIME_SECONDS, MAX_BATCH_ID
+from constants import BATCH_TIME_SECONDS, MAX_BATCH_ID, DATE_FORMAT, DATE_TIME_FORMAT
 from utils.misc import (is_unlimited_amount, to_date_from_batch_id,
                         to_date_from_epoch)
 
@@ -51,11 +51,18 @@ def format_amount(amount, decimals=18, rounding=ROUND_DOWN):
 
   return f'{rounded_value:,.{decimals}f}'.rstrip('0').rstrip('.')
 
-def format_date(date):
-  return '' if date is None else date.strftime("%d/%m/%y")
 
-def format_date_time(date, tooBigLabel='Never'):  
-    return tooBigLabel if date == datetime.max else date.strftime("%d/%m/%y %H:%M:%S")
+def format_date(date):
+  return '' if date is None else date.strftime(DATE_FORMAT)
+
+
+def format_date_time(date, tooBigLabel='Never'):
+    return tooBigLabel if date == datetime.max else date.strftime(DATE_TIME_FORMAT)
+
+
+def format_date_time_iso8601(date, tooBigLabel='Never'):
+  return tooBigLabel if date == datetime.max else datetime.isoformat(date)
+
 
 def format_batch_id_with_date(batch_id, tooBigLabel='Never expires'):
   if batch_id:
