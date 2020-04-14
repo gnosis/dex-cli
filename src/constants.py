@@ -1,8 +1,8 @@
 from decimal import Decimal
 
 # Datasource
-URL_API_THE_GRAPH = 'https://api.thegraph.com/subgraphs/name/gnosis/dfusion-staging'
-URL_UI_THE_GRAPH = 'https://thegraph.com/explorer/subgraph/gnosis/dfusion-staging'
+URL_API_THE_GRAPH = 'https://api.thegraph.com/subgraphs/name/gnosis/protocol'
+URL_UI_THE_GRAPH = 'https://thegraph.com/explorer/subgraph/gnosis/protocol'
 RETRIES = 3
 ETHERSCAN_BASE_URL = 'https://etherscan.io'
 

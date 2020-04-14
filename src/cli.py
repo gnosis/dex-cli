@@ -12,19 +12,22 @@ def show_header(ctx, param, value):
     """Display header if requested format allows that"""
     if value == 'pretty':
 
-        click.echo('\n' + click.style('''\
-     _______         _             
-    | |  ___|       (_)            
-  __| | |_ _   _ ___ _  ___  _ __  
- / _` |  _| | | / __| |/ _ \| '_ \ 
-| (_| | | | |_| \__ \ | (_) | | | |
- \__,_\_|  \__,_|___/_|\___/|_| |_|''', fg='yellow', bold=True) + '\n')
-
+        click.echo('\n' + click.style('''        
+ _____                 _✨      ______          _                  _ 
+|  __ \               (_)       | ___ \        | |                | |
+| |  \/_ __   ___  ___ _ ___    | |_/ / __ ___ | |_ ___   ___ ___ | |
+| | __| '_ \ / _ \/ __| / __|   |  __/ '__/ _ \| __/ _ \ / __/ _ \| |
+| |_\ \ | | | (_) \__ \ \__ \   | |  | | | (_) | || (_) | (_| (_) | |
+ \____/_| |_|\___/|___/_|___/   \_|  |_|  \___/ \__\___/ \___\___/|_|\
+    ''', fg='yellow', bold=True) + '\n')
     return value
 
 
 @click.group()
 def main():
+    """
+    Gnosis Protocol CLI ✨
+    """
     pass
 
 
@@ -39,7 +42,7 @@ def main():
 @click.option('--symbol', help='Token symbol')
 @click.option('--address', help='Token address')
 def tokens(count, skip, sort, sort_ascending, print_format, verbose, token_id, symbol, address):
-    """Get tokens listed in dFusion. For more details, see https://docs.gnosis.io/dfusion/docs/addtoken1"""
+    """Get list of tokens. For more details, see https://docs.gnosis.io/protocol/docs/addtoken1"""
     get_tokens(
       # Pagination
       count=count,

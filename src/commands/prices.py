@@ -13,7 +13,7 @@ from utils.graphql import (debug_query, get_graphql_client, gql_filter,
 from utils.misc import to_date_from_epoch, to_etherscan_link, get_csv_writer, to_date_from_batch_id
 
 # Price entity fields
-#   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
+#   See https://thegraph.com/explorer/subgraph/gnosis/protocol
 PRICES_FIELDS = f'''
   token {{ {TOKEN_FIELDS_BASIC} }}
   batchId

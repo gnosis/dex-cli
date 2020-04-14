@@ -13,7 +13,7 @@ from utils.misc import to_date_from_epoch, to_etherscan_link, get_csv_writer
 TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
 
 # Batch entity fields
-#   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
+#   See https://thegraph.com/explorer/subgraph/gnosis/protocol
 TOKENS_FIELDS = '''
     id
     address

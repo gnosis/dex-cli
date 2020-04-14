@@ -18,7 +18,7 @@ from utils.misc import (calculate_price, is_unlimited_amount,
                         to_etherscan_link, get_csv_writer)
 
 # Trade entity fields
-#   See https://thegraph.com/explorer/subgraph/gnosis/dfusion
+#   See https://thegraph.com/explorer/subgraph/gnosis/protocol
 TRADE_FIELDS = f'''
     owner {{ id }}
     order {{ orderId }}
