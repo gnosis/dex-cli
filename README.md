@@ -17,17 +17,17 @@ pip install -r requirements.txt
 
 ```bash
 # help command
-./gp --help
-./gp
+./gnop --help
+./gnop
 
 # Get trades
-./gp trades
+./gnop trades
 
 # Get first 5 trades
-./gp trades --count 5 --skip 0
+./gnop trades --count 5 --skip 0
 
 # Filter by trader
-./gp trades --trader 0x7b2e78d4dfaaba045a167a70da285e30e8fca196
+./gnop trades --trader 0x7b2e78d4dfaaba045a167a70da285e30e8fca196
 ```
 
 # Debug - Verbose
@@ -36,7 +36,7 @@ Verbose mode prints information that is useful for debugging, including the Grap
 
 ```
 # Verbose mode (-v)
-./gp trades -v
+./gnop trades -v
 ```
 
 ![](docs/CLI-verbose.png)
