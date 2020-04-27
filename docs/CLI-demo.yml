@@ -131,10 +131,10 @@ records:
     content: "Usage: cli.py [OPTIONS] COMMAND [ARGS]...\r\n\r\n  Gnosis Protocol CLI ✨\r\n\r\nOptions:\r\n  --help  Show this message and exit.\r\n\r\nCommands:\r\n  orders  Get orders\r\n  prices  Get historic prices\r\n  tokens  Get list of tokens.\r\n  trades  Get trades\r\n"
   - delay: 13
     content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
-  - delay: 3000
+  - delay: 10
     content: " "
 
-  - delay: 110
+  - delay: 3000
     content: "./gnop "
   - delay: 110
     content: t
@@ -158,9 +158,9 @@ records:
   - delay: 21
     content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
 
-  - delay: 3000
+  - delay: 10
     content: " "
-  - delay: 110
+  - delay: 3000
     content: ./gnop tokens
   - delay: 110
     content: " "
@@ -185,9 +185,9 @@ records:
   - delay: 21
     content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
 
-  - delay: 3000
+  - delay: 10
     content: " "
-  - delay: 200
+  - delay: 3000
     content: ./gnop tokens --id 8
   - delay: 33
     content: "\b\e[K"
@@ -236,9 +236,9 @@ records:
   - delay: 20
     content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
 
-  - delay: 3000
+  - delay: 10
     content: " "
-  - delay: 200
+  - delay: 3000
     content: ./gnop orders
   - delay: 33
     content: "\b\e[K"
@@ -273,9 +273,9 @@ records:
   - delay: 20
     content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
 
-  - delay: 3000
+  - delay: 10
     content: " "
-  - delay: 200
+  - delay: 3000
     content: ./gnop trades
   - delay: 110
     content: " "
@@ -298,9 +298,9 @@ records:
   - delay: 13
     content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
 
-  - delay: 3000
+  - delay: 10
     content: " "
-  - delay: 200
+  - delay: 3000
     content: ./gnop trades --help
   - delay: 33
     content: "\b\e[K"
@@ -333,9 +333,9 @@ records:
   - delay: 21
     content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
 
-  - delay: 3000
+  - delay: 10
     content: " "
-  - delay: 200
+  - delay: 3000
     content: ./gnop trades --count 1
   - delay: 110
     content: "0"
