@@ -1,0 +1,374 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+
+  # Specify the current working directory path
+  # the default is the current working directory path
+  #cwd: .
+
+  # Export additional ENV variables
+  env:
+    recording: true
+
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 141
+
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 33
+
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+
+  # Quality
+  # 1 - 100
+  quality: 100
+
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: Gnosis Protocol
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+
+  # The size of the font
+  fontSize: 12
+
+  # The height of lines
+  lineHeight: 1
+
+  # The spacing between letters
+  letterSpacing: 0
+
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+
+# Records, feel free to edit them
+records:
+  - delay: 110
+    content: "\r\n(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+  - delay: 110
+    content: .
+  - delay: 110
+    content: /
+  - delay: 110
+    content: g
+  - delay: 110
+    content: "n"
+  - delay: 110
+    content: o
+  - delay: 110
+    content: "p"
+
+  - delay: 500
+    content: "\r\n"
+  - delay: 202
+    content: "Usage: cli.py [OPTIONS] COMMAND [ARGS]...\r\n\r\n  Gnosis Protocol CLI ✨\r\n\r\nOptions:\r\n  --help  Show this message and exit.\r\n\r\nCommands:\r\n  orders  Get orders\r\n  prices  Get historic prices\r\n  tokens  Get list of tokens.\r\n  trades  Get trades\r\n"
+  - delay: 13
+    content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+  - delay: 10
+    content: " "
+
+  - delay: 3000
+    content: "./gnop "
+  - delay: 110
+    content: t
+  - delay: 110
+    content: o
+  - delay: 110
+    content: k
+  - delay: 110
+    content: e
+  - delay: 110
+    content: "n"
+  - delay: 110
+    content: s
+
+  - delay: 800
+    content: "\r\n"
+  - delay: 205
+    content: "\r\n\e[33m\e[1m        \r\n _____                 _✨      ______          _                  _ \r\n|  __ \\               (_)       | ___ \\        | |                | |\r\n| |  \\/_ __   ___  ___ _ ___    | |_/ / __ ___ | |_ ___   ___ ___ | |\r\n| | __| '_ \\ / _ \\/ __| / __|   |  __/ '__/ _ \\| __/ _ \\ / __/ _ \\| |\r\n| |_\\ \\ | | | (_) \\__ \\ \\__ \\   | |  | | | (_) | || (_) | (_| (_) | |\r\n \\____/_| |_|\\___/|___/_|___/   \\_|  |_|  \\___/ \\__\\___/ \\___\\___/|_|    \e[0m\r\n\r\n"
+  - delay: 315
+    content: "\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 36\r\n\e[32m  Address\e[0m: 0xe1ba0fb44ccb0d11b80f92f4f8ed94ca3ff51d00\r\n\r\n\e[32m  Symbol\e[0m: aBAT\r\n\e[32m  Name\e[0m: Aave Interest bearing BAT\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:30:01\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xcc95a21ef04b1b93f8192871acf5dceaa274c1d78b31e988405e195f4e1a5ceb\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 14\r\n\e[32m  Address\e[0m: 0xfc1e690f61efd961294b3e1ce3313fbd8aa4f85d\r\n\r\n\e[32m  Symbol\e[0m: aDAI\r\n\e[32m  Name\e[0m: Aave Interest bearing DAI\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 28/01/20 23:22:12\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x1a56bf72752a3bb6c4f171eda6c977e9c05832b3dfa213c923d8aa12355b0a50\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 35\r\n\e[32m  Address\e[0m: 0x3a3a65aab0dd2a17e3f1947ba16138cd37d08c04\r\n\r\n\e[32m  Symbol\e[0m: aETH\r\n\e[32m  Name\e[0m: Aave Interest bearing ETH\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:30:01\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xbc871a7d9e176ec54f4b649e243d0a8b0fc4e13ee68ab6a00948a7c5f860997c\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 37\r\n\e[32m  Address\e[0m: 0x9d91be44c06d373a8a226e1f3b146956083803eb\r\n\r\n\e[32m  Symbol\e[0m: aKNC\r\n\e[32m  Name\e[0m: Aave Interest bearing KNC\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:30:01\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xea9fac093a73f9f1798b11da5cd617e7866b9a0d75732236ca01b272773bb91f\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 38\r\n\e[32m  Address\e[0m: 0x7d2d3688df45ce7c552e19c27e007673da9204b8\r\n\r\n\e[32m  Symbol\e[0m: aLEND\r\n\e[32m  Name\e[0m: Aave Interest bearing LEND\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:30:01\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x603e8952e31d5c3a73d5a0c809eeb1c081f6dfc4f33dc18b58165efb7ddd2570\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 39\r\n\e[32m  Address\e[0m: 0xa64bd6c70cb9051f6a9ba1f163fdc07e0dfb5f84\r\n\r\n\e[32m  Symbol\e[0m: aLINK\r\n\e[32m  Name\e[0m: Aave Interest bearing LINK\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:30:01\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x03098458d9ed06fd30fced7a65e50ce7acfc8b7a1fe112119f46bb89cd40addc\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 40\r\n\e[32m  Address\e[0m: 0x6fce4a401b6b80ace52baaefe4421bd188e76f6f\r\n\r\n\e[32m  Symbol\e[0m: aMANA\r\n\e[32m  Name\e[0m: Aave Interest bearing MANA\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:30:06\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x39c650af43972f92070e78e03bdd9f84201de26ed6e3f8d4f112be6a37b6e542\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 41\r\n\e[32m  Address\e[0m: 0x7deb5e830be29f91e298ba5ff1356bb7f8146998\r\n\r\n\e[32m  Symbol\e[0m: aMKR\r\n\e[32m  Name\e[0m: Aave Interest bearing MKR\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:31:42\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x37b8812e6af8b60d0d755666f95520bc0b8ed248f7c51c8044312ab0f4eb9126\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 46\r\n\e[32m  Address\e[0m: 0x960b236a07cf122663c4303350609a66a7b288c0\r\n\r\n\e[32m  Symbol\e[0m: ANT\r\n\e[32m  Name\e[0m: Aragon Network Token\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 22/04/20 13:39:38\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xaa0eab412959e92fd30f299b00927b112e38a146e75b4912235c456c5d404f2d\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 42\r\n\e[32m  Address\e[0m: 0x328c4c80bc7aca0834db37e6600a6c49e12da4de\r\n\r\n\e[32m  Symbol\e[0m: aSNX\r\n\e[32m  Name\e[0m: Aave Interest bearing SNX\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:34:49\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xee3c637f24f6db65dfa25d812ac77f5d51ba20483ca6554aba2c7c6e1cae505f\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 32\r\n\e[32m  Address\e[0m: 0x625ae63000f46200499120b906716420bd059240\r\n\r\n\e[32m  Symbol\e[0m: aSUSD\r\n\e[32m  Name\e[0m: Aave Interest bearing SUSD\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 21:59:05\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xda75faf92a37db38f635b55fbd4bceaadaeb5a2b8b5528727c690dcfbff3959a\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 33\r\n\e[32m  Address\e[0m: 0x4da9b813057d04baef4e5800e36083717b4a0341\r\n\r\n\e[32m  Symbol\e[0m: aTUSD\r\n\e[32m  Name\e[0m: Aave Interest bearing TUSD\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:26:54\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x467bdeb87a2c2639471af968a232ecfc263cd792f1b93d17ecc2567b840608f4\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 31\r\n\e[32m  Address\e[0m: 0x9ba00d6856a4edf4665bca2c2309936572473b7e\r\n\r\n\e[32m  Symbol\e[0m: aUSDC\r\n\e[32m  Name\e[0m: Aave Interest bearing USDC\r\n\e[32m  Decimals\e[0m: 6\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 21:58:13\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x95938c4cee9dba466291b6855cf9deed3fcbd4fbdd7f2ad606bd9bcac35921bc\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 34\r\n\e[32m  Address\e[0m: 0x71fc860f7d3a592a4a98740e39db31d25db65ae8\r\n\r\n\e[32m  Symbol\e[0m: aUSDT\r\n\e[32m  Name\e[0m: Aave Interest bearing USDT\r\n\e[32m  Decimals\e[0m: 6\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 22:30:01\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x6a497f5bdc67cd964759557c8b8ea6b7bd091d3c00b3e26758fd37bcfec09707\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 43\r\n\e[32m  Address\e[0m: 0x0d8775f648430679a709e98d2b0cb6250d2887ef\r\n\r\n\e[32m  Symbol\e[0m: BAT\r\n\e[32m  Name\e[0m: Basic Attention Token\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 17/04/20 11:50:06\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xf328fd855126445435ee453659f2c2729d5a83ce5b70b31486c5286ab96b730b\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 45\r\n\e[32m  Address\e[0m: 0x6a4ffaafa8dd400676df8076ad6c724867b0e2e8\r\n\r\n\e[32m  Symbol\e[0m: bDAI\r\n\e[32m  Name\e[0m: BTU Incentivized DAI\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 20/04/20 20:18:22\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x994488c677d8e7ae23e26af88a35c9d2bb8dc01307d9153421856487ab1a0a7c\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 44\r\n\e[32m  Address\e[0m: 0xb683d83a532e2cb7dfa5275eed3698436371cc9f\r\n\r\n\e[32m  Symbol\e[0m: BTU\r\n\e[32m  Name\e[0m: BTU Protocol\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 20/04/20 20:17:05\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xbfe6e9affeb791f49d67cd329c1b3bd21cf95baf472c8d6d762b0a25433e637a\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 13\r\n\e[32m  Address\e[0m: 0x5d3a536e4d6dbd6114cc1ead35777bab948e3643\r\n\r\n\e[32m  Symbol\e[0m: cDAI\r\n\e[32m  Name\e[0m: Compound Dai\r\n\e[32m  Decimals\e[0m: 8\r\n\r\n\e[32m  Registered\e[0m: 28/01/20 23:16:33\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x665d8aa3dcc283f54ec637f603283c8b88bb7ac311295d95cf13c5861d0551eb\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 16\r\n\e[32m  Address\e[0m: 0x06af07097c9eeb7fd685c692751d5c66db49c215\r\n\r\n\e[32m  Symbol\e[0m: CHAI\r\n\e[32m  Name\e[0m: Chai\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 29/01/20 09:20:22\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xe0fd4ba6d0d532721e585cf9d0a64f2531d6e3e827c2fd71eb7ecadc56249232\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 7\r\n\e[32m  Address\e[0m: 0x6b175474e89094c44da98b954eedeac495271d0f\r\n\r\n\e[32m  Symbol\e[0m: DAI\r\n\e[32m  Name\e[0m: Dai Stablecoin\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 23/01/20 20:40:20\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xbaaa299ba4b8955f2067d7a1a0ba769c82a54dd747b5ae4461be0d4b0357e8ef\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 27\r\n\e[32m  Address\e[0m: 0x9cb2f26a23b8d89973f08c957c4d7cdf75cd341c\r\n\r\n\e[32m  Symbol\e[0m: DZAR\r\n\e[32m  Name\e[0m: Digital Rand\r\n\e[32m  Decimals\e[0m: 6\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 07:30:20\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xf17c10a30d4ac6768576c45b3cd83f4d644c17799de82a491027730431afe920\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 20\r\n\e[32m  Address\e[0m: 0x543ff227f64aa17ea132bf9886cab5db55dcaddf\r\n\r\n\e[32m  Symbol\e[0m: GEN\r\n\e[32m  Name\e[0m: DAOstack\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 14/04/20 21:54:52\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x9d05bc1264662d71f1bd8afba35356a795fe5ed8b007fea06f71e184b65ab8cb\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 18\r\n\e[32m  Address\e[0m: 0x6810e776880c02933d47db1b9fc05908e5386b96\r\n\r\n\e[32m  Symbol\e[0m: GNO\r\n\e[32m  Name\e[0m: Gnosis Token\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 19/02/20 10:57:05\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x65aecbc0be465f774a31b3546a6ec8fe4693b86db0da98ec88968621272893a8\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 22\r\n\e[32m  Address\e[0m: 0x12b19d3e2ccc14da04fae33e63652ce469b3f2fd\r\n\r\n\e[32m  Symbol\e[0m: GRID\r\n\e[32m  Name\e[0m: GRID Token\r\n\e[32m  Decimals\e[0m: 12\r\n\r\n\e[32m  Registered\e[0m: 15/04/20 08:12:17\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x7dd6861897ec759aec2fdf260f10f96541ea95c1de781851d33939bfeda2070c\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 6\r\n\e[32m  Address\e[0m: 0x056fd409e1d7a124bd7017459dfea2f387b6d5cd\r\n\r\n\e[32m  Symbol\e[0m: GUSD\r\n\e[32m  Name\e[0m: Gemini dollar\r\n\e[32m  Decimals\e[0m: 2\r\n\r\n\e[32m  Registered\e[0m: 23/01/20 20:39:05\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x24fe638fd20befc91f1b75e1c082dac938ef4a2278343d344626b7ad769df7b6\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 24\r\n\e[32m  Address\e[0m: 0x514910771af9ca656af840dff83e8264ecf986ca\r\n\r\n\e[32m  Symbol\e[0m: LINK\r\n\e[32m  Name\e[0m: ChainLink Token\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 15/04/20 18:16:08\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x8e13927b5427849f506030c734dc663691fef05fef9e7f2f9397668bc16adb25\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 21\r\n\e[32m  Address\e[0m: 0x6c79f10543c7886c6946b8a996f824e474bac8f2\r\n\r\n\e[32m  Symbol\e[0m: oETH $100 Put 04/24/20\r\n\e[32m  Name\e[0m: Opyn ETH Put $100 04/24/20\r\n\e[32m  Decimals\e[0m: 8\r\n\r\n\e[32m  Registered\e[0m: 14/04/20 23:14:38\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xa2d90b80981fdf57f2fe1b577261cbb2a425b49df7358fc7574a295f092127c6\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 0\r\n\e[32m  Address\e[0m: 0x1a5f9352af8af974bfc03399e3767df6370d82e4\r\n\r\n\e[32m  Symbol\e[0m: OWL\r\n\e[32m  Name\e[0m: OWL Token\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 23/01/20 20:52:02\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x24c28ad2263330505cb51726f79ae177b5883ad80e443f7c74a9509e92cf72e6\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 19\r\n\e[32m  Address\e[0m: 0xd56dac73a4d6766464b38ec6d91eb45ce7457c44\r\n\r\n\e[32m  Symbol\e[0m: PAN\r\n\e[32m  Name\e[0m: Panvala pan\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 25/03/20 16:09:15\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x47ee2e9dad7329fec98938f754f31a9d1ab96540d40fe37ed0706652379a667b\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 30\r\n\e[32m  Address\e[0m: 0xea5f88e54d982cbb0c441cde4e79bc305e5b43bc\r\n\r\n\e[32m  Symbol\e[0m: PARETO\r\n\e[32m  Name\e[0m: Pareto Network Token\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 14:49:51\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x4411271e31a561cdb89c81025743e7fce3314d431fcaf59bb5306b712a49440f\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 5\r\n\e[32m  Address\e[0m: 0x8e870d67f660d95d5be530380d0ec0bd388289e1\r\n\r\n\e[32m  Symbol\e[0m: PAX\r\n\e[32m  Name\e[0m: PAX\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 23/01/20 20:38:28\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x1a24b5057d987fe0820def722487e77b2e3b0fa91f613bd664052575d423105b\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 17\r\n\e[32m  Address\e[0m: 0x45804880de22913dafe09f4980848ece6ecbaf78\r\n\r\n\e[32m  Symbol\e[0m: PAXG\r\n\e[32m  Name\e[0m: Paxos Gold\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 31/01/20 23:19:01\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xe2ab847b43953b1a1583e0e62f03eb9507956272625f2697c7a699bcc0513899\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 29\r\n\e[32m  Address\e[0m: 0xb4efd85c19999d84251304bda99e90b92300bd93\r\n\r\n\e[32m  Symbol\e[0m: RPL\r\n\e[32m  Name\e[0m: Rocket Pool\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 13:35:24\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xde75f67cfe5cde47132da2b8e068432952a06199fdec91a6f0e724f9a3635c1e\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 10\r\n\e[32m  Address\e[0m: 0xfe18be6b3bd88a2d2a7f928d00292e7a9963cfc6\r\n\r\n\e[32m  Symbol\e[0m: sBTC\r\n\e[32m  Name\e[0m: Synth sBTC\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 27/01/20 20:55:22\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x3b568b99ed22a6ff0ac9708dd9eb2e70daff51931d3fd332b5c46590d9828cce\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 8\r\n\e[32m  Address\e[0m: 0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb\r\n\r\n\e[32m  Symbol\e[0m: sETH\r\n\e[32m  Name\e[0m: Synth sETH\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 26/01/20 23:46:40\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xec154bcc102b96d731ff0cdfc1d8062f5b8b87604e1a568be21511e206a51383\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 26\r\n\e[32m  Address\e[0m: 0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009\r\n\r\n\e[32m  Symbol\e[0m: SNGLS\r\n\e[32m  Name\e[0m: SingularDTV\r\n\e[32m  Decimals\e[0m: 0\r\n\r\n\e[32m  Registered\e[0m: 15/04/20 21:12:41\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x1a3b110c7f193e8be47d07c280d529f9a78b9c58644399db70a7e98131a44977\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 15\r\n\e[32m  Address\e[0m: 0xc011a72400e58ecd99ee497cf89e3775d4bd732f\r\n\r\n\e[32m  Symbol\e[0m: SNX\r\n\e[32m  Name\e[0m: Synthetix Network Token\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 28/01/20 23:49:24\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x4fa41ad958509227c2826c4e242a1822a22434ed18a02d7c3f710537548952c3\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 9\r\n\e[32m  Address\e[0m: 0x57ab1e02fee23774580c119740129eac7081e9d3\r\n\r\n\e[32m  Symbol\e[0m: sUSD\r\n\e[32m  Name\e[0m: Synth sUSD\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 26/01/20 23:48:53\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xd00b51c3a116ee06ea18fe06a2847b862095f155b2dfce2c89b438e56cd324a3\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 25\r\n\e[32m  Address\e[0m: 0xc27a2f05fa577a83ba0fdb4c38443c0718356501\r\n\r\n\e[32m  Symbol\e[0m: TAU\r\n\e[32m  Name\e[0m: Lamden Tau\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 15/04/20 20:08:04\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x1d468b5208910b4ec67f41bfffc436663cacee02977dd3012f6319145861496c\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 28\r\n\e[32m  Address\e[0m: 0x2c537e5624e4af88a7ae4060c022609376c8d0eb\r\n\r\n\e[32m  Symbol\e[0m: TRYB\r\n\e[32m  Name\e[0m: BiLira\r\n\e[32m  Decimals\e[0m: 6\r\n\r\n\e[32m  Registered\e[0m: 16/04/20 12:07:11\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x824ca38839eae955c4d26af9815cbc576638bdd090945b83d1292b6de01b919a\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 3\r\n\e[32m  Address\e[0m: 0x0000000000085d4780b73119b644ae5ecd22b376\r\n\r\n\e[32m  Symbol\e[0m: TUSD\r\n\e[32m  Name\e[0m: TrueUSD\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 23/01/20 20:37:44\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x95922237fe97f0549ca69a822f16573db69caea40942fef1b2c0bec9e7643f69\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 4\r\n\e[32m  Address\e[0m: 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\r\n\r\n\e[32m  Symbol\e[0m: USDC\r\n\e[32m  Name\e[0m: USD//C\r\n\e[32m  Decimals\e[0m: 6\r\n\r\n\e[32m  Registered\e[0m: 23/01/20 20:38:19\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x8ef5c6eead30f2067134b07739d6659d212e6bfad46bf64c5196302607598901\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 2\r\n\e[32m  Address\e[0m: 0xdac17f958d2ee523a2206206994597c13d831ec7\r\n\r\n\e[32m  Symbol\e[0m: USDT\r\n\e[32m  Name\e[0m: Tether USD\r\n\e[32m  Decimals\e[0m: 6\r\n\r\n\e[32m  Registered\e[0m: 23/01/20 20:37:29\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x063021aee8556a49bf2afdeb72c737729b956f20e4c158e405d378bf70d3575c\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 11\r\n\e[32m  Address\e[0m: 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599\r\n\r\n\e[32m  Symbol\e[0m: WBTC\r\n\e[32m  Name\e[0m: Wrapped BTC\r\n\e[32m  Decimals\e[0m: 8\r\n\r\n\e[32m  Registered\e[0m: 27/01/20 21:03:05\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x5aa236c27fafc0899f0a6d9be56b14e1f6083107ddd772458700034aa55eb4ca\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 1\r\n\e[32m  Address\e[0m: 0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\r\n\r\n\e[32m  Symbol\e[0m: WETH\r\n\e[32m  Name\e[0m: Wrapped Ether\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 23/01/20 20:36:33\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x62d05fb07115da73dafba6d06eeb22aa7b90a23943dd667d85637af73c53ca4e\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 12\r\n\e[32m  Address\e[0m: 0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359\r\n\r\n\e[32m  Symbol\e[0m: \r\n\e[32m  Name\e[0m: \r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 28/01/20 23:04:57\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x797fab3f26df97b1ddf50c034d8c9dce9e93a86f7238e17dfc042d30944de9a7\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 23\r\n\e[32m  Address\e[0m: 0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2\r\n\r\n\e[32m  Symbol\e[0m: \r\n\e[32m  Name\e[0m: \r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 15/04/20 09:49:55\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x8bbed8d26aa65b4bfd2e100fe51232a56b924051bf6e82f56374b6e86634ea0d\r\n\e[34m----------------------------\e[0m\r\n"
+  - delay: 21
+    content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+
+  - delay: 10
+    content: " "
+  - delay: 3000
+    content: ./gnop tokens
+  - delay: 110
+    content: " "
+  - delay: 110
+    content: "-"
+  - delay: 110
+    content: "-"
+  - delay: 110
+    content: i
+  - delay: 110
+    content: d
+  - delay: 110
+    content: " "
+  - delay: 110
+    content: "8"
+  - delay: 800
+    content: "\r\n"
+  - delay: 206
+    content: "\r\n\e[33m\e[1m        \r\n _____                 _✨      ______          _                  _ \r\n|  __ \\               (_)       | ___ \\        | |                | |\r\n| |  \\/_ __   ___  ___ _ ___    | |_/ / __ ___ | |_ ___   ___ ___ | |\r\n| | __| '_ \\ / _ \\/ __| / __|   |  __/ '__/ _ \\| __/ _ \\ / __/ _ \\| |\r\n| |_\\ \\ | | | (_) \\__ \\ \\__ \\   | |  | | | (_) | || (_) | (_| (_) | |\r\n \\____/_| |_|\\___/|___/_|___/   \\_|  |_|  \\___/ \\__\\___/ \\___\\___/|_|    \e[0m\r\n\r\n"
+  - delay: 241
+    content: "\e[34m----------------------------\e[0m\r\n\e[32m  Id\e[0m: 8\r\n\e[32m  Address\e[0m: 0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb\r\n\r\n\e[32m  Symbol\e[0m: sETH\r\n\e[32m  Name\e[0m: Synth sETH\r\n\e[32m  Decimals\e[0m: 18\r\n\r\n\e[32m  Registered\e[0m: 26/01/20 23:46:40\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xec154bcc102b96d731ff0cdfc1d8062f5b8b87604e1a568be21511e206a51383\r\n\e[34m----------------------------\e[0m\r\n"
+  - delay: 21
+    content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+
+  - delay: 10
+    content: " "
+  - delay: 3000
+    content: ./gnop tokens --id 8
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 32
+    content: "\b\e[K"
+  - delay: 36
+    content: "\b\e[K"
+  - delay: 34
+    content: "\b\e[K"
+  - delay: 34
+    content: "\b\e[K"
+  - delay: 35
+    content: "\b\e[K"
+  - delay: 35
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 110
+    content: o
+  - delay: 110
+    content: r
+  - delay: 110
+    content: d
+  - delay: 110
+    content: e
+  - delay: 110
+    content: r
+  - delay: 110
+    content: s
+  - delay: 800
+    content: "\r\n"
+  - delay: 202
+    content: "\r\n\e[33m\e[1m        \r\n _____                 _✨      ______          _                  _ \r\n|  __ \\               (_)       | ___ \\        | |                | |\r\n| |  \\/_ __   ___  ___ _ ___    | |_/ / __ ___ | |_ ___   ___ ___ | |\r\n| | __| '_ \\ / _ \\/ __| / __|   |  __/ '__/ _ \\| __/ _ \\ / __/ _ \\| |\r\n| |_\\ \\ | | | (_) \\__ \\ \\__ \\   | |  | | | (_) | || (_) | (_| (_) | |\r\n \\____/_| |_|\\___/|___/_|___/   \\_|  |_|  \\___/ \\__\\___/ \\___\\___/|_|    \e[0m\r\n\r\n"
+  - delay: 342
+    content: "\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:23:18\r\n\r\n\e[32m  Trader\e[0m: 0xeb13c6ff42f1307c026a7f6e2c97068658d9aea6\r\n\e[32m  Order Id\e[0m: 12,747\r\n\e[32m  From batch\e[0m: 5,292,508 (24/04/20 18:20:00)\r\n\e[32m  To batch\e[0m: 5,292,508 (24/04/20 18:20:00)\r\n\r\n\e[32m  Sell Token\e[0m: WETH (0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)\r\n\e[32m  Buy Token\e[0m: USDC (0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48)\r\n\e[32m  Sold volume\e[0m: 0 of 10.58397057656179712 WETH\e[36m (0%)\e[0m\r\n\r\n\e[32m  Limit Price WETH/USDC\e[0m: 190.0052999441 USDC\r\n\e[32m  Limit Price USDC/WETH\e[0m: 0.005263011 WETH\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x547f82c46f23cfd143af7efeabd4f0711b1abc7aec64a4e6d49268efa6927304\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:23:18\r\n\r\n\e[32m  Trader\e[0m: 0xeb13c6ff42f1307c026a7f6e2c97068658d9aea6\r\n\e[32m  Order Id\e[0m: 12,748\r\n\e[32m  From batch\e[0m: 5,292,508 (24/04/20 18:20:00)\r\n\e[32m  To batch\e[0m: 5,292,508 (24/04/20 18:20:00)\r\n\r\n\e[32m  Sell Token\e[0m: USDC (0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48)\r\n\e[32m  Buy Token\e[0m: WETH (0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)\r\n\e[32m  Sold volume\e[0m: 0 of 1,988.99955 USDC\e[36m (0%)\e[0m\r\n\r\n\e[32m  Limit Price USDC/WETH\e[0m: 0.0053212533 WETH\r\n\e[32m  Limit Price WETH/USDC\e[0m: 187.9256499828 USDC\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x547f82c46f23cfd143af7efeabd4f0711b1abc7aec64a4e6d49268efa6927304\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:19:23\r\n\r\n\e[32m  Trader\e[0m: 0x5ce64e024d54eee4e6409829cf0ff8529e5da170\r\n\e[32m  Order Id\e[0m: 6,872\r\n\e[32m  From batch\e[0m: 5,292,507 (24/04/20 18:15:00)\r\n\e[32m  To batch\e[0m: 5,292,507 (24/04/20 18:15:00)\r\n\r\n\e[32m  Sell Token\e[0m: sUSD (0x57ab1e02fee23774580c119740129eac7081e9d3)\r\n\e[32m  Buy Token\e[0m: sETH (0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb)\r\n\e[32m  Sold volume\e[0m: 0 of Unlimited sUSD\r\n\r\n\e[32m  Limit Price sUSD/sETH\e[0m: 0.0053099751 sETH\r\n\e[32m  Limit Price sETH/sUSD\e[0m: 188.3247979137 sUSD\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xd33d93354ba9c0739c58076c65327a91967637035ae34a23db9743ef94a9fea0\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:19:23\r\n\r\n\e[32m  Trader\e[0m: 0x5ce64e024d54eee4e6409829cf0ff8529e5da170\r\n\e[32m  Order Id\e[0m: 6,873\r\n\e[32m  From batch\e[0m: 5,292,507 (24/04/20 18:15:00)\r\n\e[32m  To batch\e[0m: 5,292,507 (24/04/20 18:15:00)\r\n\r\n\e[32m  Sell Token\e[0m: sETH (0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb)\r\n\e[32m  Buy Token\e[0m: sUSD (0x57ab1e02fee23774580c119740129eac7081e9d3)\r\n\e[32m  Sold volume\e[0m: 0 of 1,796,081,998,912,840,395.895328505 sETH\e[36m (0%)\e[0m\r\n\r\n\e[32m  Limit Price sETH/sUSD\e[0m: 189.4581467477 sUSD\r\n\e[32m  Limit Price sUSD/sETH\e[0m: 0.0052782106 sETH\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xd33d93354ba9c0739c58076c65327a91967637035ae34a23db9743ef94a9fea0\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:18:22\r\n\r\n\e[32m  Trader\e[0m: 0xeb13c6ff42f1307c026a7f6e2c97068658d9aea6\r\n\e[32m  Order Id\e[0m: 12,745\r\n\e[32m  From batch\e[0m: 5,292,507 (24/04/20 18:15:00)\r\n\e[32m  To batch\e[0m: 5,292,507 (24/04/20 18:15:00)\r\n\r\n\e[32m  Sell Token\e[0m: WETH (0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)\r\n\e[32m  Buy Token\e[0m: USDC (0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48)\r\n\e[32m  Sold volume\e[0m: 0 of 10.595184488649910272 WETH\e[36m (0%)\e[0m\r\n\r\n\e[32m  Limit Price WETH/USDC\e[0m: 189.743999942 USDC\r\n\e[32m  Limit Price USDC/WETH\e[0m: 0.0052702588 WETH\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x2f4b6f1095769d980d943208119f8a4f5612c118b1f2053f4291d147810a692c\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:18:22\r\n\r\n\e[32m  Trader\e[0m: 0xeb13c6ff42f1307c026a7f6e2c97068658d9aea6\r\n\e[32m  Order Id\e[0m: 12,746\r\n\e[32m  From batch\e[0m: 5,292,507 (24/04/20 18:15:00)\r\n\e[32m  To batch\e[0m: 5,292,507 (24/04/20 18:15:00)\r\n\r\n\e[32m  Sell Token\e[0m: USDC (0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48)\r\n\e[32m  Buy Token\e[0m: WETH (0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)\r\n\e[32m  Sold volume\e[0m: 0 of 1,989.631022 USDC\e[36m (0%)\e[0m\r\n\r\n\e[32m  Limit Price USDC/WETH\e[0m: 0.0053252006 WETH\r\n\e[32m  Limit Price WETH/USDC\e[0m: 187.7863499339 USDC\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x2f4b6f1095769d980d943208119f8a4f5612c118b1f2053f4291d147810a692c\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:14:41\r\n\r\n\e[32m  Trader\e[0m: 0x5ce64e024d54eee4e6409829cf0ff8529e5da170\r\n\e[32m  Order Id\e[0m: 6,870\r\n\e[32m  From batch\e[0m: 5,292,506 (24/04/20 18:10:00)\r\n\e[32m  To batch\e[0m: 5,292,506 (24/04/20 18:10:00)\r\n\r\n\e[32m  Sell Token\e[0m: sUSD (0x57ab1e02fee23774580c119740129eac7081e9d3)\r\n\e[32m  Buy Token\e[0m: sETH (0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb)\r\n\e[32m  Sold volume\e[0m: 0 of Unlimited sUSD\r\n\r\n\e[32m  Limit Price sUSD/sETH\e[0m: 0.0053099751 sETH\r\n\e[32m  Limit Price sETH/sUSD\e[0m: 188.3247979137 sUSD\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x4a7e86a8d7fa78e1132783f0f283c00c2849fcb013c8d54e73c4cf3974e0384d\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:14:41\r\n\r\n\e[32m  Trader\e[0m: 0x5ce64e024d54eee4e6409829cf0ff8529e5da170\r\n\e[32m  Order Id\e[0m: 6,871\r\n\e[32m  From batch\e[0m: 5,292,506 (24/04/20 18:10:00)\r\n\e[32m  To batch\e[0m: 5,292,506 (24/04/20 18:10:00)\r\n\r\n\e[32m  Sell Token\e[0m: sETH (0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb)\r\n\e[32m  Buy Token\e[0m: sUSD (0x57ab1e02fee23774580c119740129eac7081e9d3)\r\n\e[32m  Sold volume\e[0m: 0 of 1,796,081,998,912,840,395.895328505 sETH\e[36m (0%)\e[0m\r\n\r\n\e[32m  Limit Price sETH/sUSD\e[0m: 189.4581467477 sUSD\r\n\e[32m  Limit Price sUSD/sETH\e[0m: 0.0052782106 sETH\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x4a7e86a8d7fa78e1132783f0f283c00c2849fcb013c8d54e73c4cf3974e0384d\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:13:03\r\n\r\n\e[32m  Trader\e[0m: 0xeb13c6ff42f1307c026a7f6e2c97068658d9aea6\r\n\e[32m  Order Id\e[0m: 12,743\r\n\e[32m  From batch\e[0m: 5,292,506 (24/04/20 18:10:00)\r\n\e[32m  To batch\e[0m: 5,292,506 (24/04/20 18:10:00)\r\n\r\n\e[32m  Sell Token\e[0m: WETH (0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)\r\n\e[32m  Buy Token\e[0m: USDC (0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48)\r\n\e[32m  Sold volume\e[0m: 0 of 10.60642218863521792 WETH\e[36m (0%)\e[0m\r\n\r\n\e[32m  Limit Price WETH/USDC\e[0m: 189.5630999069 USDC\r\n\e[32m  Limit Price USDC/WETH\e[0m: 0.0052752882 WETH\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xa8b305fa436a5fe7d5a2976103fcb3add5069e3ec8c6567fa8908074c84a6f17\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Order date\e[0m: 24/04/20 18:13:03\r\n\r\n\e[32m  Trader\e[0m: 0xeb13c6ff42f1307c026a7f6e2c97068658d9aea6\r\n\e[32m  Order Id\e[0m: 12,744\r\n\e[32m  From batch\e[0m: 5,292,506 (24/04/20 18:10:00)\r\n\e[32m  To batch\e[0m: 5,292,506 (24/04/20 18:10:00)\r\n\r\n\e[32m  Sell Token\e[0m: USDC (0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48)\r\n\e[32m  Buy Token\e[0m: WETH (0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)\r\n\e[32m  Sold volume\e[0m: 0 of 1,989.419563 USDC\e[36m (0%)\e[0m\r\n\r\n\e[32m  Limit Price USDC/WETH\e[0m: 0.0053314154 WETH\r\n\e[32m  Limit Price WETH/USDC\e[0m: 187.5674499485 USDC\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xa8b305fa436a5fe7d5a2976103fcb3add5069e3ec8c6567fa8908074c84a6f17\r\n\e[34m----------------------------\e[0m\r\n"
+  - delay: 20
+    content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+
+  - delay: 10
+    content: " "
+  - delay: 3000
+    content: ./gnop orders
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: t
+  - delay: 110
+    content: r
+  - delay: 110
+    content: a
+  - delay: 110
+    content: d
+  - delay: 110
+    content: e
+  - delay: 110
+    content: s
+  - delay: 800
+    content: "\r\n"
+  - delay: 204
+    content: "\r\n\e[33m\e[1m        \r\n _____                 _✨      ______          _                  _ \r\n|  __ \\               (_)       | ___ \\        | |                | |\r\n| |  \\/_ __   ___  ___ _ ___    | |_/ / __ ___ | |_ ___   ___ ___ | |\r\n| | __| '_ \\ / _ \\/ __| / __|   |  __/ '__/ _ \\| __/ _ \\ / __/ _ \\| |\r\n| |_\\ \\ | | | (_) \\__ \\ \\__ \\   | |  | | | (_) | || (_) | (_| (_) | |\r\n \\____/_| |_|\\___/|___/_|___/   \\_|  |_|  \\___/ \\__\\___/ \\___\\___/|_|    \e[0m\r\n\r\n"
+  - delay: 327
+    content: "\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 16:10:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,482\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.7383432704 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543835774 OWL\r\n\e[32m  Sell volume\e[0m: 20.31564156929335241 OWL\r\n\e[32m  Buy volume\e[0m: 14.999917237652109596 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x21a7a621b6f75f2ffacdddd1e8dc58b99e0d2e752cc151ccf5a5b95458e3c8b9\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 16:10:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,482\r\n\e[32m  Trader\e[0m: 0x9a94ac82b17e67f7dff81912de68eb74ca20e6c3\r\n\e[32m  Order Id\e[0m: 1\r\n\r\n\e[32m  Sell Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Buy Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Price DAI/OWL\e[0m: 1.3516761646 OWL\r\n\e[32m  Price OWL/DAI\e[0m: 0.7398221749 DAI\r\n\e[32m  Sell volume\e[0m: 14.999917237652109596 DAI\r\n\e[32m  Buy volume\e[0m: 20.275030601796335 OWL\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x21a7a621b6f75f2ffacdddd1e8dc58b99e0d2e752cc151ccf5a5b95458e3c8b9\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:40:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,476\r\n\e[32m  Trader\e[0m: 0x013dc982fee3d7f4f8149be53cdad3da4adad162\r\n\e[32m  Order Id\e[0m: 1\r\n\r\n\e[32m  Sell Token\e[0m: sUSD (0x57ab1e02fee23774580c119740129eac7081e9d3)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price sUSD/DAI\e[0m: 0.9903525631 DAI\r\n\e[32m  Price DAI/sUSD\e[0m: 1.0097414165 sUSD\r\n\e[32m  Sell volume\e[0m: 0.000000297021952484 sUSD\r\n\e[32m  Buy volume\e[0m: 0.000000294156451951 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x99918c7aedea24b32a45eb0fa5cceaaeae32b27840bf4ecd47bb244ce4e8d098\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:40:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,476\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.73834 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543895766 OWL\r\n\e[32m  Sell volume\e[0m: 0.000000209450307588 OWL\r\n\e[32m  Buy volume\e[0m: 0.000000154645540105 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x99918c7aedea24b32a45eb0fa5cceaaeae32b27840bf4ecd47bb244ce4e8d098\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:40:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,476\r\n\e[32m  Trader\e[0m: 0xd8c16d61cf0beb41249d128864b33d64af4f1fef\r\n\e[32m  Order Id\e[0m: 5\r\n\r\n\e[32m  Sell Token\e[0m: sUSD (0x57ab1e02fee23774580c119740129eac7081e9d3)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price sUSD/DAI\e[0m: 0.9903525631 DAI\r\n\e[32m  Price DAI/sUSD\e[0m: 1.0097414165 sUSD\r\n\e[32m  Sell volume\e[0m: 0.000077661886937379 sUSD\r\n\e[32m  Buy volume\e[0m: 0.000076912648786528 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x99918c7aedea24b32a45eb0fa5cceaaeae32b27840bf4ecd47bb244ce4e8d098\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:40:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,476\r\n\e[32m  Trader\e[0m: 0xd8c16d61cf0beb41249d128864b33d64af4f1fef\r\n\e[32m  Order Id\e[0m: 6\r\n\r\n\e[32m  Sell Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Buy Token\e[0m: sUSD (0x57ab1e02fee23774580c119740129eac7081e9d3)\r\n\e[32m  Price DAI/sUSD\e[0m: 1.0077229434 sUSD\r\n\e[32m  Price sUSD/DAI\e[0m: 0.9923362432 DAI\r\n\e[32m  Sell volume\e[0m: 0.000077361450778584 DAI\r\n\e[32m  Buy volume\e[0m: 0.000077958908889863 sUSD\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x99918c7aedea24b32a45eb0fa5cceaaeae32b27840bf4ecd47bb244ce4e8d098\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:30:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,474\r\n\e[32m  Trader\e[0m: 0xeb13c6ff42f1307c026a7f6e2c97068658d9aea6\r\n\e[32m  Order Id\e[0m: 12,678\r\n\r\n\e[32m  Sell Token\e[0m: USDC (0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48)\r\n\e[32m  Buy Token\e[0m: WETH (0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)\r\n\e[32m  Price USDC/WETH\e[0m: 0.0053687248 WETH\r\n\e[32m  Price WETH/USDC\e[0m: 186.2639699475 USDC\r\n\e[32m  Sell volume\e[0m: 5.490326 USDC\r\n\e[32m  Buy volume\e[0m: 0.029476049509444101 WETH\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xe6d26ab1ad298d031eb5af9b9826dcb424eaf27b0597ad333b42f5b9376342f7\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:30:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,474\r\n\e[32m  Trader\e[0m: 0xb210d9afde9cda1b8af0d260ad8602f5134f6cac\r\n\e[32m  Order Id\e[0m: 338\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.749800153 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3336887115 OWL\r\n\e[32m  Sell volume\e[0m: 29.451574071007364409 OWL\r\n\e[32m  Buy volume\e[0m: 22.082794745624023114 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xe6d26ab1ad298d031eb5af9b9826dcb424eaf27b0597ad333b42f5b9376342f7\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:30:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,474\r\n\e[32m  Trader\e[0m: 0xb210d9afde9cda1b8af0d260ad8602f5134f6cac\r\n\e[32m  Order Id\e[0m: 345\r\n\r\n\e[32m  Sell Token\e[0m: WETH (0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2)\r\n\e[32m  Buy Token\e[0m: sETH (0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb)\r\n\e[32m  Price WETH/sETH\e[0m: 1.0050855134 sETH\r\n\e[32m  Price sETH/WETH\e[0m: 0.9949402181 WETH\r\n\e[32m  Sell volume\e[0m: 14.745397453448775549 WETH\r\n\e[32m  Buy volume\e[0m: 14.820385370131697728 sETH\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xe6d26ab1ad298d031eb5af9b9826dcb424eaf27b0597ad333b42f5b9376342f7\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:30:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,474\r\n\e[32m  Trader\e[0m: 0xb435871b0959561226b4d903b1abf79528177e81\r\n\e[32m  Order Id\e[0m: 79\r\n\r\n\e[32m  Sell Token\e[0m: USDC (0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price USDC/DAI\e[0m: 0.99086477 DAI\r\n\e[32m  Price DAI/USDC\e[0m: 1.0092194517 USDC\r\n\e[32m  Sell volume\e[0m: 586.072549 USDC\r\n\e[32m  Buy volume\e[0m: 580.718641522671002625 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xe6d26ab1ad298d031eb5af9b9826dcb424eaf27b0597ad333b42f5b9376342f7\r\n\e[34m----------------------------\e[0m\r\n"
+  - delay: 20
+    content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+
+  - delay: 10
+    content: " "
+  - delay: 3000
+    content: ./gnop trades
+  - delay: 110
+    content: " "
+  - delay: 110
+    content: "-"
+  - delay: 110
+    content: "-"
+  - delay: 110
+    content: h
+  - delay: 110
+    content: e
+  - delay: 110
+    content: l
+  - delay: 110
+    content: p
+  - delay: 800
+    content: "\r\n"
+  - delay: 202
+    content: "Usage: cli.py trades [OPTIONS]\r\n\r\n  Get trades\r\n\r\nOptions:\r\n  --count INTEGER  Number of trades to return, used for pagination\r\n  --skip INTEGER   Number of trades to skip, used for pagination\r\n  --sort TEXT      Sort result by a field, used for pagination\r\n  --asc / --desc   Sort direction. \"desc\" (default) for ascending, \"desc\" for\r\n                   descending\r\n  --format TEXT    Format type i.e. pretty, csv\r\n  -v, --verbose\r\n  --trader TEXT    Ethereum address of the trader\r\n  --batch TEXT     Batch id\r\n  --buy TEXT       Buy token id\r\n  --sell TEXT      Sell token id\r\n  --tx TEXT        Transaction hash for the trade (same as solution\r\n                   submission)\r\n  --help           Show this message and exit.\r\n"
+  - delay: 13
+    content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+
+  - delay: 10
+    content: " "
+  - delay: 3000
+    content: ./gnop trades --help
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 35
+    content: "\b\e[K"
+  - delay: 33
+    content: "\b\e[K"
+  - delay: 110
+    content: c
+  - delay: 110
+    content: o
+  - delay: 110
+    content: u
+  - delay: 110
+    content: "n"
+  - delay: 110
+    content: t
+  - delay: 110
+    content: " "
+  - delay: 110
+    content: "1"
+  - delay: 800
+    content: "\r\n"
+  - delay: 203
+    content: "\r\n\e[33m\e[1m        \r\n _____                 _✨      ______          _                  _ \r\n|  __ \\               (_)       | ___ \\        | |                | |\r\n| |  \\/_ __   ___  ___ _ ___    | |_/ / __ ___ | |_ ___   ___ ___ | |\r\n| | __| '_ \\ / _ \\/ __| / __|   |  __/ '__/ _ \\| __/ _ \\ / __/ _ \\| |\r\n| |_\\ \\ | | | (_) \\__ \\ \\__ \\   | |  | | | (_) | || (_) | (_| (_) | |\r\n \\____/_| |_|\\___/|___/_|___/   \\_|  |_|  \\___/ \\__\\___/ \\___\\___/|_|    \e[0m\r\n\r\n"
+  - delay: 433
+    content: "\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 18:20:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,508\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.73834 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543895766 OWL\r\n\e[32m  Sell volume\e[0m: 0.000112092461319179 OWL\r\n\e[32m  Buy volume\e[0m: 0.000082762347890403 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xce9024c1926a576850ee824a501cbc0617ca92269e1d8c1af0d101a49fb87f0b\r\n\e[34m----------------------------\e[0m\r\n"
+  - delay: 21
+    content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+
+  - delay: 10
+    content: " "
+  - delay: 3000
+    content: ./gnop trades --count 1
+  - delay: 110
+    content: "0"
+  - delay: 110
+    content: " "
+  - delay: 110
+    content: "-"
+  - delay: 110
+    content: "-"
+  - delay: 110
+    content: t
+  - delay: 110
+    content: r
+  - delay: 110
+    content: a
+  - delay: 110
+    content: d
+  - delay: 110
+    content: e
+  - delay: 110
+    content: r
+  - delay: 110
+    content: " "
+  - delay: 200
+    content: "0xf419c46fe10914cf5605be63b803a90cb3d4af82"
+  - delay: 800
+    content: "\r\n"
+  - delay: 203
+    content: "\r\n\e[33m\e[1m        \r\n _____                 _✨      ______          _                  _ \r\n|  __ \\               (_)       | ___ \\        | |                | |\r\n| |  \\/_ __   ___  ___ _ ___    | |_/ / __ ___ | |_ ___   ___ ___ | |\r\n| | __| '_ \\ / _ \\/ __| / __|   |  __/ '__/ _ \\| __/ _ \\ / __/ _ \\| |\r\n| |_\\ \\ | | | (_) \\__ \\ \\__ \\   | |  | | | (_) | || (_) | (_| (_) | |\r\n \\____/_| |_|\\___/|___/_|___/   \\_|  |_|  \\___/ \\__\\___/ \\___\\___/|_|    \e[0m\r\n\r\n"
+  - delay: 272
+    content: "\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 18:20:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,508\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.73834 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543895766 OWL\r\n\e[32m  Sell volume\e[0m: 0.000112092461319179 OWL\r\n\e[32m  Buy volume\e[0m: 0.000082762347890403 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xce9024c1926a576850ee824a501cbc0617ca92269e1d8c1af0d101a49fb87f0b\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 16:10:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,482\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.7383432704 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543835774 OWL\r\n\e[32m  Sell volume\e[0m: 20.31564156929335241 OWL\r\n\e[32m  Buy volume\e[0m: 14.999917237652109596 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x21a7a621b6f75f2ffacdddd1e8dc58b99e0d2e752cc151ccf5a5b95458e3c8b9\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:40:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,476\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.73834 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543895766 OWL\r\n\e[32m  Sell volume\e[0m: 0.000000209450307588 OWL\r\n\e[32m  Buy volume\e[0m: 0.000000154645540105 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x99918c7aedea24b32a45eb0fa5cceaaeae32b27840bf4ecd47bb244ce4e8d098\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:30:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,474\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.749800153 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3336887115 OWL\r\n\e[32m  Sell volume\e[0m: 15.700296530399999087 OWL\r\n\e[32m  Buy volume\e[0m: 11.772084741221351003 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xe6d26ab1ad298d031eb5af9b9826dcb424eaf27b0597ad333b42f5b9376342f7\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 15:15:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,471\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.738343855 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543825049 OWL\r\n\e[32m  Sell volume\e[0m: 3.451922377002592812 OWL\r\n\e[32m  Buy volume\e[0m: 2.548705675318500491 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xb2a43fc1c477b5f4a4fd533539f16ffc84b667ac8b52da0ed69e618ef0fb8d36\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 14:30:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,462\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.7498001499 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3336887169 OWL\r\n\e[32m  Sell volume\e[0m: 28.250949281800001511 OWL\r\n\e[32m  Buy volume\e[0m: 21.182566008005962574 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x1af21a52b31739c5fc3dd38241cf64de849eeb97b3c4b4e41120279d0c2c51f8\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 12:20:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,436\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.738342598 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543848109 OWL\r\n\e[32m  Sell volume\e[0m: 0.168426875591455306 OWL\r\n\e[32m  Buy volume\e[0m: 0.124356736898162748 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x185e16725d376711f180e040cada0a794b8dc97148c91067298bef15f8de3eb4\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 11:25:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,425\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.7383425859 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543848331 OWL\r\n\e[32m  Sell volume\e[0m: 0.132975203262454985 OWL\r\n\e[32m  Buy volume\e[0m: 0.098181255437828072 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x3891a2eeaae8b32e0ecc177584a412b77076d2e347f4b75d6e761442c6d90098\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 09:45:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,405\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.738342471 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543850438 OWL\r\n\e[32m  Sell volume\e[0m: 1.327378479846078804 OWL\r\n\e[32m  Buy volume\e[0m: 0.980059906801209434 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0xd8b78d846e25879074055eaa7948ad6cd167b9e87e6d60bb55f8d4ff54af6227\r\n\e[34m----------------------------\e[0m\r\n\e[32m  Trade date\e[0m: 24/04/20 09:30:00\r\n\r\n\e[32m  Batch Id\e[0m: 5,292,402\r\n\e[32m  Trader\e[0m: 0xf419c46fe10914cf5605be63b803a90cb3d4af82\r\n\e[32m  Order Id\e[0m: 2\r\n\r\n\e[32m  Sell Token\e[0m: OWL (0x1a5f9352af8af974bfc03399e3767df6370d82e4)\r\n\e[32m  Buy Token\e[0m: DAI (0x6b175474e89094c44da98b954eedeac495271d0f)\r\n\e[32m  Price OWL/DAI\e[0m: 0.7383424624 DAI\r\n\e[32m  Price DAI/OWL\e[0m: 1.3543850595 OWL\r\n\e[32m  Sell volume\e[0m: 0.10376910538574982 OWL\r\n\e[32m  Buy volume\e[0m: 0.076617136799663357 DAI\r\n\r\n\e[32m  Transaction\e[0m: https://etherscan.io/tx/0x49ebccdbf3649a3b00a332761c5e63173ae301946cc419c534e7b4c450a30ee9\r\n\e[34m----------------------------\e[0m\r\n"
+  - delay: 100
+    content: "(ENV) \e[38;5;161manxo\e[m\e[38;5;248m@\e[m\e[38;5;214mgnosis\e[m\e[38;5;248m:[\e[m\e[38;5;15mgnosis/dex-cli\e[m\e[38;5;248m]\e[m\e[38;5;248m:\e[m\e[38;5;15m \e[m"
+
+  - delay: 3000
+    content: " "
