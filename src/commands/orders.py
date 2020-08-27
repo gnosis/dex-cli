@@ -11,12 +11,14 @@ from utils.format import (format_amount, format_amount_in_weis,
                           format_batch_id_with_date, format_date_time,
                           format_integer, format_percentage, format_price,
                           format_token_long, format_token_short,
-                          parse_date_from_epoch)
+                          parse_date_from_epoch,
+                          format_date_time_iso8601,)
 from utils.graphql import (debug_query, get_graphql_client, gql_filter,
                            gql_sort_by)
 from utils.misc import (calculate_price, is_unlimited_amount,
                         to_date_from_batch_id, to_date_from_epoch,
-                        to_etherscan_link)
+                        to_etherscan_link,
+                        get_csv_writer)
 
 # Orders entity fields
 #   See https://thegraph.com/explorer/subgraph/gnosis/protocol
@@ -226,8 +228,93 @@ def print_orders_pretty(orders):
     )
 
 def print_orders_csv(orders):
-  # TODO: Implement here the CSV formatting
-  click.echo("Not implemented yet")
+
+  writer = get_csv_writer()
+
+  writer.writerow([
+    'ID',
+    'From Batch Id',
+    'Until Batch Id',
+    'Create Date',
+    'Cancel Date',
+    'Delete Date',
+    'Pair Sell/Buy',
+    'Limit Price Sell/Buy',
+    'AVG Price Sell/Buy',
+    'Pair Buy/Sell',
+    'Limit Price Buy/Sell',
+    'AVG Price Buy/Sell',
+    'Sell Token',
+    'Sold Volume',
+    'Max Sell Amount',
+    'Buy Token',
+    'Bought Volume',
+    'Timestamp',
+    'Transaction',
+    'Trader Address',
+    ])
+
+  for order in orders:
+
+    price_sell_buy = format_amount(
+      calculate_price(
+          numerator=order['price_numerator'],
+          denominator=order['price_denominator'],
+          decimals_numerator=order['buy_token']['decimals'],
+          decimals_denominator=order['sell_token']['decimals'],
+      ), thousands_separator=False)
+
+    price_buy_sell = format_amount(
+      calculate_price(
+        numerator=order['price_denominator'],
+        denominator=order['price_numerator'],
+        decimals_numerator=order['sell_token']['decimals'],
+        decimals_denominator=order['buy_token']['decimals'],
+      ), thousands_separator=False)
+
+    avg_sell_buy = format_amount(
+      calculate_price(
+          numerator=order['bought_volume'],
+          denominator=order['sold_volume'],
+          decimals_numerator=order['buy_token']['decimals'],
+          decimals_denominator=order['sell_token']['decimals'],
+      ), thousands_separator=False)
+
+    avg_buy_sell = format_amount(
+      calculate_price(
+        numerator=order['sold_volume'],
+        denominator=order['bought_volume'],
+        decimals_numerator=order['sell_token']['decimals'],
+        decimals_denominator=order['buy_token']['decimals'],
+      ), thousands_separator=False)
+
+    pair_sell_buy = format_token_short(order['sell_token']) + '/' + format_token_short(order['buy_token'])
+    pair_buy_sell = format_token_short(order['buy_token']) + '/' + format_token_short(order['sell_token'])
+
+    max_sell_amount = format_amount_in_weis(order['max_sell_amount'], order['sell_token']['decimals'], thousands_separator=False)
+
+    writer.writerow([
+      order['order_id'],
+      order['from_batch_id'],
+      order['until_batch_id'],
+      format_date_time_iso8601(order['create_date']),
+      format_date_time_iso8601(order['cancel_date']),
+      format_date_time_iso8601(order['delete_date']),
+      pair_sell_buy,
+      price_sell_buy,
+      avg_sell_buy,
+      pair_buy_sell,
+      price_buy_sell,
+      avg_buy_sell,
+      format_token_short(order['sell_token']),
+      format_amount_in_weis(order['sold_volume'], order['sell_token']['decimals'], thousands_separator=False),
+      max_sell_amount,
+      format_token_short(order['buy_token']),
+      format_amount_in_weis(order['bought_volume'], order['buy_token']['decimals'], thousands_separator=False),
+      format_date_time_iso8601(order['create_date']),
+      to_etherscan_link(order['tx_hash']),
+      order['owner_address'],
+    ])
 
 
 def _get_price_text (label, sell_label, buy_label, numerator, denominator, decimals_numerator, decimals_denominator, label_color):

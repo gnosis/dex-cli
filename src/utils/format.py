@@ -27,12 +27,12 @@ def format_integer(number):
   return f'{number:,d}'
 
 
-def format_amount_in_weis(amount, decimals, rounding=ROUND_DOWN, unlimited_label='Unlimited'):
+def format_amount_in_weis(amount, decimals, rounding=ROUND_DOWN, unlimited_label='Unlimited', thousands_separator=True):
   if is_unlimited_amount(amount):
     return unlimited_label
   else:
     value = amount / Decimal(10 ** decimals)
-    return format_amount(value, decimals=decimals, rounding=rounding)
+    return format_amount(value, decimals=decimals, rounding=rounding, thousands_separator=thousands_separator)
 
 def format_price(amount, decimals=10, rounding=ROUND_DOWN, currency=''):
   price = format_amount(amount, decimals=decimals, rounding=rounding)
@@ -45,12 +45,18 @@ def format_percentage(value, total):
     percentage = (Decimal(value) / Decimal(total)) * Decimal(100)
     return format_amount(percentage, decimals=2) + '%'
 
-def format_amount(amount, decimals=18, rounding=ROUND_DOWN):
+def format_amount(amount, decimals=18, rounding=ROUND_DOWN, thousands_separator=True):
+  rounded_value = format_amount_raw(amount, decimals, rounding)
+
+  if thousands_separator:
+    return f'{rounded_value:,.{decimals}f}'.rstrip('0').rstrip('.')
+  else:
+    return f'{rounded_value:.{decimals}f}'.rstrip('0').rstrip('.')
+
+def format_amount_raw(amount, decimals=18, rounding=ROUND_DOWN) -> Decimal:
   quantize_value = Decimal(10) ** -Decimal(decimals)
   rounded_value = Decimal(amount).quantize(quantize_value, context=Context(prec=40), rounding=rounding)
-
-  return f'{rounded_value:,.{decimals}f}'.rstrip('0').rstrip('.')
-
+  return rounded_value
 
 def format_date(date):
   return '' if date is None else date.strftime(DATE_FORMAT)
@@ -61,6 +67,8 @@ def format_date_time(date, tooBigLabel='Never'):
 
 
 def format_date_time_iso8601(date, tooBigLabel='Never'):
+  if not date:
+    return ''
   return tooBigLabel if date == datetime.max else datetime.isoformat(date)
 
 
