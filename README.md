@@ -30,7 +30,20 @@ pip install -r requirements.txt
 ./gnop trades --trader 0x7b2e78d4dfaaba045a167a70da285e30e8fca196
 ```
 
-# Debug - Verbose
+## Different Networks
+
+The cli supports mainnet (default), rinkeby and xdai. To specify a network you need to:
+
+```bash
+export NETWORK=xdai
+./gnop trades --count 5 --skip 0
+
+# Or
+export NETWORK=rinkeby
+./gnop trades --count 5 --skip 0
+```
+
+## Debug - Verbose
 
 Verbose mode prints information that is useful for debugging, including the GraphQL query and the url for the endpoint and subgraph:
 

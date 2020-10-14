@@ -5,7 +5,7 @@ import csv
 import os
 import sys
 
-from constants import (BATCH_TIME_SECONDS, ETHERSCAN_BASE_URL, MAX_AMOUNT,
+from constants import (BATCH_TIME_SECONDS, TX_EXPLORER_BASE_URL, MAX_AMOUNT,
                        MAX_EPOCH, CSV_DELIMITER, CSV_QUOTE)
 
 
@@ -43,7 +43,7 @@ def calculate_price(numerator, denominator, decimals_numerator, decimals_denomin
 
 
 def to_etherscan_link(hash):
-  return ETHERSCAN_BASE_URL + '/tx/' + hash
+  return TX_EXPLORER_BASE_URL + '/tx/' + hash
 
 
 def get_csv_writer() -> csv.writer:
