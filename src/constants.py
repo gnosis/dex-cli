@@ -12,11 +12,11 @@ class Network(Enum):
     if 'NETWORK' not in os.environ:
       return Network.MAINNET
     
-    if os.environ['NETWORK'] == "xdai":
+    if os.environ['NETWORK'].casefold() == "xdai":
       return Network.XDAI
-    if os.environ['NETWORK'] == "rinkeby":
+    if os.environ['NETWORK'].casefold() == "rinkeby":
       return Network.RINKEBY
-    if os.environ['NETWORK'] == "mainnet":
+    if os.environ['NETWORK'].casefold() == "mainnet":
       return Network.MAINNET
     
     raise RuntimeError("Unknown env value for Network: " + os.environ['NETWORK'])
