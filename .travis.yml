@@ -1,3 +1,4 @@
+dist: xenial
 language: python
 cache: pip
 
@@ -13,11 +14,10 @@ script:
 
 after_success:
   - coveralls
-#
-# TODO: Do in different PR
-#deploy:
-#  provider: script
-#  script: bash scripts/deploy_pipy.sh "${PYPI_USER}" "${PYPI_PASS}"
-#  skip_cleanup: true
-#  on:
-#    tags: true
+
+deploy:
+  provider: script
+  script: bash scripts/deploy_pipy.sh "${PYPI_USER}" "${PYPI_PASS}"
+  skip_cleanup: true
+  on:
+    tags: true
